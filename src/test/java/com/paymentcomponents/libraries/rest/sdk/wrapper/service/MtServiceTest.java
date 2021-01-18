@@ -182,7 +182,7 @@ public class MtServiceTest {
         String confirmationId = "1234";
         String statusCode = "ACCC";
         String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_MT_199)
-                .replace(":79:\\/\\/2101071652\\+0200", ":79:\\/\\/([0-9]{10})\\+0200");
+                .replaceAll(":79:\\\\/.*\n", ":79:\\\\/.*\n");
 
         //WHEN
         String result = mtService.generateUniversalConfirmation(TestConstants.VALID_MT_103, confirmationId, statusCode, null, null, null, null);

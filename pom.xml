@@ -19,6 +19,7 @@
         <smv.version>20.5.0</smv.version>
         <mx.version>20.7.0</mx.version>
         <sepa.version>19.20.0</sepa.version>
+        <swift.translator.version>1.5.2</swift.translator.version>
     </properties>
 
     <repositories>
@@ -63,6 +64,12 @@
             <artifactId>sepa-core-jaxb</artifactId>
             <version>${sepa.version}</version>
             <classifier>epc</classifier>
+        </dependency>
+        <dependency>
+            <groupId>gr.datamation</groupId>
+            <artifactId>swift-translator</artifactId>
+            <version>${swift.translator.version}</version>
+            <classifier>jar-with-dependencies</classifier>
         </dependency>
 
         <dependency>

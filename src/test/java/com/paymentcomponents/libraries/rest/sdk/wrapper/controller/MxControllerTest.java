@@ -85,7 +85,7 @@ public class MxControllerTest {
                 "        \"column\": 0\n" +
                 "    }\n" +
                 "]";
-        willThrow(new InvalidMessageException(errorReponse)).given(mxService).validateMx(anyString());
+        given(mxService.validateMx(anyString())).willThrow(new InvalidMessageException(errorReponse));
 
         //WHEN
         mvc.perform(post("/mx/validate")

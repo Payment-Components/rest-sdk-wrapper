@@ -61,7 +61,7 @@ public class SepaIntegrationTest {
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0]", is("Line: 6 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\":MsgId}' is expected.")));
+                .andExpect(jsonPath("$[0]", is("Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\":MsgId}' is expected.")));
 
     }
 
@@ -69,8 +69,8 @@ public class SepaIntegrationTest {
     public void givenValidPacs008Json_whenCreatePacs008_thenReturnSepaXml() throws Exception {
         //GIVEN
         String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_SEPA_PACS_008)
-                .replace("<MsgId>20210113155624246<\\/MsgId>", "<MsgId>([0-9]{17})<\\/MsgId>")
-                .replace("<CreDtTm>2021-01-13T15:56:24<\\/CreDtTm>", "<CreDtTm>.*<\\/CreDtTm>");
+                .replaceAll("<MsgId>.*<\\\\/MsgId>", "<MsgId>.*<\\\\/MsgId>")
+                .replaceAll("<CreDtTm>.*<\\\\/CreDtTm>", "<CreDtTm>.*<\\\\/CreDtTm>");
 
         String requestJson = objectMapper.writeValueAsString(TestConstants.getSepaCreatePacs008RequestSample());
 
@@ -114,10 +114,10 @@ public class SepaIntegrationTest {
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("AC04");
         String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_SEPA_PACS_004)
-                .replace("<MsgId>20210113155630479<\\/MsgId>", "<MsgId>([0-9]{17})<\\/MsgId>")
-                .replace("<IntrBkSttlmDt>2021-01-13<\\/IntrBkSttlmDt>", "<IntrBkSttlmDt>.*<\\/IntrBkSttlmDt>")
-                .replace("<CreDtTm>2021-01-13T15:56:30<\\/CreDtTm>", "<CreDtTm>.*<\\/CreDtTm>")
-                .replace("<RtrId>20210113155630479<\\/RtrId>", "<RtrId>.*<\\/RtrId>");
+                .replaceAll("<MsgId>.*<\\\\/MsgId>", "<MsgId>.*<\\\\/MsgId>")
+                .replaceAll("<IntrBkSttlmDt>.*<\\\\/IntrBkSttlmDt>", "<IntrBkSttlmDt>.*<\\\\/IntrBkSttlmDt>")
+                .replaceAll("<CreDtTm>.*<\\\\/CreDtTm>", "<CreDtTm>.*<\\\\/CreDtTm>")
+                .replaceAll("<RtrId>.*<\\\\/RtrId>", "<RtrId>.*<\\\\/RtrId>");
 
 
         //WHEN
@@ -151,7 +151,7 @@ public class SepaIntegrationTest {
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0]", is("Line: 6 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\":MsgId}' is expected.")));
+                .andExpect(jsonPath("$[0]", is("Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\":MsgId}' is expected.")));
 
     }
 
@@ -161,10 +161,10 @@ public class SepaIntegrationTest {
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("DUPL");
         String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_SEPA_CAMT_056)
-                .replace("<Id>20210113171000590<\\/Id>", "<Id>([0-9]{17})<\\/Id>")
-                .replace("<CreDtTm>2021-01-13T17:10:00<\\/CreDtTm>", "<CreDtTm>.*<\\/CreDtTm>")
-                .replace("<CxlId>20210113171000590<\\/CxlId>", "<CxlId>.*<\\/CxlId>")
-                .replace("<OrgnlIntrBkSttlmDt>2021-01-13<\\/OrgnlIntrBkSttlmDt>", "<OrgnlIntrBkSttlmDt>.*<\\/OrgnlIntrBkSttlmDt>");
+                .replaceAll("<Id>.*<\\\\/Id>", "<Id>.*<\\\\/Id>")
+                .replaceAll("<CreDtTm>.*<\\\\/CreDtTm>", "<CreDtTm>.*<\\\\/CreDtTm>")
+                .replaceAll("<CxlId>.*<\\\\/CxlId>", "<CxlId>.*<\\\\/CxlId>")
+                .replaceAll("<OrgnlIntrBkSttlmDt>.*<\\\\/OrgnlIntrBkSttlmDt>", "<OrgnlIntrBkSttlmDt>.*<\\/OrgnlIntrBkSttlmDt>");
 
         //WHEN
         mvc.perform(post("/sepa/cancellation/request")
@@ -197,7 +197,7 @@ public class SepaIntegrationTest {
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0]", is("Line: 6 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\":MsgId}' is expected.")));
+                .andExpect(jsonPath("$[0]", is("Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\":MsgId}' is expected.")));
 
     }
 
@@ -207,9 +207,9 @@ public class SepaIntegrationTest {
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("CUST");
         String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_SEPA_CAMT_029)
-                .replace("<Id>20210114115956743<\\/Id>", "<Id>([0-9]{17})<\\/Id>")
-                .replace("<CreDtTm>2021-01-14T11:59:56<\\/CreDtTm>", "<CreDtTm>.*<\\/CreDtTm>")
-                .replace("<CxlStsId>20210114115956743<\\/CxlStsId>", "<CxlStsId>.*<\\/CxlStsId>");
+                .replaceAll("<Id>.*<\\\\/Id>", "<Id>.*<\\\\/Id>")
+                .replaceAll("<CreDtTm>.*<\\\\/CreDtTm>", "<CreDtTm>.*<\\\\/CreDtTm>")
+                .replaceAll("<CxlStsId>.*<\\\\/CxlStsId>", "<CxlStsId>.*<\\\\/CxlStsId>");
 
         //WHEN
         mvc.perform(post("/sepa/resolution/of/investigation")
@@ -242,7 +242,7 @@ public class SepaIntegrationTest {
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0]", is("Line: 6 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\":MsgId}' is expected.")));
+                .andExpect(jsonPath("$[0]", is("Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\":MsgId}' is expected.")));
 
     }
 
