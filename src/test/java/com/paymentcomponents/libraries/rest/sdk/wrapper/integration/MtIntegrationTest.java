@@ -220,7 +220,7 @@ public class MtIntegrationTest {
     public void givenValidMt103Message_whenUniversalConfirmation_thenReturnUniversalConfirmation() throws Exception {
         //GIVEN
         String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_MT_199)
-                .replace(":79:\\/\\/2101071652\\+0200", ":79:\\/\\/([0-9]{10})\\+0200");
+                .replaceAll(":79:\\\\/.*\n", ":79:\\\\/.*\n");
 
         //WHEN
         mvc.perform(post("/mt/generate/universal/confirmation")

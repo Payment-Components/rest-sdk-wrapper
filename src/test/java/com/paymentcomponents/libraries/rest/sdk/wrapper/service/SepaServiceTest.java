@@ -44,7 +44,7 @@ public class SepaServiceTest {
     @Test
     public void givenInvalidSepaMessage_whenSepaValidate_thenThrowInvalidMessageException() {
         //GIVEN
-        String exceptionBody = "[ \"Line: 6 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\" ]";
+        String exceptionBody = "[ \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\" ]";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
@@ -59,8 +59,8 @@ public class SepaServiceTest {
     public void givenValidSepaCreatePacs008Request_whenCreatePacs008_thenReturnSepaAsXml() throws Exception {
         //GIVEN
         String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_SEPA_PACS_008)
-                .replace("<MsgId>20210113155624246<\\/MsgId>", "<MsgId>([0-9]{17})<\\/MsgId>")
-                .replace("<CreDtTm>2021-01-13T15:56:24<\\/CreDtTm>", "<CreDtTm>.*<\\/CreDtTm>");
+                .replaceAll("<MsgId>.*<\\\\/MsgId>", "<MsgId>.*<\\\\/MsgId>")
+                .replaceAll("<CreDtTm>.*<\\\\/CreDtTm>", "<CreDtTm>.*<\\\\/CreDtTm>");
 
         //WHEN
         String resultXml = sepaService.createPacs008(TestConstants.getSepaCreatePacs008RequestSample());
@@ -91,10 +91,10 @@ public class SepaServiceTest {
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("AC04");
         String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_SEPA_PACS_004)
-                .replace("<MsgId>20210113155630479<\\/MsgId>", "<MsgId>([0-9]{17})<\\/MsgId>")
-                .replace("<IntrBkSttlmDt>2021-01-13<\\/IntrBkSttlmDt>", "<IntrBkSttlmDt>.*<\\/IntrBkSttlmDt>")
-                .replace("<CreDtTm>2021-01-13T15:56:30<\\/CreDtTm>", "<CreDtTm>.*<\\/CreDtTm>")
-                .replace("<RtrId>20210113155630479<\\/RtrId>", "<RtrId>.*<\\/RtrId>");
+                .replaceAll("<MsgId>.*<\\\\/MsgId>", "<MsgId>.*<\\\\/MsgId>")
+                .replaceAll("<IntrBkSttlmDt>.*<\\\\/IntrBkSttlmDt>", "<IntrBkSttlmDt>.*<\\\\/IntrBkSttlmDt>")
+                .replaceAll("<CreDtTm>.*<\\\\/CreDtTm>", "<CreDtTm>.*<\\\\/CreDtTm>")
+                .replaceAll("<RtrId>.*<\\\\/RtrId>", "<RtrId>.*<\\\\/RtrId>");
 
 
         //WHEN
@@ -109,7 +109,7 @@ public class SepaServiceTest {
         //GIVEN
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("AC04");
-        String errorReponse = "[ \"Line: 6 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\" ]";
+        String errorReponse = "[ \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\" ]";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
@@ -160,10 +160,10 @@ public class SepaServiceTest {
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("DUPL");
         String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_SEPA_CAMT_056)
-                .replace("<Id>20210113171000590<\\/Id>", "<Id>([0-9]{17})<\\/Id>")
-                .replace("<CreDtTm>2021-01-13T17:10:00<\\/CreDtTm>", "<CreDtTm>.*<\\/CreDtTm>")
-                .replace("<CxlId>20210113171000590<\\/CxlId>", "<CxlId>.*<\\/CxlId>")
-                .replace("<OrgnlIntrBkSttlmDt>2021-01-13<\\/OrgnlIntrBkSttlmDt>", "<OrgnlIntrBkSttlmDt>.*<\\/OrgnlIntrBkSttlmDt>");
+                .replaceAll("<Id>.*<\\\\/Id>", "<Id>.*<\\\\/Id>")
+                .replaceAll("<CreDtTm>.*<\\\\/CreDtTm>", "<CreDtTm>.*<\\\\/CreDtTm>")
+                .replaceAll("<CxlId>.*<\\\\/CxlId>", "<CxlId>.*<\\\\/CxlId>")
+                .replaceAll("<OrgnlIntrBkSttlmDt>.*<\\\\/OrgnlIntrBkSttlmDt>", "<OrgnlIntrBkSttlmDt>.*<\\\\/OrgnlIntrBkSttlmDt>");
 
         //WHEN
         String resultXml = sepaService.generateCancellationRequest(TestConstants.VALID_SEPA_PACS_008, msgReplyInfoRequest);
@@ -177,7 +177,7 @@ public class SepaServiceTest {
         //GIVEN
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("DUPL");
-        String errorReponse = "[ \"Line: 6 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\" ]";
+        String errorReponse = "[ \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\" ]";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
@@ -228,9 +228,9 @@ public class SepaServiceTest {
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("CUST");
         String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_SEPA_CAMT_029)
-                .replace("<Id>20210114115956743<\\/Id>", "<Id>([0-9]{17})<\\/Id>")
-                .replace("<CreDtTm>2021-01-14T11:59:56<\\/CreDtTm>", "<CreDtTm>.*<\\/CreDtTm>")
-                .replace("<CxlStsId>20210114115956743<\\/CxlStsId>", "<CxlStsId>.*<\\/CxlStsId>");
+                .replaceAll("<Id>.*<\\\\/Id>", "<Id>.*<\\\\/Id>")
+                .replaceAll("<CreDtTm>.*<\\\\/CreDtTm>", "<CreDtTm>.*<\\\\/CreDtTm>")
+                .replaceAll("<CxlStsId>.*<\\\\/CxlStsId>", "<CxlStsId>.*<\\\\/CxlStsId>");
 
         //WHEN
         String resultXml = sepaService.generateResolutionOfInvestigation(TestConstants.VALID_SEPA_PACS_008, msgReplyInfoRequest);
@@ -244,7 +244,7 @@ public class SepaServiceTest {
         //GIVEN
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("CUST");
-        String errorReponse = "[ \"Line: 6 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\" ]";
+        String errorReponse = "[ \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\" ]";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {

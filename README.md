@@ -26,6 +26,7 @@ It has a dependency to
 - MT library version `20.5.0`
 - SEPA library version `19.20.0`
 - MX library version `20.7.0`
+- Swift Translator library version `1.5.2`
 
 ## Features
 
@@ -44,6 +45,9 @@ It has a dependency to
 
 ### The following MX operations are available
 - Validate an MX message and return it as JSON
+
+### The following MX operations are available
+- Translate an MT Message to the equivalent MX
 
 
 ## Get Started

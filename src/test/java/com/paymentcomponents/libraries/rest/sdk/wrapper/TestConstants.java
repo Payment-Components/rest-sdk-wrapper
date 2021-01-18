@@ -37,23 +37,6 @@ public class TestConstants {
             ":72:/INS/ABNANL2A\n" +
             "-}";
 
-    public static final String INVALID_MT_103 = "{1:F21COPZBEB0AXXX0377002845}{4:{177:1108050226}{451:0}}{1:F01COPZBEB0AXXX0377002845}{2:O1031519110804LRLRXXXX4A1100009044681108041720N}{3:{108:MT103 006 OF 045}{119:REMIT}{121:c8b66b47-2bd9-48fe-be90-93c2096f27d2}{433:/AOK/NOT CHECKED         }}{4:\n" +
-            ":23B:SSTD\n" +
-            ":32A:001118USD3,34\n" +
-            ":50F:/34x\n" +
-            "1/Name\n" +
-            "2/AddressLine\n" +
-            "3/US/Town\n" +
-            ":57D:/D/34x\n" +
-            "4X35x\n" +
-            ":59F:1/Beneficiary Name-1234567891234123\n" +
-            "2/QWERT\n" +
-            "3/US/Beneficiary Address Line 21\n" +
-            "3/Beneficiary Name-1234567891234123\n" +
-            ":71A:OUR\n" +
-            ":77T:9000z\n" +
-            "-}{5:{MAC:00000000}{CHK:7C4CBA518E33}{TNG:}}{S:{SAC:}{COP:P}}";
-
     public static final String VALID_MT_199 = "{1:F01TESTBICGXXXX0000000000}{2:I199TRCKCHZZXVALN}{3:{121:2412527e-aefa-455d-8307-851118e145fe}}{4:\n" +
             ":20:1234\n" +
             ":21:123456789\n" +
@@ -658,10 +641,89 @@ public class TestConstants {
             "</Document>";
 
 
+    public static final String VALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST = "{1:F01AAAABEBBAXXX0000000000}{2:I200CCCCUS33AXXXN}{3:{108:MT200 005 OF 013}{433:/AOK/EXCLUDED            }}{4:\n" +
+            ":20:00322\n" +
+            ":32A:090527USD10500,00\n" +
+            ":57A:TESTBICE\n" +
+            "-}{5:{MAC:00000000}{CHK:7C36CF9824B0}{TNG:}}{S:{SAC:}{COP:P}}";
+
+    public static final String VALID_SWIFT_TRANSLATOR_MT_TO_MX_RESPONSE = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<AppHdr xmlns=\"urn:iso:std:iso:20022:tech:xsd:head.001.001.02\">\n" +
+            "    <Fr>\n" +
+            "        <FIId>\n" +
+            "            <FinInstnId>\n" +
+            "                <BICFI>AAAABEBBXXX</BICFI>\n" +
+            "            </FinInstnId>\n" +
+            "        </FIId>\n" +
+            "    </Fr>\n" +
+            "    <To>\n" +
+            "        <FIId>\n" +
+            "            <FinInstnId>\n" +
+            "                <BICFI>CCCCUS33XXX</BICFI>\n" +
+            "            </FinInstnId>\n" +
+            "        </FIId>\n" +
+            "    </To>\n" +
+            "    <BizMsgIdr>00322</BizMsgIdr>\n" +
+            "    <MsgDefIdr>pacs.009.001.08</MsgDefIdr>\n" +
+            "    <BizSvc>swift.cbprplus.01</BizSvc>\n" +
+            "    <CreDt>2021-01-21T15:42:04.843+02:00</CreDt>\n" +
+            "    <Prty>N</Prty>\n" +
+            "</AppHdr>\n" +
+            "\n" +
+            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\">\n" +
+            "    <FICdtTrf>\n" +
+            "        <GrpHdr>\n" +
+            "            <MsgId>00322</MsgId>\n" +
+            "            <CreDtTm>2021-01-21T15:42:04.871+02:00</CreDtTm>\n" +
+            "            <NbOfTxs>1</NbOfTxs>\n" +
+            "            <SttlmInf>\n" +
+            "                <SttlmMtd>INDA</SttlmMtd>\n" +
+            "            </SttlmInf>\n" +
+            "        </GrpHdr>\n" +
+            "        <CdtTrfTxInf>\n" +
+            "            <PmtId>\n" +
+            "                <InstrId>00322</InstrId>\n" +
+            "                <EndToEndId>NOTPROVIDED</EndToEndId>\n" +
+            "                <UETR>4a12cddb-3cd0-4aa1-91b4-195330904dcf</UETR>\n" +
+            "            </PmtId>\n" +
+            "            <IntrBkSttlmAmt Ccy=\"USD\">10500.00</IntrBkSttlmAmt>\n" +
+            "            <IntrBkSttlmDt>2009-05-27</IntrBkSttlmDt>\n" +
+            "            <InstgAgt>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>AAAABEBBXXX</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </InstgAgt>\n" +
+            "            <InstdAgt>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>CCCCUS33XXX</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </InstdAgt>\n" +
+            "            <Dbtr>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>AAAABEBBXXX</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </Dbtr>\n" +
+            "            <CdtrAgt>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>TESTBICE</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </CdtrAgt>\n" +
+            "            <Cdtr>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>CCCCUS33XXX</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </Cdtr>\n" +
+            "        </CdtTrfTxInf>\n" +
+            "    </FICdtTrf>\n" +
+            "</Document>\n";
+
+    public static final String INVALID_MT_103 = VALID_MT_103.replace(":20:123456789\n", "");
     public static final String VALID_JSON_SEPA_PACS_008 = Utils.convertXmlToJson(VALID_SEPA_PACS_008, "Document");
-    public static final String INVALID_SEPA_PACS_008 = VALID_SEPA_PACS_008.replaceAll("<MsgId>20210113155624246</MsgId>", "");
+    public static final String INVALID_SEPA_PACS_008 = VALID_SEPA_PACS_008.replace("<MsgId>20210113155624246</MsgId>\n", "");
     public static final String VALID_JSON_MX_PAIN001 = Utils.convertXmlToJson(VALID_MX_PAIN_001, "Document");
-    public static final String INVALID_MX_PAIN_001 = VALID_MX_PAIN_001.replaceAll("<MsgId>ABC/120928/CCT001</MsgId>", "");
+    public static final String INVALID_MX_PAIN_001 = VALID_MX_PAIN_001.replace("<MsgId>ABC/120928/CCT001</MsgId>\n", "");
+    public static final String INVALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST = VALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST.replace(":20:00322\n", "");
 
     public static MtCreate103Request getMtCreate103RequestSample() {
         MtCreate103Request mtCreate103RequestSample = new MtCreate103Request();

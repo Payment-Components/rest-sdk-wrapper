@@ -87,7 +87,8 @@ public class MtControllerTest {
     @Test
     public void givenInvalidFormatMtMessage_whenMtParse_thenReturnErrorText() throws Exception {
         //GIVEN
-        given(mtService.parseMt(anyString())).willThrow(new InvalidMessageFormatException("Application Header Block is missing"));
+        String errorResponse = "Application Header Block is missing";
+        given(mtService.parseMt(anyString())).willThrow(new InvalidMessageFormatException(errorResponse));
 
         //WHEN
         mvc.perform(post("/mt/parse")
@@ -97,7 +98,7 @@ public class MtControllerTest {
         //THEN
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
-                .andExpect(content().string("Application Header Block is missing"));
+                .andExpect(content().string(errorResponse));
 
         then(mtService).should(times(1)).parseMt(TestConstants.VALID_MT_103);
     }
@@ -208,7 +209,7 @@ public class MtControllerTest {
                 "        \"errorCode\": \"T08\"\n" +
                 "    }\n" +
                 "]";
-        willThrow(new InvalidMessageException(errorReponse)).given(mtService).createMt103(isA(MtCreate103Request.class));
+        given(mtService.createMt103(isA(MtCreate103Request.class))).willThrow(new InvalidMessageException(errorReponse));
         MtCreate103Request mtCreate103Request = TestConstants.getMtCreate103RequestSample();
         mtCreate103Request.setDetailsOfCharges("AAA"); //invalid value
         String requestJson = objectMapper.writeValueAsString(mtCreate103Request);
@@ -268,7 +269,7 @@ public class MtControllerTest {
                 "        \"errorCode\": \"T08\"\n" +
                 "    }\n" +
                 "]";
-        willThrow(new InvalidMessageException(errorReponse)).given(mtService).createMtGeneral(isA(MtCreateGeneralRequest.class));
+        given(mtService.createMtGeneral(isA(MtCreateGeneralRequest.class))).willThrow(new InvalidMessageException(errorReponse));
         MtCreateGeneralRequest mtCreateGeneralRequest = TestConstants.getMtCreateGeneralRequestSample();
         mtCreateGeneralRequest.getTags().removeIf( tag -> tag.getName().equals("71A"));
         mtCreateGeneralRequest.getTags().add(new MtTagGeneralRequest("71A", Arrays.asList("AAA"))); //invalid value
@@ -330,8 +331,9 @@ public class MtControllerTest {
                 "        \"errorCode\": \"D94\"\n" +
                 "    }\n" +
                 "]";
-        willThrow(new InvalidMessageException(errorReponse)).given(mtService)
-                .generateUniversalConfirmation(eq(TestConstants.VALID_MT_103), eq("1234"), eq("ACCC"), eq("AC01"), isNull(), isNull(), isNull());
+
+        given(mtService.generateUniversalConfirmation(eq(TestConstants.VALID_MT_103), eq("1234"), eq("ACCC"), eq("AC01"), isNull(), isNull(), isNull()))
+                .willThrow(new InvalidMessageException(errorReponse));
 
 
         //WHEN
