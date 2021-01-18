@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.1</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.paymentcomponents.libraries</groupId>
+    <artifactId>rest-sdk-wrapper</artifactId>
+    <version>1.0.0</version>
+    <name>rest-sdk-wrapper</name>
+    <description>Wrapper for Payment Components Financial Messaging Libraries</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>internal</id>
+            <url>${datamation.repo.url}/internal</url>
+        </repository>
+        <repository>
+            <id>snapshots</id>
+            <url>${datamation.repo.url}/snapshots</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- FINANCIAL MESSAGES LIBRARIES  -->
+        <dependency>
+            <groupId>gr.datamation</groupId>
+            <artifactId>smv</artifactId>
+            <version>20.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>gr.datamation.mx</groupId>
+            <artifactId>mx</artifactId>
+            <version>20.6.0</version>
+            <classifier>full</classifier>
+        </dependency>
+        <dependency>
+            <groupId>gr.datamation</groupId>
+            <artifactId>sepa-core-jaxb</artifactId>
+            <version>19.19.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>2.11.4</version> <!--For 2.12.X, advice https://cowtowncoder.medium.com/jackson-2-12-most-wanted-4-5-cbc91c00bcd2-->
+        </dependency>
+
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>internal</id>
+            <name>Internal Release Repository</name>
+            <url>${datamation.repo.url}/internal</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Internal Snapshot Repository</name>
+            <url>${datamation.repo.url}/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>
