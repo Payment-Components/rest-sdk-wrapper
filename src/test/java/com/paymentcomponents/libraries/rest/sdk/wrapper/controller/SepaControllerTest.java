@@ -61,7 +61,7 @@ public class SepaControllerTest {
     }
 
     @Test
-    public void givenValidSepaMessage_whenSepaValidate_thenReturnNoContent() throws Exception {
+    public void givenValidSepaMessage_whenSepaValidate_thenReturnSepaAsJson() throws Exception {
         //GIVEN
         given(sepaService.validateSepaMessage(anyString())).willReturn(TestConstants.VALID_JSON_SEPA_PACS_008);
 
@@ -103,7 +103,7 @@ public class SepaControllerTest {
     }
 
     @Test
-    public void givenValidPacs008Json_whenCreatePacs008_thenReturnSepaXml() throws Exception {
+    public void givenValidPacs008Json_whenCreatePacs008_thenReturnXml() throws Exception {
         //GIVEN
         given(sepaService.createPacs008(isA(SepaCreatePacs008Request.class))).willReturn(TestConstants.VALID_SEPA_PACS_008);
         String requestJson = objectMapper.writeValueAsString(TestConstants.getSepaCreatePacs008RequestSample());

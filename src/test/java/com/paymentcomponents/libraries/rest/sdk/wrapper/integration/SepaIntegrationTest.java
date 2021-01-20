@@ -31,7 +31,7 @@ public class SepaIntegrationTest {
     ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    public void givenValidSepaMessage_whenSepaValidate_thenReturnNoContent() throws Exception {
+    public void givenValidSepaMessage_whenSepaValidate_thenReturnSepaAsJson() throws Exception {
         //GIVEN
 
         //WHEN
