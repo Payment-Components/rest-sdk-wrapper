@@ -459,8 +459,209 @@ public class TestConstants {
             "    </RsltnOfInvstgtn>\n" +
             "</Document>";
 
+    public static final String VALID_MX_PAIN_001 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pain.001.001.09\">\n" +
+            "    <CstmrCdtTrfInitn>\n" +
+            "        <GrpHdr>\n" +
+            "            <MsgId>ABC/120928/CCT001</MsgId>\n" +
+            "            <CreDtTm>2012-09-28T14:07:00</CreDtTm>\n" +
+            "            <NbOfTxs>3</NbOfTxs>\n" +
+            "            <CtrlSum>11500000</CtrlSum>\n" +
+            "            <InitgPty>\n" +
+            "                <Nm>ABC Corporation</Nm>\n" +
+            "                <PstlAdr>\n" +
+            "                    <StrtNm>Times Square</StrtNm>\n" +
+            "                    <BldgNb>7</BldgNb>\n" +
+            "                    <PstCd>NY 10036</PstCd>\n" +
+            "                    <TwnNm>New York</TwnNm>\n" +
+            "                    <Ctry>US</Ctry>\n" +
+            "                </PstlAdr>\n" +
+            "            </InitgPty>\n" +
+            "        </GrpHdr>\n" +
+            "        <PmtInf>\n" +
+            "            <PmtInfId>ABC/086</PmtInfId>\n" +
+            "            <PmtMtd>TRF</PmtMtd>\n" +
+            "            <BtchBookg>false</BtchBookg>\n" +
+            "            <ReqdExctnDt>\n" +
+            "                <Dt>2012-09-29</Dt>\n" +
+            "            </ReqdExctnDt>\n" +
+            "            <Dbtr>\n" +
+            "                <Nm>ABC Corporation</Nm>\n" +
+            "                <PstlAdr>\n" +
+            "                    <StrtNm>Times Square</StrtNm>\n" +
+            "                    <BldgNb>7</BldgNb>\n" +
+            "                    <PstCd>NY 10036</PstCd>\n" +
+            "                    <TwnNm>New York</TwnNm>\n" +
+            "                    <Ctry>US</Ctry>\n" +
+            "                </PstlAdr>\n" +
+            "            </Dbtr>\n" +
+            "            <DbtrAcct>\n" +
+            "                <Id>\n" +
+            "                    <Othr>\n" +
+            "                        <Id>00125574999</Id>\n" +
+            "                    </Othr>\n" +
+            "                </Id>\n" +
+            "            </DbtrAcct>\n" +
+            "            <DbtrAgt>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>BBBBUS33</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </DbtrAgt>\n" +
+            "            <CdtTrfTxInf>\n" +
+            "                <PmtId>\n" +
+            "                    <InstrId>ABC/120928/CCT001/01</InstrId>\n" +
+            "                    <EndToEndId>ABC/4562/2012-09-08</EndToEndId>\n" +
+            "                </PmtId>\n" +
+            "                <Amt>\n" +
+            "                    <InstdAmt Ccy=\"JPY\">10000000</InstdAmt>\n" +
+            "                </Amt>\n" +
+            "                <ChrgBr>SHAR</ChrgBr>\n" +
+            "                <CdtrAgt>\n" +
+            "                    <FinInstnId>\n" +
+            "                        <BICFI>AAAAGB2L</BICFI>\n" +
+            "                    </FinInstnId>\n" +
+            "                </CdtrAgt>\n" +
+            "                <Cdtr>\n" +
+            "                    <Nm>DEF Electronics</Nm>\n" +
+            "                    <PstlAdr>\n" +
+            "                        <AdrLine>Corn Exchange 5th Floor</AdrLine>\n" +
+            "                        <AdrLine>Mark Lane 55</AdrLine>\n" +
+            "                        <AdrLine>EC3R7NE London</AdrLine>\n" +
+            "                        <AdrLine>GB</AdrLine>\n" +
+            "                    </PstlAdr>\n" +
+            "                </Cdtr>\n" +
+            "                <CdtrAcct>\n" +
+            "                    <Id>\n" +
+            "                        <Othr>\n" +
+            "                            <Id>23683707994125</Id>\n" +
+            "                        </Othr>\n" +
+            "                    </Id>\n" +
+            "                </CdtrAcct>\n" +
+            "                <Purp>\n" +
+            "                    <Cd>GDDS</Cd>\n" +
+            "                </Purp>\n" +
+            "                <RmtInf>\n" +
+            "                    <Strd>\n" +
+            "                        <RfrdDocInf>\n" +
+            "                            <Tp>\n" +
+            "                                <CdOrPrtry>\n" +
+            "                                    <Cd>CINV</Cd>\n" +
+            "                                </CdOrPrtry>\n" +
+            "                            </Tp>\n" +
+            "                            <Nb>4562</Nb>\n" +
+            "                            <RltdDt>2012-09-08</RltdDt>\n" +
+            "                        </RfrdDocInf>\n" +
+            "                    </Strd>\n" +
+            "                </RmtInf>\n" +
+            "            </CdtTrfTxInf>\n" +
+            "            <CdtTrfTxInf>\n" +
+            "                <PmtId>\n" +
+            "                    <InstrId>ABC/120928/CCT001/2</InstrId>\n" +
+            "                    <EndToEndId>ABC/ABC-13679/2012-09-15</EndToEndId>\n" +
+            "                </PmtId>\n" +
+            "                <Amt>\n" +
+            "                    <InstdAmt Ccy=\"EUR\">500000</InstdAmt>\n" +
+            "                </Amt>\n" +
+            "                <ChrgBr>CRED</ChrgBr>\n" +
+            "                <CdtrAgt>\n" +
+            "                    <FinInstnId>\n" +
+            "                        <BICFI>DDDDBEBB</BICFI>\n" +
+            "                    </FinInstnId>\n" +
+            "                </CdtrAgt>\n" +
+            "                <Cdtr>\n" +
+            "                    <Nm>GHI Semiconductors</Nm>\n" +
+            "                    <PstlAdr>\n" +
+            "                        <StrtNm>Avenue Brugmann</StrtNm>\n" +
+            "                        <BldgNb>415</BldgNb>\n" +
+            "                        <PstCd>1180</PstCd>\n" +
+            "                        <TwnNm>Brussels</TwnNm>\n" +
+            "                        <Ctry>BE</Ctry>\n" +
+            "                    </PstlAdr>\n" +
+            "                </Cdtr>\n" +
+            "                <CdtrAcct>\n" +
+            "                    <Id>\n" +
+            "                        <IBAN>BE30001216371411</IBAN>\n" +
+            "                    </Id>\n" +
+            "                </CdtrAcct>\n" +
+            "                <InstrForCdtrAgt>\n" +
+            "                    <Cd>PHOB</Cd>\n" +
+            "                    <InstrInf>+32/2/2222222</InstrInf>\n" +
+            "                </InstrForCdtrAgt>\n" +
+            "                <Purp>\n" +
+            "                    <Cd>GDDS</Cd>\n" +
+            "                </Purp>\n" +
+            "                <RmtInf>\n" +
+            "                    <Strd>\n" +
+            "                        <RfrdDocInf>\n" +
+            "                            <Tp>\n" +
+            "                                <CdOrPrtry>\n" +
+            "                                    <Cd>CINV</Cd>\n" +
+            "                                </CdOrPrtry>\n" +
+            "                            </Tp>\n" +
+            "                            <Nb>ABC-13679</Nb>\n" +
+            "                            <RltdDt>2012-09-15</RltdDt>\n" +
+            "                        </RfrdDocInf>\n" +
+            "                    </Strd>\n" +
+            "                </RmtInf>\n" +
+            "            </CdtTrfTxInf>\n" +
+            "            <CdtTrfTxInf>\n" +
+            "                <PmtId>\n" +
+            "                    <InstrId>ABC/120928/CCT001/3</InstrId>\n" +
+            "                    <EndToEndId>ABC/987-AC/2012-09-27</EndToEndId>\n" +
+            "                </PmtId>\n" +
+            "                <Amt>\n" +
+            "                    <InstdAmt Ccy=\"USD\">1000000</InstdAmt>\n" +
+            "                </Amt>\n" +
+            "                <ChrgBr>SHAR</ChrgBr>\n" +
+            "                <CdtrAgt>\n" +
+            "                    <FinInstnId>\n" +
+            "                        <BICFI>BBBBUS66</BICFI>\n" +
+            "                    </FinInstnId>\n" +
+            "                </CdtrAgt>\n" +
+            "                <Cdtr>\n" +
+            "                    <Nm>ABC Corporation</Nm>\n" +
+            "                    <PstlAdr>\n" +
+            "                        <Dept>Treasury department</Dept>\n" +
+            "                        <StrtNm>Bush Street</StrtNm>\n" +
+            "                        <BldgNb>13</BldgNb>\n" +
+            "                        <PstCd>CA 94108</PstCd>\n" +
+            "                        <TwnNm>San Francisco</TwnNm>\n" +
+            "                        <Ctry>US</Ctry>\n" +
+            "                    </PstlAdr>\n" +
+            "                </Cdtr>\n" +
+            "                <CdtrAcct>\n" +
+            "                    <Id>\n" +
+            "                        <Othr>\n" +
+            "                            <Id>4895623</Id>\n" +
+            "                        </Othr>\n" +
+            "                    </Id>\n" +
+            "                </CdtrAcct>\n" +
+            "                <Purp>\n" +
+            "                    <Cd>INTC</Cd>\n" +
+            "                </Purp>\n" +
+            "                <RmtInf>\n" +
+            "                    <Strd>\n" +
+            "                        <RfrdDocInf>\n" +
+            "                            <Tp>\n" +
+            "                                <CdOrPrtry>\n" +
+            "                                    <Cd>CINV</Cd>\n" +
+            "                                </CdOrPrtry>\n" +
+            "                            </Tp>\n" +
+            "                            <Nb>987-AC</Nb>\n" +
+            "                            <RltdDt>2012-09-27</RltdDt>\n" +
+            "                        </RfrdDocInf>\n" +
+            "                    </Strd>\n" +
+            "                </RmtInf>\n" +
+            "            </CdtTrfTxInf>\n" +
+            "        </PmtInf>\n" +
+            "    </CstmrCdtTrfInitn>\n" +
+            "</Document>";
+
+
     public static final String VALID_JSON_SEPA_PACS_008 = Utils.convertXmlToJson(VALID_SEPA_PACS_008, "Document");
     public static final String INVALID_SEPA_PACS_008 = VALID_SEPA_PACS_008.replaceAll("<MsgId>20210113155624246</MsgId>", "");
+    public static final String VALID_JSON_MX_PAIN001 = Utils.convertXmlToJson(VALID_MX_PAIN_001, "Document");
+    public static final String INVALID_MX_PAIN_001 = VALID_MX_PAIN_001.replaceAll("<MsgId>ABC/120928/CCT001</MsgId>", "");
 
     public static MtCreate103Request getMtCreate103RequestSample() {
         MtCreate103Request mtCreate103RequestSample = new MtCreate103Request();

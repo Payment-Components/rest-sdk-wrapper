@@ -30,7 +30,7 @@ public class SepaServiceTest {
     SepaService sepaService;
 
     @Test
-    public void givenValidSepaMessage_whenSepaValidate_thenDoNothing() throws Exception {
+    public void givenValidSepaMessage_whenSepaValidate_thenReturnSepaAsJson() throws Exception {
         //GIVEN
         String expected = TestConstants.VALID_JSON_SEPA_PACS_008;
 
