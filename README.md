@@ -23,9 +23,9 @@ CMD ["java", "-jar", "/tmp/app.jar"]
 
 ## Dependencies
 It has a dependency to 
-- MT library version `20.4.0`
-- SEPA library version `19.19.0`
-- MX library version `20.6.0`
+- MT library version `20.5.0`
+- SEPA library version `19.20.0`
+- MX library version `20.7.0`
 
 ## Features
 
