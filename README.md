@@ -46,8 +46,9 @@ It has a dependency to
 ### The following MX operations are available
 - Validate an MX message and return it as JSON
 
-### The following MX operations are available
+### The following SWIFT Translator operations are available
 - Translate an MT Message to the equivalent MX
+- Translate an MX Message to the equivalent MT
 
 
 ## Get Started

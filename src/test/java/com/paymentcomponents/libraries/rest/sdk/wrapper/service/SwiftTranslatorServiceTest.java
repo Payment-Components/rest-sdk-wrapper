@@ -43,7 +43,7 @@ public class SwiftTranslatorServiceTest {
     }
 
     @Test
-    public void givenInvalidMtMessage_whenTranslateMtToMx_thenReturnMessageValidationException() {
+    public void givenInvalidMtMessage_whenTranslateMtToMx_thenThrowInvalidMessageException() {
         //GIVEN
         String exceptionBody = "[ {\n" +
                 "  \"tagName\" : \"20\",\n" +
@@ -58,6 +58,43 @@ public class SwiftTranslatorServiceTest {
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
             swiftTranslatorService.translateMtToMx(TestConstants.INVALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST);
+        });
+
+        //THEN
+        assertEquals(exceptionBody.replaceAll("\n", "\r\n"), exception.getResponseBodyAsString());
+    }
+
+    @Test
+    public void givenValidMxMessage_whenTranslateMxToMt_thenReturnMtMessage() throws Exception {
+        //GIVEN
+        String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_SWIFT_TRANSLATOR_MX_TO_MT_RESPONSE)
+                .replaceAll("0527210121", ".*")
+                .replaceAll("2101210527", ".*");
+
+        //WHEN
+        String result = swiftTranslatorService.translateMxToMt(TestConstants.VALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST);
+
+        //THEN
+        assertTrue(result.matches(expectedAsRegex.replaceAll("\n", "\r\n")));
+
+    }
+
+    @Test
+    public void givenInvalidMxMessage_whenTranslateMxToMt_thenThrowInvalidMessageException() {
+        //GIVEN
+        String exceptionBody = "[ {\n" +
+                "  \"severity\" : \"ERROR\",\n" +
+                "  \"errorCode\" : null,\n" +
+                "  \"fieldPath\" : null,\n" +
+                "  \"description\" : \"cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\\\":MsgId}' is expected.\",\n" +
+                "  \"erroneousValue\" : null,\n" +
+                "  \"line\" : 0,\n" +
+                "  \"column\" : 0\n" +
+                "} ]";
+
+        //WHEN
+        InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
+            swiftTranslatorService.translateMxToMt(TestConstants.INVALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST);
         });
 
         //THEN
