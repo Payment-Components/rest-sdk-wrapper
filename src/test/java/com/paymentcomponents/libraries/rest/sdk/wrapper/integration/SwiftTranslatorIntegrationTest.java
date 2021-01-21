@@ -69,4 +69,46 @@ public class SwiftTranslatorIntegrationTest {
                 .andExpect(jsonPath("$[0].errorCode", is("SV16")));
     }
 
+    @Test
+    public void givenValidMxMessage_whenTranslateMxToMt_thenReturnMtMessage() throws Exception {
+        //GIVEN
+        String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_SWIFT_TRANSLATOR_MX_TO_MT_RESPONSE)
+                .replaceAll("0527210121", ".*")
+                .replaceAll("2101210527", ".*");
+
+        //WHEN
+        mvc.perform(post("/swift/translator/mx/to/mt")
+                .content(TestConstants.VALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST)
+                .contentType(MediaType.TEXT_PLAIN))
+
+        //THEN
+                .andExpect(status().isOk())
+                .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
+                .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
+                .andExpect(content().string(Matchers.matchesPattern(expectedAsRegex.replaceAll("\n", "\r\n"))));
+
+    }
+
+    @Test
+    public void givenInvalidMxMessage_whenTranslateMxToMt_thenReturnValidationErrors() throws Exception {
+        //GIVEN
+
+        //WHEN
+        mvc.perform(post("/swift/translator/mx/to/mt")
+                .content(TestConstants.INVALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST)
+                .contentType(MediaType.TEXT_PLAIN))
+
+        //THEN
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].severity", is("ERROR")))
+                .andExpect(jsonPath("$[0].errorCode", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].fieldPath", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].description", is("cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\":MsgId}' is expected.")))
+                .andExpect(jsonPath("$[0].erroneousValue", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].line", is(0)))
+                .andExpect(jsonPath("$[0].column", is(0)));
+    }
+
 }

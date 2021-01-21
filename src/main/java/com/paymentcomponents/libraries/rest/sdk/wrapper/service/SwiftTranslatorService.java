@@ -28,4 +28,19 @@ public class SwiftTranslatorService {
         }
     }
 
+    public String translateMxToMt(String mxMessage) throws InvalidMessageException, JsonProcessingException {
+        try {
+            return Converter.convertMxToMt(mxMessage);
+        } catch (InvalidMxMessageException ex) {
+            throw new InvalidMessageException(
+                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(ex.getValidationErrorList()));
+        } catch (InvalidMtMessageException ex) {
+            throw new InvalidMessageException(
+                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(ex.getValidationErrorList()));
+        } catch (Exception ex) {
+            throw new InvalidMessageException(
+                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString("Message could not be translated"));
+        }
+    }
+
 }
