@@ -101,9 +101,9 @@ public class SepaController {
                             @Content(mediaType = "application/xml", examples = @ExampleObject(value = SwaggerConstants.SEPA_PAYMENT_RETURN_EXAMPLE_VALID), schema = @Schema(implementation = SwaggerConstants.SwaggerSepaPacs008Wrapper.class))
                     }),
             parameters = {
-                @Parameter(in = ParameterIn.QUERY, name = "reasonCode", description = SwaggerConstants.REASON_CD_PRTRY_PRESENCE, examples = @ExampleObject(value = "AC04")),
-                @Parameter(in = ParameterIn.QUERY, name = "reasonPrtry", description = SwaggerConstants.REASON_CD_PRTRY_PRESENCE, examples = @ExampleObject(value = "Not trusted")),
-                @Parameter(in = ParameterIn.QUERY, name = "indicator", description = SwaggerConstants.REASON_INDICATOR, examples = @ExampleObject(value = "1234")),
+                @Parameter(in = ParameterIn.QUERY, name = "reasonCode", description = SwaggerConstants.REASON_CD_PRTRY_PRESENCE, content = @Content(examples = @ExampleObject(value = "AC04"))),
+                @Parameter(in = ParameterIn.QUERY, name = "reasonPrtry", description = SwaggerConstants.REASON_CD_PRTRY_PRESENCE, content = @Content(examples = @ExampleObject(value = "Not trusted"))),
+                @Parameter(in = ParameterIn.QUERY, name = "indicator", description = SwaggerConstants.REASON_INDICATOR, content = @Content(examples = @ExampleObject(value = "1234"))),
             },
             responses = {
                     @ApiResponse(
@@ -140,9 +140,9 @@ public class SepaController {
                             @Content(mediaType = "application/xml", examples = @ExampleObject(value = SwaggerConstants.SEPA_CANCEL_REQUEST_EXAMPLE_VALID), schema = @Schema(implementation = SwaggerConstants.SwaggerSepaPacs008Wrapper.class))
                     }),
             parameters = {
-                    @Parameter(in = ParameterIn.QUERY, name = "reasonCode", description = SwaggerConstants.REASON_CD_PRTRY_PRESENCE, examples = @ExampleObject(value = "DUPL")),
-                    @Parameter(in = ParameterIn.QUERY, name = "reasonPrtry", description = SwaggerConstants.REASON_CD_PRTRY_PRESENCE, examples = @ExampleObject(value = "Not trusted")),
-                    @Parameter(in = ParameterIn.QUERY, name = "indicator", description = SwaggerConstants.REASON_INDICATOR, examples = @ExampleObject(value = "1234")),
+                    @Parameter(in = ParameterIn.QUERY, name = "reasonCode", description = SwaggerConstants.REASON_CD_PRTRY_PRESENCE, content = @Content(examples = @ExampleObject(value = "DUPL"))),
+                    @Parameter(in = ParameterIn.QUERY, name = "reasonPrtry", description = SwaggerConstants.REASON_CD_PRTRY_PRESENCE, content = @Content(examples = @ExampleObject(value = "Not trusted"))),
+                    @Parameter(in = ParameterIn.QUERY, name = "indicator", description = SwaggerConstants.REASON_INDICATOR, content = @Content(examples = @ExampleObject(value = "1234"))),
             },
             responses = {
                     @ApiResponse(
@@ -179,9 +179,9 @@ public class SepaController {
                             @Content(mediaType = "application/xml", examples = @ExampleObject(value = SwaggerConstants.SEPA_RES_OF_INVEST_EXAMPLE_VALID), schema = @Schema(implementation = SwaggerConstants.SwaggerSepaPacs008Wrapper.class))
                     }),
             parameters = {
-                    @Parameter(in = ParameterIn.QUERY, name = "reasonCode", description = SwaggerConstants.REASON_CD_PRTRY_PRESENCE, examples = @ExampleObject(value = "DUPL")),
-                    @Parameter(in = ParameterIn.QUERY, name = "reasonPrtry", description = SwaggerConstants.REASON_CD_PRTRY_PRESENCE, examples = @ExampleObject(value = "Not trusted")),
-                    @Parameter(in = ParameterIn.QUERY, name = "indicator", description = SwaggerConstants.REASON_INDICATOR, examples = @ExampleObject(value = "1234")),
+                    @Parameter(in = ParameterIn.QUERY, name = "reasonCode", description = SwaggerConstants.REASON_CD_PRTRY_PRESENCE, content = @Content(examples = @ExampleObject(value = "DUPL"))),
+                    @Parameter(in = ParameterIn.QUERY, name = "reasonPrtry", description = SwaggerConstants.REASON_CD_PRTRY_PRESENCE, content = @Content(examples = @ExampleObject(value = "Not trusted"))),
+                    @Parameter(in = ParameterIn.QUERY, name = "indicator", description = SwaggerConstants.REASON_INDICATOR, content = @Content(examples = @ExampleObject(value = "1234"))),
             },
             responses = {
                     @ApiResponse(
