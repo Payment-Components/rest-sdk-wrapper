@@ -25,8 +25,8 @@ CMD ["java", "-jar", "/tmp/app.jar"]
 It has a dependency to 
 - MT library version `20.5.0`
 - SEPA library version `19.20.0`
-- MX library version `20.7.0`
-- Swift Translator library version `1.5.2`
+- MX library version `20.10.0`
+- Swift Translator library version `1.5.3`
 
 ## Features
 
@@ -49,6 +49,10 @@ It has a dependency to
 ### The following SWIFT Translator operations are available
 - Translate an MT Message to the equivalent MX
 - Translate an MX Message to the equivalent MT
+
+### The following CBPR+ operations are available
+- Validate a CBPR+ message
+- Envelope a CBPR+ message inside a RequestPayload for FINplus service
 
 
 ## Get Started

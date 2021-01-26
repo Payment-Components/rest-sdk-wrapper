@@ -842,6 +842,231 @@ public class TestConstants {
             "/INS/TESTBICD\n" +
             "-}";
 
+    public static final String VALID_CBPR_REQUEST = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<AppHdr xmlns=\"urn:iso:std:iso:20022:tech:xsd:head.001.001.02\">\n" +
+            "    <Fr>\n" +
+            "        <FIId>\n" +
+            "            <FinInstnId>\n" +
+            "                <BICFI>TESTBICY</BICFI>\n" +
+            "            </FinInstnId>\n" +
+            "        </FIId>\n" +
+            "    </Fr>\n" +
+            "    <To>\n" +
+            "        <FIId>\n" +
+            "            <FinInstnId>\n" +
+            "                <BICFI>TESTBICZ</BICFI>\n" +
+            "            </FinInstnId>\n" +
+            "        </FIId>\n" +
+            "    </To>\n" +
+            "    <BizMsgIdr>BBBB/120928-FICT/JPY/430</BizMsgIdr>\n" +
+            "    <MsgDefIdr>pacs.009.001.08</MsgDefIdr>\n" +
+            "    <BizSvc>swift.cbprplus.01</BizSvc>\n" +
+            "    <MktPrctc>\n" +
+            "        <Regy>str1234</Regy>\n" +
+            "        <Id>str1234</Id>\n" +
+            "    </MktPrctc>\n" +
+            "    <CreDt>2012-12-13T12:12:12+13:00</CreDt>\n" +
+            "    <CpyDplct>CODU</CpyDplct>\n" +
+            "    <PssblDplct>true</PssblDplct>\n" +
+            "    <Prty>str1234</Prty>\n" +
+            "</AppHdr>\n" +
+            "\n" +
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\">\n" +
+            "    <FICdtTrf>\n" +
+            "        <GrpHdr>\n" +
+            "            <MsgId>BBBB/120928-FICT/JPY/430</MsgId>\n" +
+            "            <CreDtTm>2012-09-28T16:00:00+13:00</CreDtTm>\n" +
+            "            <NbOfTxs>1</NbOfTxs>\n" +
+            "            <SttlmInf>\n" +
+            "                <SttlmMtd>INDA</SttlmMtd>\n" +
+            "                <SttlmAcct>\n" +
+            "                    <Id>\n" +
+            "                        <Othr>\n" +
+            "                            <Id>ACCOUNTID</Id>\n" +
+            "                        </Othr>\n" +
+            "                    </Id>\n" +
+            "                </SttlmAcct>\n" +
+            "            </SttlmInf>\n" +
+            "        </GrpHdr>\n" +
+            "        <CdtTrfTxInf>\n" +
+            "            <PmtId>\n" +
+            "                <InstrId>BBBB/120928-FICT</InstrId>\n" +
+            "                <EndToEndId>ABC/4562/2012-09-08</EndToEndId>\n" +
+            "                <TxId>BBBB/120928-CCT/123/1</TxId>\n" +
+            "                <UETR>00000000-0000-4000-8000-000000000000</UETR>\n" +
+            "            </PmtId>\n" +
+            "            <IntrBkSttlmAmt Ccy=\"JPY\">10000000</IntrBkSttlmAmt>\n" +
+            "            <IntrBkSttlmDt>2012-09-29</IntrBkSttlmDt>\n" +
+            "            <SttlmTmReq>\n" +
+            "                <CLSTm>12:12:12+13:00</CLSTm>\n" +
+            "            </SttlmTmReq>\n" +
+            "            <PrvsInstgAgt1>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>TESTBICD</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </PrvsInstgAgt1>\n" +
+            "            <InstgAgt>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>BBBBUS33</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </InstgAgt>\n" +
+            "            <InstdAgt>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>CCCCJPJT</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </InstdAgt>\n" +
+            "            <IntrmyAgt1>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>INTERBIC</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </IntrmyAgt1>\n" +
+            "            <IntrmyAgt1Acct>\n" +
+            "                <Id>\n" +
+            "                    <Othr>\n" +
+            "                        <Id>INTERAGTACCT</Id>\n" +
+            "                    </Othr>\n" +
+            "                </Id>\n" +
+            "            </IntrmyAgt1Acct>\n" +
+            "            <Dbtr>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>BBBBUS33</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </Dbtr>\n" +
+            "            <CdtrAgt>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>AAAAJPJT</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </CdtrAgt>\n" +
+            "            <CdtrAgtAcct>\n" +
+            "                <Id>\n" +
+            "                    <Othr>\n" +
+            "                        <Id>CDTRAGTACCT</Id>\n" +
+            "                    </Othr>\n" +
+            "                </Id>\n" +
+            "            </CdtrAgtAcct>\n" +
+            "            <Cdtr>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>BBBBUS33</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </Cdtr>\n" +
+            "        </CdtTrfTxInf>\n" +
+            "    </FICdtTrf>\n" +
+            "</Document>";
+
+    public static final String CBPR_ENVELOPE = "<RequestPayload>\n" +
+            "  <AppHdr xmlns=\"urn:iso:std:iso:20022:tech:xsd:head.001.001.02\">\n" +
+            "    <Fr>\n" +
+            "      <FIId>\n" +
+            "        <FinInstnId>\n" +
+            "          <BICFI>TESTBICY</BICFI>\n" +
+            "        </FinInstnId>\n" +
+            "      </FIId>\n" +
+            "    </Fr>\n" +
+            "    <To>\n" +
+            "      <FIId>\n" +
+            "        <FinInstnId>\n" +
+            "          <BICFI>TESTBICZ</BICFI>\n" +
+            "        </FinInstnId>\n" +
+            "      </FIId>\n" +
+            "    </To>\n" +
+            "    <BizMsgIdr>BBBB/120928-FICT/JPY/430</BizMsgIdr>\n" +
+            "    <MsgDefIdr>pacs.009.001.08</MsgDefIdr>\n" +
+            "    <BizSvc>swift.cbprplus.01</BizSvc>\n" +
+            "    <MktPrctc>\n" +
+            "      <Regy>str1234</Regy>\n" +
+            "      <Id>str1234</Id>\n" +
+            "    </MktPrctc>\n" +
+            "    <CreDt>2012-12-13T12:12:12+13:00</CreDt>\n" +
+            "    <CpyDplct>CODU</CpyDplct>\n" +
+            "    <PssblDplct>true</PssblDplct>\n" +
+            "    <Prty>str1234</Prty>\n" +
+            "  </AppHdr>\n" +
+            "  <Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\">\n" +
+            "    <FICdtTrf>\n" +
+            "      <GrpHdr>\n" +
+            "        <MsgId>BBBB/120928-FICT/JPY/430</MsgId>\n" +
+            "        <CreDtTm>2012-09-28T16:00:00+13:00</CreDtTm>\n" +
+            "        <NbOfTxs>1</NbOfTxs>\n" +
+            "        <SttlmInf>\n" +
+            "          <SttlmMtd>INDA</SttlmMtd>\n" +
+            "          <SttlmAcct>\n" +
+            "            <Id>\n" +
+            "              <Othr>\n" +
+            "                <Id>ACCOUNTID</Id>\n" +
+            "              </Othr>\n" +
+            "            </Id>\n" +
+            "          </SttlmAcct>\n" +
+            "        </SttlmInf>\n" +
+            "      </GrpHdr>\n" +
+            "      <CdtTrfTxInf>\n" +
+            "        <PmtId>\n" +
+            "          <InstrId>BBBB/120928-FICT</InstrId>\n" +
+            "          <EndToEndId>ABC/4562/2012-09-08</EndToEndId>\n" +
+            "          <TxId>BBBB/120928-CCT/123/1</TxId>\n" +
+            "          <UETR>00000000-0000-4000-8000-000000000000</UETR>\n" +
+            "        </PmtId>\n" +
+            "        <IntrBkSttlmAmt Ccy=\"JPY\">10000000</IntrBkSttlmAmt>\n" +
+            "        <IntrBkSttlmDt>2012-09-29</IntrBkSttlmDt>\n" +
+            "        <SttlmTmReq>\n" +
+            "          <CLSTm>12:12:12+13:00</CLSTm>\n" +
+            "        </SttlmTmReq>\n" +
+            "        <PrvsInstgAgt1>\n" +
+            "          <FinInstnId>\n" +
+            "            <BICFI>TESTBICD</BICFI>\n" +
+            "          </FinInstnId>\n" +
+            "        </PrvsInstgAgt1>\n" +
+            "        <InstgAgt>\n" +
+            "          <FinInstnId>\n" +
+            "            <BICFI>BBBBUS33</BICFI>\n" +
+            "          </FinInstnId>\n" +
+            "        </InstgAgt>\n" +
+            "        <InstdAgt>\n" +
+            "          <FinInstnId>\n" +
+            "            <BICFI>CCCCJPJT</BICFI>\n" +
+            "          </FinInstnId>\n" +
+            "        </InstdAgt>\n" +
+            "        <IntrmyAgt1>\n" +
+            "          <FinInstnId>\n" +
+            "            <BICFI>INTERBIC</BICFI>\n" +
+            "          </FinInstnId>\n" +
+            "        </IntrmyAgt1>\n" +
+            "        <IntrmyAgt1Acct>\n" +
+            "          <Id>\n" +
+            "            <Othr>\n" +
+            "              <Id>INTERAGTACCT</Id>\n" +
+            "            </Othr>\n" +
+            "          </Id>\n" +
+            "        </IntrmyAgt1Acct>\n" +
+            "        <Dbtr>\n" +
+            "          <FinInstnId>\n" +
+            "            <BICFI>BBBBUS33</BICFI>\n" +
+            "          </FinInstnId>\n" +
+            "        </Dbtr>\n" +
+            "        <CdtrAgt>\n" +
+            "          <FinInstnId>\n" +
+            "            <BICFI>AAAAJPJT</BICFI>\n" +
+            "          </FinInstnId>\n" +
+            "        </CdtrAgt>\n" +
+            "        <CdtrAgtAcct>\n" +
+            "          <Id>\n" +
+            "            <Othr>\n" +
+            "              <Id>CDTRAGTACCT</Id>\n" +
+            "            </Othr>\n" +
+            "          </Id>\n" +
+            "        </CdtrAgtAcct>\n" +
+            "        <Cdtr>\n" +
+            "          <FinInstnId>\n" +
+            "            <BICFI>BBBBUS33</BICFI>\n" +
+            "          </FinInstnId>\n" +
+            "        </Cdtr>\n" +
+            "      </CdtTrfTxInf>\n" +
+            "    </FICdtTrf>\n" +
+            "  </Document>\n" +
+            "</RequestPayload>\n";
+
+
+
     public static final String INVALID_MT_103 = VALID_MT_103.replace(":20:123456789\n", "");
     public static final String VALID_JSON_SEPA_PACS_008 = Utils.convertXmlToJson(VALID_SEPA_PACS_008, "Document");
     public static final String INVALID_SEPA_PACS_008 = VALID_SEPA_PACS_008.replace("<MsgId>20210113155624246</MsgId>\n", "");
@@ -849,6 +1074,7 @@ public class TestConstants {
     public static final String INVALID_MX_PAIN_001 = VALID_MX_PAIN_001.replace("<MsgId>ABC/120928/CCT001</MsgId>\n", "");
     public static final String INVALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST = VALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST.replace(":20:00322\n", "");
     public static final String INVALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST = VALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST.replace("<MsgId>BBBB/120928-FICT/JPY/430</MsgId>\n", "");
+    public static final String INVALID_CBPR_REQUEST = VALID_CBPR_REQUEST.replace("<MsgId>BBBB/120928-FICT/JPY/430</MsgId>\n", "");
 
     public static MtCreate103Request getMtCreate103RequestSample() {
         MtCreate103Request mtCreate103RequestSample = new MtCreate103Request();

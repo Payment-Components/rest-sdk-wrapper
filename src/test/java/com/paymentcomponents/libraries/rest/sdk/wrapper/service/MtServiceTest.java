@@ -108,12 +108,13 @@ public class MtServiceTest {
     @Test
     public void givenValidCreateMt103Request_whenCreateMt103_thenReturnMt103AsText() throws Exception {
         //GIVEN
+        String expected = TestConstants.VALID_MT_103;
 
         //WHEN
         String responseText = mtService.createMt103(TestConstants.getMtCreate103RequestSample());
 
         //THEN
-        assertEquals(TestConstants.VALID_MT_103.replaceAll("\n", "\r\n"), responseText);
+        assertEquals(expected.replaceAll("\n", "\r\n"), responseText);
     }
 
     @Test
@@ -143,12 +144,13 @@ public class MtServiceTest {
     @Test
     public void givenValidCreateMtGeneralRequest_whenCreateMtGeneral_thenReturnMtGeneralAsText() throws Exception {
         //GIVEN
+        String expected = TestConstants.VALID_MT_103;
 
         //WHEN
-        String responseText = mtService.createMtGeneral(TestConstants.getMtCreateGeneralRequestSample());
+        String result = mtService.createMtGeneral(TestConstants.getMtCreateGeneralRequestSample());
 
         //THEN
-        assertEquals(TestConstants.VALID_MT_103.replaceAll("\n", "\r\n"), responseText);
+        assertEquals(expected.replaceAll("\n", "\r\n"), result);
     }
 
     @Test

@@ -8,10 +8,9 @@ import org.springframework.stereotype.Service;
 public class MxService {
 
     public String validateMx(String mxMessage) throws Exception {
-        MxUtils.validateMxMessage(mxMessage);
+        MxUtils.parseAndValidateMxMessage(mxMessage);
 
         return Utils.convertXmlToJson(mxMessage, "Document");
     }
-
 
 }
