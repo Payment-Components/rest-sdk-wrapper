@@ -28,7 +28,8 @@ public class RestSdkWrapperConfiguration {
                         "/mt/**",
                         "/sepa/**",
                         "/mx/**",
-                        "/swift/translator/**"
+                        "/swift/translator/**",
+                        "/cbpr/**"
                 )
                 .build();
     }
@@ -42,7 +43,8 @@ public class RestSdkWrapperConfiguration {
         registrationBean.addUrlPatterns("/mt/*",
                                         "/sepa/*",
                                         "/mx/*",
-                                        "/swift/translator/*");
+                                        "/swift/translator/*",
+                                        "/cbpr/*");
 
         return registrationBean;
 

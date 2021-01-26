@@ -8,7 +8,7 @@ import gr.datamation.validation.error.ValidationErrorList;
 
 public class MxUtils {
 
-    public static CoreMessage validateMxMessage(String mxMessage) throws Exception {
+    public static CoreMessage parseAndValidateMxMessage(String mxMessage) throws Exception {
         CoreMessage coreMessage = (CoreMessage) MXUtils.autoParseXML(mxMessage);
 
         ValidationErrorList validationErrorList = coreMessage.validate();

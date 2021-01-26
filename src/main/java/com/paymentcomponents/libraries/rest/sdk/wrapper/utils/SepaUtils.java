@@ -36,7 +36,7 @@ public class SepaUtils {
         }
     }
 
-    public static CoreMessage validateSepaMessage(String messageText) throws JsonProcessingException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException, ClassNotFoundException {
+    public static CoreMessage parseAndValidateSepaMessage(String messageText) throws JsonProcessingException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException, ClassNotFoundException {
         CoreMessage sepaMessage = SepaUtils.retrieveSepaMessageTypeText(messageText);
         sepaMessage.parseAndValidateString(messageText);
 
@@ -48,7 +48,7 @@ public class SepaUtils {
         return sepaMessage;
     }
 
-    public static CoreMessage validateSepaMessage(CoreMessage sepaMessage) throws JsonProcessingException {
+    public static CoreMessage parseAndValidateSepaMessage(CoreMessage sepaMessage) throws JsonProcessingException {
         sepaMessage.validate();
 
         if (sepaMessage.hasValidationErrors()) {

@@ -27,7 +27,7 @@ public class SepaService {
 
     public String validateSepaMessage(String messageText) throws Exception {
 
-        SepaUtils.validateSepaMessage(messageText);
+        SepaUtils.parseAndValidateSepaMessage(messageText);
 
         return Utils.convertXmlToJson(messageText, "Document");
 
@@ -75,14 +75,14 @@ public class SepaService {
         addElement(fiToFICustomerCreditTransfer, "/GrpHdr/InstgAgt/FinInstnId/BIC", request.getInstgAgt());
         addElement(fiToFICustomerCreditTransfer, "/GrpHdr/InstdAgt/FinInstnId/BIC", request.getInstdAgt());
 
-        SepaUtils.validateSepaMessage(fiToFICustomerCreditTransfer.toString());
+        SepaUtils.parseAndValidateSepaMessage(fiToFICustomerCreditTransfer.toString());
 
         return fiToFICustomerCreditTransfer.toString();
     }
 
     public String generatePaymentReturn(String pacs008MessageText, MsgReplyInfoRequest msgReplyInfoRequest) throws Exception {
         SepaUtils.validateMsgReplyInfoRequest(msgReplyInfoRequest);
-        FIToFICustomerCreditTransfer fiToFICustomerCreditTransfer = (FIToFICustomerCreditTransfer)SepaUtils.validateSepaMessage(pacs008MessageText);
+        FIToFICustomerCreditTransfer fiToFICustomerCreditTransfer = (FIToFICustomerCreditTransfer)SepaUtils.parseAndValidateSepaMessage(pacs008MessageText);
 
         CreditTransferTransactionInformation11 firstTransaction = fiToFICustomerCreditTransfer.getRootMessage().getCdtTrfTxInf().get(0);
 
@@ -118,14 +118,14 @@ public class SepaService {
         addElement(paymentReturn, "/GrpHdr/SttlmInf/SttlmMtd", "CLRG");
         addElement(paymentReturn, "/GrpHdr/SttlmInf/ClrSys/Prtry", "ST2");
 
-        SepaUtils.validateSepaMessage(paymentReturn);
+        SepaUtils.parseAndValidateSepaMessage(paymentReturn);
 
         return paymentReturn.toString();
     }
 
     public String generateCancellationRequest(String pacs008MessageText, MsgReplyInfoRequest msgReplyInfoRequest) throws Exception {
         SepaUtils.validateMsgReplyInfoRequest(msgReplyInfoRequest);
-        FIToFICustomerCreditTransfer fiToFICustomerCreditTransfer = (FIToFICustomerCreditTransfer)SepaUtils.validateSepaMessage(pacs008MessageText);
+        FIToFICustomerCreditTransfer fiToFICustomerCreditTransfer = (FIToFICustomerCreditTransfer)SepaUtils.parseAndValidateSepaMessage(pacs008MessageText);
 
         CreditTransferTransactionInformation11 firstTransaction = fiToFICustomerCreditTransfer.getRootMessage().getCdtTrfTxInf().get(0);
 
@@ -159,14 +159,14 @@ public class SepaService {
         addElement(cancellationRequest, "/Assgnmt/Assgne/Agt/FinInstnId/BIC", firstTransaction.getCdtrAgt().getFinInstnId().getBIC());
         addElement(cancellationRequest, "/Assgnmt/CreDtTm", Utils.convertDateToCalendar(new Date()));
 
-        SepaUtils.validateSepaMessage(cancellationRequest);
+        SepaUtils.parseAndValidateSepaMessage(cancellationRequest);
 
         return cancellationRequest.toString();
     }
 
     public String generateResolutionOfInvestigation(String pacs008MessageText, MsgReplyInfoRequest msgReplyInfoRequest) throws Exception {
         SepaUtils.validateMsgReplyInfoRequest(msgReplyInfoRequest);
-        FIToFICustomerCreditTransfer fiToFICustomerCreditTransfer = (FIToFICustomerCreditTransfer)SepaUtils.validateSepaMessage(pacs008MessageText);
+        FIToFICustomerCreditTransfer fiToFICustomerCreditTransfer = (FIToFICustomerCreditTransfer)SepaUtils.parseAndValidateSepaMessage(pacs008MessageText);
 
         CreditTransferTransactionInformation11 firstTransaction = fiToFICustomerCreditTransfer.getRootMessage().getCdtTrfTxInf().get(0);
 
@@ -200,7 +200,7 @@ public class SepaService {
         addElement(resolutionOfInvestigation, "/Assgnmt/Assgne/Agt/FinInstnId/BIC", firstTransaction.getCdtrAgt().getFinInstnId().getBIC());
         addElement(resolutionOfInvestigation, "/Assgnmt/CreDtTm", Utils.convertDateToCalendar(new Date()));
 
-        SepaUtils.validateSepaMessage(resolutionOfInvestigation);
+        SepaUtils.parseAndValidateSepaMessage(resolutionOfInvestigation);
 
         return resolutionOfInvestigation.toString();
     }
