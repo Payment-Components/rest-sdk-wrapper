@@ -4,7 +4,7 @@ The Financial Messaging Libraries are written in Java. They can be integrated sm
 In order to help developers of other Programming Languages worlds, we prepared this standalone REST API wrapper for MT, SEPA, MX(ISO20022), SWIFT Translator and CBPR+ libraries.
 
 ## Installation 
-It's a simple java web application written in spring boot. You can start it by running the following command `java -jar rest-sdk-wrapper-1.0.0.jar` or
+It's a simple java web application written in spring boot. You can start it by running the following command `java -jar rest-sdk-wrapper-1.0.1.jar` or
 you can run it inside a docker container using the following instructions:
 
 1. Create a folder named `rest-sdk-wrapper`
@@ -26,7 +26,7 @@ It has a dependency to
 - MT library version `20.5.0`
 - SEPA library version `19.20.0`
 - MX library version `20.10.0`
-- Swift Translator library version `1.5.3`
+- Swift Translator library version `1.5.4`
 
 ## Features
 

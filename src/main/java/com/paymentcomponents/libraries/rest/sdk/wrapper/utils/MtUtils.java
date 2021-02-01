@@ -22,11 +22,10 @@ import java.util.stream.Collectors;
 public class MtUtils {
 
     public static SwiftMessage parseMt(String messageText) throws InvalidMessageFormatException {
-        messageText = messageText.replaceAll("\r\n", "\r");
-        messageText = messageText.replaceAll("\n", "\r");
-        messageText = messageText.replaceAll("\r", "\r\n");
+        messageText = messageText.replaceAll("\r\n", "\n");
+        messageText = messageText.replaceAll("\n", "\r\n");
 
-        SwiftMsgProcessor smp = new SwiftMsgProcessor("\r\n");
+        SwiftMsgProcessor smp = new SwiftMsgProcessor();
 
         return smp.ParseMsgStringToObject(messageText);
     }

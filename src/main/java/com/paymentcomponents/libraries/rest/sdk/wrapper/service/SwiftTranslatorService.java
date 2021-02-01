@@ -13,8 +13,6 @@ public class SwiftTranslatorService {
 
     public String translateMtToMx(String mtMessage) throws InvalidMessageException, JsonProcessingException {
         try {
-            mtMessage = mtMessage.replaceAll("\r\n", "\n").replaceAll("\n", "\r\n");
-
             return Converter.convertMtToMx(mtMessage);
         } catch (InvalidMtMessageException ex) {
             throw new InvalidMessageException(

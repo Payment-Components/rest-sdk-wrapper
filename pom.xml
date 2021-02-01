@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.paymentcomponents.libraries</groupId>
     <artifactId>rest-sdk-wrapper</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>rest-sdk-wrapper</name>
     <description>Wrapper for Payment Components Financial Messaging Libraries</description>
 
@@ -19,7 +19,7 @@
         <smv.version>20.5.0</smv.version>
         <mx.version>20.10.0</mx.version>
         <sepa.version>19.20.0</sepa.version>
-        <swift.translator.version>1.5.3</swift.translator.version>
+        <swift.translator.version>1.5.4</swift.translator.version>
     </properties>
 
     <repositories>
@@ -69,7 +69,7 @@
             <groupId>gr.datamation</groupId>
             <artifactId>swift-translator</artifactId>
             <version>${swift.translator.version}</version>
-            <classifier>jar-with-dependencies</classifier>
+            <classifier>full</classifier>
         </dependency>
 
         <dependency>
