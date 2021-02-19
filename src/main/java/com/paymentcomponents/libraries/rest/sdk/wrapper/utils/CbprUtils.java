@@ -5,15 +5,22 @@ import com.paymentcomponents.libraries.rest.sdk.wrapper.exception.InvalidMessage
 import gr.datamation.mx.CbprMessage;
 import gr.datamation.validation.error.ValidationErrorList;
 
+import java.io.ByteArrayInputStream;
+
 
 public class CbprUtils {
 
     public static CbprMessage parseAndValidateCbprMessage(String cbprXml) throws Exception {
         CbprMessage cbprMessage = new CbprMessage();
 
-        cbprMessage.autoParseXml(cbprXml);
+        ValidationErrorList validationErrorList = cbprMessage.validateXml(new ByteArrayInputStream(cbprXml.getBytes()));
+        if (!validationErrorList.isEmpty()) {
+            throw new InvalidMessageException(
+                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(validationErrorList));
+        }
 
-        ValidationErrorList validationErrorList = cbprMessage.autoValidate();
+        cbprMessage.autoParseXml(cbprXml);
+        validationErrorList = cbprMessage.autoValidate();
 
         if (!validationErrorList.isEmpty()) {
             throw new InvalidMessageException(

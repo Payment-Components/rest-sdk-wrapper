@@ -107,8 +107,8 @@ public class SwiftTranslatorIntegrationTest {
                 .andExpect(jsonPath("$[0].fieldPath", IsNull.nullValue()))
                 .andExpect(jsonPath("$[0].description", is("cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\":MsgId}' is expected.")))
                 .andExpect(jsonPath("$[0].erroneousValue", IsNull.nullValue()))
-                .andExpect(jsonPath("$[0].line", is(0)))
-                .andExpect(jsonPath("$[0].column", is(0)));
+                .andExpect(jsonPath("$[0].line", is(4)))
+                .andExpect(jsonPath("$[0].column", is(34)));
     }
 
 }

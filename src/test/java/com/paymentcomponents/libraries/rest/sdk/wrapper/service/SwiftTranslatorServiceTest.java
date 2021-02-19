@@ -88,8 +88,8 @@ public class SwiftTranslatorServiceTest {
                 "  \"fieldPath\" : null,\n" +
                 "  \"description\" : \"cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\\\":MsgId}' is expected.\",\n" +
                 "  \"erroneousValue\" : null,\n" +
-                "  \"line\" : 0,\n" +
-                "  \"column\" : 0\n" +
+                "  \"line\" : 4,\n" +
+                "  \"column\" : 34\n" +
                 "} ]";
 
         //WHEN

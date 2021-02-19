@@ -6,13 +6,19 @@ import gr.datamation.mx.CoreMessage;
 import gr.datamation.mx.MXUtils;
 import gr.datamation.validation.error.ValidationErrorList;
 
+import java.io.ByteArrayInputStream;
+
 public class MxUtils {
 
     public static CoreMessage parseAndValidateMxMessage(String mxMessage) throws Exception {
+        ValidationErrorList validationErrorList = MXUtils.autoValidateXML(new ByteArrayInputStream(mxMessage.getBytes()));
+        if (!validationErrorList.isEmpty()) {
+            throw new InvalidMessageException(
+                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(validationErrorList));
+        }
+
         CoreMessage coreMessage = (CoreMessage) MXUtils.autoParseXML(mxMessage);
-
-        ValidationErrorList validationErrorList = coreMessage.validate();
-
+        validationErrorList = coreMessage.validate();
         if (!validationErrorList.isEmpty()) {
             throw new InvalidMessageException(
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(validationErrorList));
