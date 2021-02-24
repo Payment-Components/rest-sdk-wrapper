@@ -17,7 +17,7 @@ public class RestSdkWrapperConfiguration {
                 .info(new Info()
                         .title("Payment Components")
                         .description("Financial Messaging APIs")
-                        .version("1.0.0")); //should be the same as maven
+                        .version("1.1.0")); //should be the same as maven
     }
 
     @Bean
@@ -29,7 +29,8 @@ public class RestSdkWrapperConfiguration {
                         "/sepa/**",
                         "/mx/**",
                         "/swift/translator/**",
-                        "/cbpr/**"
+                        "/cbpr/**",
+                        "/rtgs/**"
                 )
                 .build();
     }
@@ -44,7 +45,8 @@ public class RestSdkWrapperConfiguration {
                                         "/sepa/*",
                                         "/mx/*",
                                         "/swift/translator/*",
-                                        "/cbpr/*");
+                                        "/cbpr/*",
+                                        "/rtgs/*");
 
         return registrationBean;
 

@@ -1,10 +1,10 @@
 package com.paymentcomponents.libraries.rest.sdk.wrapper.controller;
 
+import com.paymentcomponents.libraries.rest.sdk.wrapper.SwaggerConstants;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.model.CustomSwiftMessage;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.model.mt.request.MtCreate103Request;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.model.mt.request.MtCreateGeneralRequest;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.service.MtService;
-import gr.datamation.swift.validator.validation.ValidationError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -85,7 +85,7 @@ public class MtController {
                             responseCode = "400",
                             description = INVALID_MESSAGE_DESCRIPTION,
                             headers = @Header(name = REQUEST_LOG_ID, description = REQUEST_LOG_ID_DESCRIPTION),
-                            content = @Content(mediaType = "application/json", examples = @ExampleObject(value = SWIFT_MT_VALIDATE_RESPONSE_EXAMPLE_400), array = @ArraySchema(schema = @Schema(implementation = ValidationError.class)))),
+                            content = @Content(mediaType = "application/json", examples = @ExampleObject(value = SWIFT_MT_VALIDATE_RESPONSE_EXAMPLE_400), array = @ArraySchema(schema = @Schema(implementation = SwaggerConstants.SwaggerMtValidationErrorWrapper.class)))),
                     @ApiResponse(
                             responseCode = "500",
                             description = UNHANDLED_ERROR_DESCRIPTION,
@@ -113,7 +113,7 @@ public class MtController {
                             responseCode = "400",
                             description = INVALID_MESSAGE_DESCRIPTION,
                             headers = @Header(name = REQUEST_LOG_ID, description = REQUEST_LOG_ID_DESCRIPTION),
-                            content = @Content(mediaType = "application/json", examples = @ExampleObject(value = SWIFT_MT_CREATE_103_RESPONSE_EXAMPLE_400), array = @ArraySchema(schema = @Schema(implementation = ValidationError.class)))),
+                            content = @Content(mediaType = "application/json", examples = @ExampleObject(value = SWIFT_MT_CREATE_103_RESPONSE_EXAMPLE_400), array = @ArraySchema(schema = @Schema(implementation = SwaggerConstants.SwaggerMtValidationErrorWrapper.class)))),
                     @ApiResponse(
                             responseCode = "500",
                             description = UNHANDLED_ERROR_DESCRIPTION,
@@ -140,7 +140,7 @@ public class MtController {
                             responseCode = "400",
                             description = INVALID_MESSAGE_DESCRIPTION,
                             headers = @Header(name = REQUEST_LOG_ID, description = REQUEST_LOG_ID_DESCRIPTION),
-                            content = @Content(mediaType = "application/json", examples = @ExampleObject(value = SWIFT_MT_CREATE_GENERAL_RESPONSE_EXAMPLE_400), array = @ArraySchema(schema = @Schema(implementation = ValidationError.class)))),
+                            content = @Content(mediaType = "application/json", examples = @ExampleObject(value = SWIFT_MT_CREATE_GENERAL_RESPONSE_EXAMPLE_400), array = @ArraySchema(schema = @Schema(implementation = SwaggerConstants.SwaggerMtValidationErrorWrapper.class)))),
                     @ApiResponse(
                             responseCode = "500",
                             description = UNHANDLED_ERROR_DESCRIPTION,

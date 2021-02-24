@@ -1065,7 +1065,94 @@ public class TestConstants {
             "  </Document>\n" +
             "</RequestPayload>\n";
 
-
+    public static final String VALID_RTGS_PACS_009 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<!--Inbound_pacs.009_RTGS_FICreditTransferOrder_COV_bs028-->\n" +
+            "<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08 RTGS_pacs_guidelines_pacs_009_FIToFIFinancialInstitutionCreditTransfer_pacs_009_001_08_20191021_1544%20(1).xsd\">\n" +
+            "    <FICdtTrf>\n" +
+            "        <GrpHdr>\n" +
+            "            <MsgId>NONREF</MsgId>\n" +
+            "            <CreDtTm>2019-10-07T13:45:00+00:00</CreDtTm>\n" +
+            "            <NbOfTxs>1</NbOfTxs>\n" +
+            "            <SttlmInf>\n" +
+            "                <SttlmMtd>CLRG</SttlmMtd>\n" +
+            "                <ClrSys>\n" +
+            "                    <Cd>TGT</Cd>\n" +
+            "                </ClrSys>\n" +
+            "            </SttlmInf>\n" +
+            "        </GrpHdr>\n" +
+            "        <CdtTrfTxInf>\n" +
+            "            <PmtId>\n" +
+            "                <InstrId>Inp009b028-InsId</InstrId>\n" +
+            "                <EndToEndId>Inp008b028-E2EId</EndToEndId>\n" +
+            "                <UETR>e008b028-59c5-41e9-be4c-d45102fc201e</UETR>\n" +
+            "            </PmtId>\n" +
+            "            <IntrBkSttlmAmt Ccy=\"EUR\">61250.00</IntrBkSttlmAmt>\n" +
+            "            <IntrBkSttlmDt>2019-10-07</IntrBkSttlmDt>\n" +
+            "            <InstgAgt>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>PBBBDEFFXXX</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </InstgAgt>\n" +
+            "            <InstdAgt>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>PBAADEFFAC2</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </InstdAgt>\n" +
+            "            <Dbtr>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>PBBBDEFFXXX</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </Dbtr>\n" +
+            "            <Cdtr>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>PBAADEFFAC2</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </Cdtr>\n" +
+            "            <UndrlygCstmrCdtTrf>\n" +
+            "                <UltmtDbtr>\n" +
+            "                    <Nm>Ultimate debtor name</Nm>\n" +
+            "                    <Id>\n" +
+            "                        <OrgId>\n" +
+            "                            <AnyBIC>ULTMDBTRBIC</AnyBIC>\n" +
+            "                        </OrgId>\n" +
+            "                    </Id>\n" +
+            "                </UltmtDbtr>\n" +
+            "                <Dbtr>\n" +
+            "                    <Nm>Debit customer name</Nm>\n" +
+            "                    <PstlAdr>\n" +
+            "                        <TwnNm>Frankfurt</TwnNm>\n" +
+            "                        <Ctry>DE</Ctry>\n" +
+            "                    </PstlAdr>\n" +
+            "                </Dbtr>\n" +
+            "                <DbtrAgt>\n" +
+            "                    <FinInstnId>\n" +
+            "                        <BICFI>PBBBDEFFXXX</BICFI>\n" +
+            "                    </FinInstnId>\n" +
+            "                </DbtrAgt>\n" +
+            "                <CdtrAgt>\n" +
+            "                    <FinInstnId>\n" +
+            "                        <BICFI>PBAADEFFXXX</BICFI>\n" +
+            "                    </FinInstnId>\n" +
+            "                </CdtrAgt>\n" +
+            "                <Cdtr>\n" +
+            "                    <Nm>Credit customer name</Nm>\n" +
+            "                    <PstlAdr>\n" +
+            "                        <TwnNm>Dusseldorf</TwnNm>\n" +
+            "                        <Ctry>DE</Ctry>\n" +
+            "                    </PstlAdr>\n" +
+            "                </Cdtr>\n" +
+            "                <UltmtCdtr>\n" +
+            "                    <Nm>Ultimate creditor name</Nm>\n" +
+            "                    <Id>\n" +
+            "                        <OrgId>\n" +
+            "                            <AnyBIC>ULTMCDTRBIC</AnyBIC>\n" +
+            "                        </OrgId>\n" +
+            "                    </Id>\n" +
+            "                </UltmtCdtr>\n" +
+            "            </UndrlygCstmrCdtTrf>\n" +
+            "        </CdtTrfTxInf>\n" +
+            "    </FICdtTrf>\n" +
+            "</Document>";
 
     public static final String INVALID_MT_103 = VALID_MT_103.replace(":20:123456789\n", "");
     public static final String VALID_JSON_SEPA_PACS_008 = Utils.convertXmlToJson(VALID_SEPA_PACS_008, "Document");
@@ -1075,6 +1162,8 @@ public class TestConstants {
     public static final String INVALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST = VALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST.replace(":20:00322\n", "");
     public static final String INVALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST = VALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST.replace("<MsgId>BBBB/120928-FICT/JPY/430</MsgId>\n", "");
     public static final String INVALID_CBPR_REQUEST = VALID_CBPR_REQUEST.replace("<MsgId>BBBB/120928-FICT/JPY/430</MsgId>\n", "");
+    public static final String INVALID_RTGS_PACS_009 = VALID_RTGS_PACS_009.replace("<MsgId>NONREF</MsgId>\n", "");
+    public static final String VALID_JSON_RTGS_PACS_009 = Utils.convertXmlToJson(VALID_RTGS_PACS_009, "Document");
 
     public static MtCreate103Request getMtCreate103RequestSample() {
         MtCreate103Request mtCreate103RequestSample = new MtCreate103Request();

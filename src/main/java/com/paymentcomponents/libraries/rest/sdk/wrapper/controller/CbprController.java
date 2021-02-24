@@ -56,7 +56,7 @@ public class CbprController {
                             responseCode = "400",
                             description = SwaggerConstants.INVALID_MESSAGE_DESCRIPTION,
                             headers = @Header(name = Constants.REQUEST_LOG_ID, description = SwaggerConstants.REQUEST_LOG_ID_DESCRIPTION),
-                            content = @Content(mediaType = "application/json", examples = @ExampleObject(value = SwaggerConstants.CBPR_VALIDATE_RESPONSE_EXAMPLE_400), array = @ArraySchema(schema = @Schema(implementation = ValidationError.class)))),
+                            content = @Content(mediaType = "application/json", examples = @ExampleObject(value = SwaggerConstants.CBPR_VALIDATE_RESPONSE_EXAMPLE_400), array = @ArraySchema(schema = @Schema(implementation = SwaggerConstants.SwaggerMxValidationErrorWrapper.class)))),
                     @ApiResponse(
                             responseCode = "500",
                             description = UNHANDLED_ERROR_DESCRIPTION,
@@ -64,7 +64,7 @@ public class CbprController {
                             content = @Content(mediaType = "*/*"))
             }
     )
-    @PostMapping(value = "/validate", consumes = "text/plain", produces = "text/plain")
+    @PostMapping(value = "/validate", consumes = "text/plain")
     public ResponseEntity<?> validateCbpr(@RequestBody String cbprMessage, HttpServletRequest req) throws Exception{
         logger.info("LogID=" + req.getAttribute(Constants.REQUEST_LOG_ID) + " cbpr message=" + cbprMessage );
         cbprService.validateCbpr(cbprMessage);
@@ -89,7 +89,7 @@ public class CbprController {
                             responseCode = "400",
                             description = SwaggerConstants.INVALID_MESSAGE_DESCRIPTION,
                             headers = @Header(name = Constants.REQUEST_LOG_ID, description = SwaggerConstants.REQUEST_LOG_ID_DESCRIPTION),
-                            content = @Content(mediaType = "application/json", examples = @ExampleObject(value = SwaggerConstants.CBPR_ENVELOPE_RESPONSE_EXAMPLE_400), array = @ArraySchema(schema = @Schema(implementation = ValidationError.class)))),
+                            content = @Content(mediaType = "application/json", examples = @ExampleObject(value = SwaggerConstants.CBPR_ENVELOPE_RESPONSE_EXAMPLE_400), array = @ArraySchema(schema = @Schema(implementation = SwaggerConstants.SwaggerMxValidationErrorWrapper.class)))),
                     @ApiResponse(
                             responseCode = "500",
                             description = UNHANDLED_ERROR_DESCRIPTION,
