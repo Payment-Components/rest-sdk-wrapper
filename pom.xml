@@ -10,14 +10,14 @@
     </parent>
     <groupId>com.paymentcomponents.libraries</groupId>
     <artifactId>rest-sdk-wrapper</artifactId>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
     <name>rest-sdk-wrapper</name>
     <description>Wrapper for Payment Components Financial Messaging Libraries</description>
 
     <properties>
         <java.version>1.8</java.version>
         <smv.version>20.5.0</smv.version>
-        <mx.version>20.12.0</mx.version>
+        <mx.version>20.13.0</mx.version>
         <sepa.version>19.20.0</sepa.version>
         <swift.translator.version>1.5.5</swift.translator.version>
     </properties>
@@ -60,6 +60,12 @@
             <classifier>full</classifier>
         </dependency>
         <dependency>
+            <groupId>gr.datamation.mx</groupId>
+            <artifactId>mx</artifactId>
+            <version>${mx.version}</version>
+            <classifier>full-rtgs</classifier>
+        </dependency>
+        <dependency>
             <groupId>gr.datamation</groupId>
             <artifactId>sepa-core-jaxb</artifactId>
             <version>${sepa.version}</version>
@@ -87,7 +93,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.5.2</version>
+            <version>1.5.4</version>
         </dependency>
 
     </dependencies>
