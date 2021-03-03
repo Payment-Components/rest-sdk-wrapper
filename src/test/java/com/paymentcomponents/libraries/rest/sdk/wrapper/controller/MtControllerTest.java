@@ -123,7 +123,7 @@ public class MtControllerTest {
     @Test
     public void givenInValidMtMessage_whenMtValidate_thenReturnValidationErrors() throws Exception {
         //GIVEN
-        String errorReponse = "[ {\n" +
+        String errorResponse = "[ {\n" +
                 "  \"tagName\" : \"20\",\n" +
                 "  \"description\" : \"SV16 - Mandatory Tag is missing \",\n" +
                 "  \"sequence\" : null,\n" +
@@ -132,7 +132,7 @@ public class MtControllerTest {
                 "  \"messageIndex\" : null,\n" +
                 "  \"errorCode\" : \"SV16\"\n" +
                 "} ]";
-        willThrow(new InvalidMessageException(errorReponse)).given(mtService).validateMt(anyString());
+        willThrow(new InvalidMessageException(errorResponse)).given(mtService).validateMt(anyString());
 
         //WHEN
         mvc.perform(post("/mt/validate")
@@ -158,8 +158,8 @@ public class MtControllerTest {
     @Test
     public void givenInValidFormatMtMessage_whenMtValidate_thenReturnErrorMessage() throws Exception {
         //GIVEN
-        String errorReponse = "Application Header Block is missing";
-        willThrow(new InvalidMessageFormatException(errorReponse)).given(mtService).validateMt(anyString());
+        String errorResponse = "Application Header Block is missing";
+        willThrow(new InvalidMessageFormatException(errorResponse)).given(mtService).validateMt(anyString());
 
         //WHEN
         mvc.perform(post("/mt/validate")
@@ -170,7 +170,7 @@ public class MtControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
-                .andExpect(content().string(errorReponse));
+                .andExpect(content().string(errorResponse));
 
         then(mtService).should(times(1)).validateMt(TestConstants.VALID_MT_103);
     }
@@ -198,7 +198,7 @@ public class MtControllerTest {
     @Test
     public void givenInvalidMt103Json_whenCreateMt103_thenReturnValidationErrors() throws Exception {
         //GIVEN
-        String errorReponse = "[\n" +
+        String errorResponse = "[\n" +
                 "    {\n" +
                 "        \"tagName\": \"71A\",\n" +
                 "        \"description\": \"T08 - in field 71A one of the following codes may be used : BEN, OUR, SHA. \",\n" +
@@ -209,7 +209,7 @@ public class MtControllerTest {
                 "        \"errorCode\": \"T08\"\n" +
                 "    }\n" +
                 "]";
-        given(mtService.createMt103(isA(MtCreate103Request.class))).willThrow(new InvalidMessageException(errorReponse));
+        given(mtService.createMt103(isA(MtCreate103Request.class))).willThrow(new InvalidMessageException(errorResponse));
         MtCreate103Request mtCreate103Request = TestConstants.getMtCreate103RequestSample();
         mtCreate103Request.setDetailsOfCharges("AAA"); //invalid value
         String requestJson = objectMapper.writeValueAsString(mtCreate103Request);
@@ -258,7 +258,7 @@ public class MtControllerTest {
     @Test
     public void givenInvalidMtGeneralJson_whenCreateMtGeneral_thenReturnValidationErrors() throws Exception {
         //GIVEN
-        String errorReponse = "[\n" +
+        String errorResponse = "[\n" +
                 "    {\n" +
                 "        \"tagName\": \"71A\",\n" +
                 "        \"description\": \"T08 - in field 71A one of the following codes may be used : BEN, OUR, SHA. \",\n" +
@@ -269,7 +269,7 @@ public class MtControllerTest {
                 "        \"errorCode\": \"T08\"\n" +
                 "    }\n" +
                 "]";
-        given(mtService.createMtGeneral(isA(MtCreateGeneralRequest.class))).willThrow(new InvalidMessageException(errorReponse));
+        given(mtService.createMtGeneral(isA(MtCreateGeneralRequest.class))).willThrow(new InvalidMessageException(errorResponse));
         MtCreateGeneralRequest mtCreateGeneralRequest = TestConstants.getMtCreateGeneralRequestSample();
         mtCreateGeneralRequest.getTags().removeIf( tag -> tag.getName().equals("71A"));
         mtCreateGeneralRequest.getTags().add(new MtTagGeneralRequest("71A", Arrays.asList("AAA"))); //invalid value
@@ -320,7 +320,7 @@ public class MtControllerTest {
     @Test
     public void givenInvalidUniversalConfirmationParams_whenUniversalConfirmation_thenReturnInvalidMessageException() throws Exception {
         //GIVEN
-        String errorReponse = "[\n" +
+        String errorResponse = "[\n" +
                 "    {\n" +
                 "        \"tagName\": null,\n" +
                 "        \"description\": \"D94 - In field 79, line 2, presence of subfield 2 (Reason Code) depends on subfield 1 (Status) as follows:\\n- When Status Code is ACCC, Reason Code is not allowed.\\n- When Status Code is ACSP, Reason Code must be one of the following : [G001, G002, G003, G004]\\n- When Status Code is RJCT, if Reason Code is present must be one of the following : [AC01, AC04, AC06, AM06, BE01, CUST, DUPL, FF07, FOCR, MS03, NOAS, RC01, RC08, RR03, RR05]\",\n" +
@@ -333,7 +333,7 @@ public class MtControllerTest {
                 "]";
 
         given(mtService.generateUniversalConfirmation(eq(TestConstants.VALID_MT_103), eq("1234"), eq("ACCC"), eq("AC01"), isNull(), isNull(), isNull()))
-                .willThrow(new InvalidMessageException(errorReponse));
+                .willThrow(new InvalidMessageException(errorResponse));
 
 
         //WHEN

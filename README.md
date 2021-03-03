@@ -23,7 +23,7 @@ CMD ["java", "-jar", "/tmp/app.jar"]
 
 ## Dependencies
 It has a dependency to 
-- MT library version `20.5.0`
+- MT library version `20.7.0`
 - SEPA library version `19.20.0`
 - MX library version `20.13.0`
 - Swift Translator library version `1.5.7`

@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLindEndings;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -52,7 +53,7 @@ public class SepaServiceTest {
         });
 
         //THEN
-        assertEquals(exceptionBody.replaceAll("\n", "\r\n"), exception.getResponseBodyAsString());
+        assertEquals(replaceLindEndings(exceptionBody), replaceLindEndings(exception.getResponseBodyAsString()));
     }
 
     @Test
@@ -74,7 +75,7 @@ public class SepaServiceTest {
         //GIVEN
         SepaCreatePacs008Request sepaCreatePacs008Request = TestConstants.getSepaCreatePacs008RequestSample();
         sepaCreatePacs008Request.setDebtorBic("AAAAAAAAAAAA"); //invalid value, 12 chars in bic
-        String errorReponse = "[ \"Line: 56 -- cvc-pattern-valid: Value 'AAAAAAAAAAAA' is not facet-valid with respect to pattern '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}' for type 'BICIdentifier'.\" ]";
+        String errorResponse = "[ \"Line: 56 -- cvc-pattern-valid: Value 'AAAAAAAAAAAA' is not facet-valid with respect to pattern '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}' for type 'BICIdentifier'.\" ]";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
@@ -82,7 +83,7 @@ public class SepaServiceTest {
         });
 
         //THEN
-        assertEquals(errorReponse, exception.getResponseBodyAsString());
+        assertEquals(errorResponse, exception.getResponseBodyAsString());
     }
 
     @Test
@@ -109,7 +110,7 @@ public class SepaServiceTest {
         //GIVEN
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("AC04");
-        String errorReponse = "[ \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\" ]";
+        String errorResponse = "[ \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\" ]";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
@@ -117,7 +118,7 @@ public class SepaServiceTest {
         });
 
         //THEN
-        assertEquals(errorReponse, exception.getResponseBodyAsString());
+        assertEquals(errorResponse, exception.getResponseBodyAsString());
     }
 
     @Test
@@ -126,7 +127,7 @@ public class SepaServiceTest {
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("AC04");
         msgReplyInfoRequest.setReasonPrtry("Just Return");
-        String errorReponse = "\"The reason is CD or PRTRY based\"";
+        String errorResponse = "\"The reason is CD or PRTRY based\"";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
@@ -134,7 +135,7 @@ public class SepaServiceTest {
         });
 
         //THEN
-        assertEquals(errorReponse, exception.getResponseBodyAsString());
+        assertEquals(errorResponse, exception.getResponseBodyAsString());
     }
 
     @Test
@@ -143,7 +144,7 @@ public class SepaServiceTest {
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode(null);
         msgReplyInfoRequest.setReasonPrtry(null);
-        String errorReponse = "\"Either CD or PRTRY is required\"";
+        String errorResponse = "\"Either CD or PRTRY is required\"";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
@@ -151,7 +152,7 @@ public class SepaServiceTest {
         });
 
         //THEN
-        assertEquals(errorReponse, exception.getResponseBodyAsString());
+        assertEquals(errorResponse, exception.getResponseBodyAsString());
     }
 
     @Test
@@ -177,7 +178,7 @@ public class SepaServiceTest {
         //GIVEN
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("DUPL");
-        String errorReponse = "[ \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\" ]";
+        String errorResponse = "[ \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\" ]";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
@@ -185,7 +186,7 @@ public class SepaServiceTest {
         });
 
         //THEN
-        assertEquals(errorReponse, exception.getResponseBodyAsString());
+        assertEquals(errorResponse, exception.getResponseBodyAsString());
     }
 
     @Test
@@ -194,7 +195,7 @@ public class SepaServiceTest {
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("DUPL");
         msgReplyInfoRequest.setReasonPrtry("Just Cancel");
-        String errorReponse = "\"The reason is CD or PRTRY based\"";
+        String errorResponse = "\"The reason is CD or PRTRY based\"";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
@@ -202,7 +203,7 @@ public class SepaServiceTest {
         });
 
         //THEN
-        assertEquals(errorReponse, exception.getResponseBodyAsString());
+        assertEquals(errorResponse, exception.getResponseBodyAsString());
     }
 
     @Test
@@ -211,7 +212,7 @@ public class SepaServiceTest {
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode(null);
         msgReplyInfoRequest.setReasonPrtry(null);
-        String errorReponse = "\"Either CD or PRTRY is required\"";
+        String errorResponse = "\"Either CD or PRTRY is required\"";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
@@ -219,7 +220,7 @@ public class SepaServiceTest {
         });
 
         //THEN
-        assertEquals(errorReponse, exception.getResponseBodyAsString());
+        assertEquals(errorResponse, exception.getResponseBodyAsString());
     }
 
     @Test
@@ -244,7 +245,7 @@ public class SepaServiceTest {
         //GIVEN
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("CUST");
-        String errorReponse = "[ \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\" ]";
+        String errorResponse = "[ \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\" ]";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
@@ -252,7 +253,7 @@ public class SepaServiceTest {
         });
 
         //THEN
-        assertEquals(errorReponse, exception.getResponseBodyAsString());
+        assertEquals(errorResponse, exception.getResponseBodyAsString());
     }
 
     @Test
@@ -261,7 +262,7 @@ public class SepaServiceTest {
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("CUST");
         msgReplyInfoRequest.setReasonPrtry("Just Cancel");
-        String errorReponse = "\"The reason is CD or PRTRY based\"";
+        String errorResponse = "\"The reason is CD or PRTRY based\"";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
@@ -269,7 +270,7 @@ public class SepaServiceTest {
         });
 
         //THEN
-        assertEquals(errorReponse, exception.getResponseBodyAsString());
+        assertEquals(errorResponse, exception.getResponseBodyAsString());
     }
 
     @Test
@@ -278,7 +279,7 @@ public class SepaServiceTest {
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode(null);
         msgReplyInfoRequest.setReasonPrtry(null);
-        String errorReponse = "\"Either CD or PRTRY is required\"";
+        String errorResponse = "\"Either CD or PRTRY is required\"";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
@@ -286,7 +287,7 @@ public class SepaServiceTest {
         });
 
         //THEN
-        assertEquals(errorReponse, exception.getResponseBodyAsString());
+        assertEquals(errorResponse, exception.getResponseBodyAsString());
     }
 
 }

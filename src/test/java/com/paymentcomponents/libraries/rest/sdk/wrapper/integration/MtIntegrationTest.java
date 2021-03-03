@@ -1,12 +1,12 @@
 package com.paymentcomponents.libraries.rest.sdk.wrapper.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.paymentcomponents.libraries.rest.sdk.wrapper.Constants;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.TestConstants;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.model.mt.request.MtCreate103Request;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.model.mt.request.MtCreateGeneralRequest;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.model.mt.request.MtTagGeneralRequest;
-import com.paymentcomponents.libraries.rest.sdk.wrapper.Constants;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.Test;
@@ -19,11 +19,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
+import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLindEndings;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -131,7 +133,7 @@ public class MtIntegrationTest {
         String requestJson = objectMapper.writeValueAsString(TestConstants.getMtCreate103RequestSample());
 
         //WHEN
-        mvc.perform(post("/mt/create/103")
+        String content = mvc.perform(post("/mt/create/103")
                 .content(requestJson)
                 .contentType(MediaType.APPLICATION_JSON))
 
@@ -139,8 +141,10 @@ public class MtIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
-                .andExpect(content().string(TestConstants.VALID_MT_103.replaceAll("\n", "\r\n")));
+                .andExpect(content().string(replaceLindEndings(TestConstants.VALID_MT_103, "\r\n")))
+                .andReturn().getResponse().getContentAsString();
 
+        assertEquals(replaceLindEndings(content), replaceLindEndings(TestConstants.VALID_MT_103));
     }
 
     @Test
@@ -176,7 +180,7 @@ public class MtIntegrationTest {
         String requestJson = objectMapper.writeValueAsString(TestConstants.getMtCreateGeneralRequestSample());
 
         //WHEN
-        mvc.perform(post("/mt/create/general")
+        String content = mvc.perform(post("/mt/create/general")
                 .content(requestJson)
                 .contentType(MediaType.APPLICATION_JSON))
 
@@ -184,7 +188,10 @@ public class MtIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
-                .andExpect(content().string(TestConstants.VALID_MT_103.replaceAll("\n", "\r\n")));
+                .andExpect(content().string(replaceLindEndings(TestConstants.VALID_MT_103, "\r\n")))
+                .andReturn().getResponse().getContentAsString();
+
+        assertEquals(replaceLindEndings(content), replaceLindEndings(TestConstants.VALID_MT_103));
 
     }
 
@@ -192,7 +199,7 @@ public class MtIntegrationTest {
     public void givenInvalidMtGeneralJson_whenCreateMtGeneral_thenReturnValidationErrors() throws Exception {
         //GIVEN
         MtCreateGeneralRequest mtCreateGeneralRequest = TestConstants.getMtCreateGeneralRequestSample();
-        mtCreateGeneralRequest.getTags().removeIf( tag -> tag.getName().equals("71A"));
+        mtCreateGeneralRequest.getTags().removeIf(tag -> tag.getName().equals("71A"));
         mtCreateGeneralRequest.getTags().add(new MtTagGeneralRequest("71A", Arrays.asList("AAA"))); //invalid value
         String requestJson = objectMapper.writeValueAsString(mtCreateGeneralRequest);
 
@@ -223,7 +230,7 @@ public class MtIntegrationTest {
                 .replaceAll(":79:\\\\/.*\n", ":79:\\\\/.*\n");
 
         //WHEN
-        mvc.perform(post("/mt/generate/universal/confirmation")
+        String content = mvc.perform(post("/mt/generate/universal/confirmation")
                 .queryParam("confirmationId", "1234")
                 .queryParam("statusCode", "ACCC")
                 .content(TestConstants.VALID_MT_103)
@@ -233,8 +240,10 @@ public class MtIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
-                .andExpect(content().string(Matchers.matchesPattern(expectedAsRegex.replaceAll("\n", "\r\n"))));
+                .andExpect(content().string(Matchers.matchesPattern(replaceLindEndings(expectedAsRegex, "\r\n"))))
+                .andReturn().getResponse().getContentAsString();
 
+        assertTrue(replaceLindEndings(content).matches(replaceLindEndings(expectedAsRegex)));
     }
 
     @Test
@@ -263,6 +272,5 @@ public class MtIntegrationTest {
                 .andExpect(jsonPath("$[0].errorCode", is("D94")));
 
     }
-
 
 }

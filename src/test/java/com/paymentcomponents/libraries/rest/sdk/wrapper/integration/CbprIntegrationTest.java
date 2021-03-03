@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.StandardCharsets;
 
+import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLindEndings;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -77,7 +78,7 @@ public class CbprIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
-                .andExpect(content().string(TestConstants.CBPR_ENVELOPE.replaceAll("\n", "\r\n")));
+                .andExpect(content().string(replaceLindEndings(TestConstants.CBPR_ENVELOPE)));
 
     }
 

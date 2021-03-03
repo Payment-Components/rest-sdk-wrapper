@@ -30,7 +30,7 @@ public class SepaUtils {
                 MessageInfo messageInfo = (MessageInfo) clazz.getAnnotation(MessageInfo.class);
                 messageInfo.xsd();
                 SEPA_MESSAGE_TYPES.put(messageInfo.xsd()
-                                .replaceAll("^.*([a-z]{4}\\.[0-9]{3}\\.[0-9]{3}\\.[0-9]{2})\\.xsd.*", "$1"),
+                                .replaceAll("^.*([a-z]{4}\\.[0-9]{3}\\.[0-9]{3}\\.[0-9]{2}([A-Z0-9]{2})?)\\.xsd.*", "$1"),
                         clazz.getName());
             }
         }
@@ -60,7 +60,7 @@ public class SepaUtils {
     }
 
     public static CoreMessage retrieveSepaMessageTypeText(String messageText) throws JsonProcessingException, ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        String messageType = messageText.replaceAll("(?s).*<Document.*([a-z]{4}\\.[0-9]{3}\\.[0-9]{3}\\.[0-9]{2})\".*>.*</Document>.*", "$1");
+        String messageType = messageText.replaceAll("(?s).*<Document.*([a-z]{4}\\.[0-9]{3}\\.[0-9]{3}\\.[0-9]{2}([A-Z0-9]{2})?)\".*>.*</Document>.*", "$1");
         if (messageType.split("\\.").length != 4) {
             throw new InvalidMessageException(
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(Collections.singletonList(MESSASE_TYPE_ERROR)));

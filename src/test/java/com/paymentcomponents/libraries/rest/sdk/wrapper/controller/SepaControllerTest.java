@@ -82,10 +82,10 @@ public class SepaControllerTest {
     @Test
     public void givenInValidSepaMessage_whenSepaValidate_thenReturnValidationErrors() throws Exception {
         //GIVEN
-        String errorReponse = "[\n" +
+        String errorResponse = "[\n" +
                 "    \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\"\n" +
                 "]";
-        given(sepaService.validateSepaMessage(anyString())).willThrow(new InvalidMessageException(errorReponse));
+        given(sepaService.validateSepaMessage(anyString())).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
         mvc.perform(post("/sepa/validate")
@@ -125,10 +125,10 @@ public class SepaControllerTest {
     @Test
     public void givenInvalidPacs008Json_whenCreatePacs008_thenReturnValidationErrors() throws Exception {
         //GIVEN
-        String errorReponse = "[\n" +
+        String errorResponse = "[\n" +
                 "    \"Line: 53 -- cvc-pattern-valid: Value 'AAAAAAAAAAAA' is not facet-valid with respect to pattern '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}' for type 'BICIdentifier'.\"\n" +
                 "]";
-        given(sepaService.createPacs008(isA(SepaCreatePacs008Request.class))).willThrow(new InvalidMessageException(errorReponse));
+        given(sepaService.createPacs008(isA(SepaCreatePacs008Request.class))).willThrow(new InvalidMessageException(errorResponse));
         SepaCreatePacs008Request sepaCreatePacs008Request = TestConstants.getSepaCreatePacs008RequestSample();
         sepaCreatePacs008Request.setDebtorBic("AAAAAAAAAAAA"); //invalid value, 12 chars in bic
         String requestJson = objectMapper.writeValueAsString(sepaCreatePacs008Request);
@@ -175,10 +175,10 @@ public class SepaControllerTest {
         //GIVEN
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("AC04");
-        String errorReponse = "[\n" +
+        String errorResponse = "[\n" +
                 "    \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\"\n" +
                 "]";
-        given(sepaService.generatePaymentReturn(anyString(), isA(MsgReplyInfoRequest.class))).willThrow(new InvalidMessageException(errorReponse));
+        given(sepaService.generatePaymentReturn(anyString(), isA(MsgReplyInfoRequest.class))).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
         mvc.perform(post("/sepa/payment/return")
@@ -223,10 +223,10 @@ public class SepaControllerTest {
         //GIVEN
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("DUPL");
-        String errorReponse = "[\n" +
+        String errorResponse = "[\n" +
                 "    \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\"\n" +
                 "]";
-        given(sepaService.generateCancellationRequest(anyString(), isA(MsgReplyInfoRequest.class))).willThrow(new InvalidMessageException(errorReponse));
+        given(sepaService.generateCancellationRequest(anyString(), isA(MsgReplyInfoRequest.class))).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
         mvc.perform(post("/sepa/cancellation/request")
@@ -271,10 +271,10 @@ public class SepaControllerTest {
         //GIVEN
         MsgReplyInfoRequest msgReplyInfoRequest = new MsgReplyInfoRequest();
         msgReplyInfoRequest.setReasonCode("CUST");
-        String errorReponse = "[\n" +
+        String errorResponse = "[\n" +
                 "    \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\\\":MsgId}' is expected.\"\n" +
                 "]";
-        given(sepaService.generateResolutionOfInvestigation(anyString(), isA(MsgReplyInfoRequest.class))).willThrow(new InvalidMessageException(errorReponse));
+        given(sepaService.generateResolutionOfInvestigation(anyString(), isA(MsgReplyInfoRequest.class))).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
         mvc.perform(post("/sepa/resolution/of/investigation")

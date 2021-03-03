@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLindEndings;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -55,7 +56,7 @@ public class CbprServiceTest {
         });
 
         //THEN
-        assertEquals(exceptionBody.replaceAll("\n", "\r\n"), exception.getResponseBodyAsString());
+        assertEquals(replaceLindEndings(exceptionBody), replaceLindEndings(exception.getResponseBodyAsString()));
 
     }
 
@@ -68,7 +69,7 @@ public class CbprServiceTest {
         String result = cbprService.envelopeCbpr(TestConstants.VALID_CBPR_REQUEST);
 
         //THEN
-        assertEquals(expected.replaceAll("\n", "\r\n"), result);
+        assertEquals(replaceLindEndings(expected), replaceLindEndings(result));
     }
 
     @Test
@@ -90,7 +91,7 @@ public class CbprServiceTest {
         });
 
         //THEN
-        assertEquals(exceptionBody.replaceAll("\n", "\r\n"), exception.getResponseBodyAsString());
+        assertEquals(replaceLindEndings(exceptionBody), replaceLindEndings(exception.getResponseBodyAsString()));
 
     }
 

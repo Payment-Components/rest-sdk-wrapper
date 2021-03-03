@@ -74,7 +74,7 @@ public class CbprControllerTest {
     @Test
     public void givenInValidCbprMessage_whenCbprValidate_thenReturnValidationErrors() throws Exception {
         //GIVEN
-        String errorReponse = "[\n" +
+        String errorResponse = "[\n" +
                 "    {\n" +
                 "        \"severity\": \"ERROR\",\n" +
                 "        \"errorCode\": null,\n" +
@@ -85,7 +85,7 @@ public class CbprControllerTest {
                 "        \"column\": 22\n" +
                 "    }\n" +
                 "]";
-        willThrow(new InvalidMessageException(errorReponse)).given(cbprService).validateCbpr(anyString());
+        willThrow(new InvalidMessageException(errorResponse)).given(cbprService).validateCbpr(anyString());
 
         //WHEN
         mvc.perform(post("/cbpr/validate")
@@ -130,7 +130,7 @@ public class CbprControllerTest {
     @Test
     public void givenInValidCbprMessage_whenCbprEnvelope_thenReturnValidationErrors() throws Exception {
         //GIVEN
-        String errorReponse = "[\n" +
+        String errorResponse = "[\n" +
                 "    {\n" +
                 "        \"severity\": \"ERROR\",\n" +
                 "        \"errorCode\": null,\n" +
@@ -141,7 +141,7 @@ public class CbprControllerTest {
                 "        \"column\": 22\n" +
                 "    }\n" +
                 "]";
-        willThrow(new InvalidMessageException(errorReponse)).given(cbprService).envelopeCbpr(anyString());
+        willThrow(new InvalidMessageException(errorResponse)).given(cbprService).envelopeCbpr(anyString());
 
         //WHEN
         mvc.perform(post("/cbpr/envelope")

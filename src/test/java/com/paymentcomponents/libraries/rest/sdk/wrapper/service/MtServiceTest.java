@@ -17,6 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
 
+import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLindEndings;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -88,7 +89,7 @@ public class MtServiceTest {
         });
 
         //THEN
-        assertEquals(exceptionBody.replaceAll("\n", "\r\n"), exception.getResponseBodyAsString());
+        assertEquals(replaceLindEndings(exceptionBody), replaceLindEndings(exception.getResponseBodyAsString()));
     }
 
     @Test
@@ -114,7 +115,7 @@ public class MtServiceTest {
         String responseText = mtService.createMt103(TestConstants.getMtCreate103RequestSample());
 
         //THEN
-        assertEquals(expected.replaceAll("\n", "\r\n"), responseText);
+        assertEquals(replaceLindEndings(expected), replaceLindEndings(responseText));
     }
 
     @Test
@@ -122,7 +123,7 @@ public class MtServiceTest {
         //GIVEN
         MtCreate103Request mtCreate103Request = TestConstants.getMtCreate103RequestSample();
         mtCreate103Request.setDetailsOfCharges("AAA"); //invalid value
-        String errorReponse = "[ {\n" +
+        String errorResponse = "[ {\n" +
                 "  \"tagName\" : \"71A\",\n" +
                 "  \"description\" : \"T08 - in field 71A one of the following codes may be used : BEN, OUR, SHA. \",\n" +
                 "  \"sequence\" : null,\n" +
@@ -138,7 +139,7 @@ public class MtServiceTest {
         });
 
         //THEN
-        assertEquals(errorReponse.replaceAll("\n", "\r\n"), exception.getResponseBodyAsString());
+        assertEquals(replaceLindEndings(errorResponse), replaceLindEndings(exception.getResponseBodyAsString()));
     }
 
     @Test
@@ -150,16 +151,16 @@ public class MtServiceTest {
         String result = mtService.createMtGeneral(TestConstants.getMtCreateGeneralRequestSample());
 
         //THEN
-        assertEquals(expected.replaceAll("\n", "\r\n"), result);
+        assertEquals(replaceLindEndings(expected), replaceLindEndings(result));
     }
 
     @Test
     public void givenInvalidCreateMtGeneralRequest_whenCreateMtGeneral_thenThrowInvalidMessageException() throws Exception {
         //GIVEN
         MtCreateGeneralRequest mtCreateGeneralRequest = TestConstants.getMtCreateGeneralRequestSample();
-        mtCreateGeneralRequest.getTags().removeIf( tag -> tag.getName().equals("71A"));
+        mtCreateGeneralRequest.getTags().removeIf(tag -> tag.getName().equals("71A"));
         mtCreateGeneralRequest.getTags().add(new MtTagGeneralRequest("71A", Arrays.asList("AAA"))); //invalid value
-        String errorReponse = "[ {\n" +
+        String errorResponse = "[ {\n" +
                 "  \"tagName\" : \"71A\",\n" +
                 "  \"description\" : \"T08 - in field 71A one of the following codes may be used : BEN, OUR, SHA. \",\n" +
                 "  \"sequence\" : null,\n" +
@@ -175,7 +176,7 @@ public class MtServiceTest {
         });
 
         //THEN
-        assertEquals(errorReponse.replaceAll("\n", "\r\n"), exception.getResponseBodyAsString());
+        assertEquals(replaceLindEndings(errorResponse), replaceLindEndings(exception.getResponseBodyAsString()));
     }
 
     @Test
@@ -190,7 +191,7 @@ public class MtServiceTest {
         String result = mtService.generateUniversalConfirmation(TestConstants.VALID_MT_103, confirmationId, statusCode, null, null, null, null);
 
         //THEN
-        assertTrue(result.matches(expectedAsRegex.replaceAll("\n", "\r\n")));
+        assertTrue(replaceLindEndings(result).matches(replaceLindEndings(expectedAsRegex)));
     }
 
     @Test
@@ -199,7 +200,7 @@ public class MtServiceTest {
         String confirmationId = "1234";
         String statusCode = "ACCC";
         String reasonCode = "AC01";
-        String errorReponse = "[ {\n" +
+        String errorResponse = "[ {\n" +
                 "  \"tagName\" : null,\n" +
                 "  \"description\" : \"D94 - In field 79, line 2, presence of subfield 2 (Reason Code) depends on subfield 1 (Status) as follows:\\n- When Status Code is ACCC, Reason Code is not allowed.\\n- When Status Code is ACSP, Reason Code must be one of the following : [G001, G002, G003, G004]\\n- When Status Code is RJCT, if Reason Code is present must be one of the following : [AC01, AC04, AC06, AM06, BE01, CUST, DUPL, FF07, FOCR, MS03, NOAS, RC01, RC08, RR03, RR05]\",\n" +
                 "  \"sequence\" : null,\n" +
@@ -215,7 +216,7 @@ public class MtServiceTest {
         });
 
         //THEN
-        assertEquals(errorReponse.replaceAll("\n", "\r\n"), exception.getResponseBodyAsString());
+        assertEquals(replaceLindEndings(errorResponse), replaceLindEndings(exception.getResponseBodyAsString()));
     }
 
 

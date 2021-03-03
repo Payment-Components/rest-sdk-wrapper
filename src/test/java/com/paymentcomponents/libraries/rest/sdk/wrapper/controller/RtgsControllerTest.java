@@ -74,7 +74,7 @@ public class RtgsControllerTest {
     @Test
     public void givenInvalidRtgsMessage_whenRtgsValidate_thenReturnValidationErrors() throws Exception {
         //GIVEN
-        String errorReponse = "[\n" +
+        String errorResponse = "[\n" +
                 "    {\n" +
                 "        \"severity\": \"ERROR\",\n" +
                 "        \"errorCode\": null,\n" +
@@ -85,7 +85,7 @@ public class RtgsControllerTest {
                 "        \"column\": 0\n" +
                 "    }\n" +
                 "]";
-        given(rtgsService.validateRtgs(anyString())).willThrow(new InvalidMessageException(errorReponse));
+        given(rtgsService.validateRtgs(anyString())).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
         mvc.perform(post("/rtgs/validate")

@@ -74,7 +74,7 @@ public class MxControllerTest {
     @Test
     public void givenInValidMxMessage_whenMxValidate_thenReturnValidationErrors() throws Exception {
         //GIVEN
-        String errorReponse = "[\n" +
+        String errorResponse = "[\n" +
                 "    {\n" +
                 "        \"severity\": \"ERROR\",\n" +
                 "        \"errorCode\": null,\n" +
@@ -85,7 +85,7 @@ public class MxControllerTest {
                 "        \"column\": 0\n" +
                 "    }\n" +
                 "]";
-        given(mxService.validateMx(anyString())).willThrow(new InvalidMessageException(errorReponse));
+        given(mxService.validateMx(anyString())).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
         mvc.perform(post("/mx/validate")

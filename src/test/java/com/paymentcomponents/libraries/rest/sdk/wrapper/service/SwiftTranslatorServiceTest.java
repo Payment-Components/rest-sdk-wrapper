@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLindEndings;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -61,7 +62,7 @@ public class SwiftTranslatorServiceTest {
         });
 
         //THEN
-        assertEquals(exceptionBody.replaceAll("\n", "\r\n"), exception.getResponseBodyAsString());
+        assertEquals(replaceLindEndings(exceptionBody), replaceLindEndings(exception.getResponseBodyAsString()));
     }
 
     @Test
@@ -75,8 +76,7 @@ public class SwiftTranslatorServiceTest {
         String result = swiftTranslatorService.translateMxToMt(TestConstants.VALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST);
 
         //THEN
-        assertTrue(result.matches(expectedAsRegex.replaceAll("\n", "\r\n")));
-
+        assertTrue(replaceLindEndings(result).matches(replaceLindEndings(expectedAsRegex)));
     }
 
     @Test
@@ -98,7 +98,7 @@ public class SwiftTranslatorServiceTest {
         });
 
         //THEN
-        assertEquals(exceptionBody.replaceAll("\n", "\r\n"), exception.getResponseBodyAsString());
+        assertEquals(replaceLindEndings(exceptionBody), replaceLindEndings(exception.getResponseBodyAsString()));
     }
 
 

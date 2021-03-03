@@ -22,4 +22,12 @@ public class TestUtils {
         return SPECIAL_REGEX_CHARS.matcher(text).replaceAll("\\\\$0");
     }
 
+    public static String replaceLindEndings(String s) {
+        return replaceLindEndings(s, System.lineSeparator());
+    }
+
+    public static String replaceLindEndings(String s, String lineSeparator) {
+        return s.replaceAll("\r\n", "\n").replaceAll("\n", lineSeparator);
+    }
+
 }
