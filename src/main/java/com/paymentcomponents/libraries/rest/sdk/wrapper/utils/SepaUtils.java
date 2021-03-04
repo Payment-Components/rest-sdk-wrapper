@@ -13,13 +13,19 @@ import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import static com.paymentcomponents.libraries.rest.sdk.wrapper.Constants.ISO20022_REGEX;
 
 public class SepaUtils {
 
     public static final String MESSASE_TYPE_ERROR = "Cannot retrieve message type";
     public static final String CLASS_NOT_FOUND_ERROR = "Class not found";
     private static final HashMap<String, String> SEPA_MESSAGE_TYPES = new HashMap<String, String>();
+
     static {
         Reflections reflections = new Reflections("gr.datamation.sepa.core.messages");
 
@@ -28,10 +34,9 @@ public class SepaUtils {
         for (Class clazz : allClasses) {
             if (clazz.getName().contains(".epc.") && clazz.getAnnotation(MessageInfo.class) != null) {
                 MessageInfo messageInfo = (MessageInfo) clazz.getAnnotation(MessageInfo.class);
-                messageInfo.xsd();
-                SEPA_MESSAGE_TYPES.put(messageInfo.xsd()
-                                .replaceAll("^.*([a-z]{4}\\.[0-9]{3}\\.[0-9]{3}\\.[0-9]{2}([A-Z0-9]{2})?)\\.xsd.*", "$1"),
-                        clazz.getName());
+                String messageTypeId = messageInfo.xsd().replaceAll("^.*(" + ISO20022_REGEX + ")\\.xsd.*", "$1");
+                messageTypeId += clazz.getName().contains(".sdd.") ? "_sdd" : "";
+                SEPA_MESSAGE_TYPES.put(messageTypeId, clazz.getName());
             }
         }
     }
@@ -60,20 +65,27 @@ public class SepaUtils {
     }
 
     public static CoreMessage retrieveSepaMessageTypeText(String messageText) throws JsonProcessingException, ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        String messageType = messageText.replaceAll("(?s).*<Document.*([a-z]{4}\\.[0-9]{3}\\.[0-9]{3}\\.[0-9]{2}([A-Z0-9]{2})?)\".*>.*</Document>.*", "$1");
+        String messageType = messageText.replaceAll("(?s).*<Document.*(" + ISO20022_REGEX + ")\".*>.*</Document>.*", "$1");
         if (messageType.split("\\.").length != 4) {
             throw new InvalidMessageException(
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(Collections.singletonList(MESSASE_TYPE_ERROR)));
         }
 
-        String classFullName;
+        String orgnlMsgNmId = messageText.contains("<OrgnlMsgNmId>") ? messageText.replaceAll("(?s).*<OrgnlMsgNmId>(.*)</OrgnlMsgNmId>.*", "$1") : null;
+        String variation = isSDD(messageType, orgnlMsgNmId) ? "_sdd" : "";
+
+        String classFullName = getClassForMessageType(messageType + variation);
+        return (CoreMessage) Class.forName(classFullName).getDeclaredConstructor().newInstance();
+    }
+
+    public static String getClassForMessageType(String messageType) throws ClassNotFoundException {
         if (SEPA_MESSAGE_TYPES.containsKey(messageType)) {
-            classFullName = SEPA_MESSAGE_TYPES.get(messageType);
+            return SEPA_MESSAGE_TYPES.get(messageType);
+        } else if (SEPA_MESSAGE_TYPES.containsKey(messageType + "_sdd")) {
+            return SEPA_MESSAGE_TYPES.get(messageType + "_sdd");
         } else {
             throw new ClassNotFoundException(CLASS_NOT_FOUND_ERROR);
         }
-
-        return  (CoreMessage) Class.forName(classFullName).getDeclaredConstructor().newInstance();
     }
 
     public static BigDecimal calculateTtlIntrBkSttlmAmt(FIToFICustomerCreditTransfer fiToFICustomerCreditTransfer) {
@@ -83,7 +95,7 @@ public class SepaUtils {
     }
 
     public static void addIntrBkSttlmAmt(CoreMessage coreMessage, String elementPath, BigDecimal value) throws Exception {
-        if(ObjectUtils.isEmpty(value))
+        if (ObjectUtils.isEmpty(value))
             return;
 
         ActiveCurrencyAndAmount intrBkSttlmAmt = new ActiveCurrencyAndAmount();
@@ -94,7 +106,7 @@ public class SepaUtils {
     }
 
     public static void addElement(CoreMessage coreMessage, String elementPath, Object element) throws Exception {
-        if(ObjectUtils.isEmpty(element))
+        if (ObjectUtils.isEmpty(element))
             return;
 
         coreMessage.setElement(elementPath, element);
@@ -104,14 +116,31 @@ public class SepaUtils {
         boolean rsnCdExists = !ObjectUtils.isEmpty(msgReplyInfoRequest.getReasonCode());
         boolean rsnPrtryExists = !ObjectUtils.isEmpty(msgReplyInfoRequest.getReasonPrtry());
 
-        if(rsnCdExists && rsnPrtryExists)
+        if (rsnCdExists && rsnPrtryExists)
             throw new InvalidMessageException(
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString("The reason is CD or PRTRY based"));
 
-        if(!rsnCdExists && !rsnPrtryExists)
+        if (!rsnCdExists && !rsnPrtryExists)
             throw new InvalidMessageException(
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString("Either CD or PRTRY is required"));
 
+    }
+
+    private static boolean isSDD(String messageType, String orgnlMsgNmId) {
+        final Map<String, String> sdd_messages = new HashMap<String, String>() {{
+            put("pacs.002.001.03", "pacs.003.001.02");
+            put("pacs.003.001.02", "*");
+            put("pacs.004.001.02", "pacs.003.001.02");
+            put("pacs.007.001.02", "pacs.003.001.02");
+            put("pain.008.001.02", "*");
+        }};
+        if (sdd_messages.containsKey(messageType)) {
+            if (sdd_messages.get(messageType).equalsIgnoreCase("*")) {
+                return true;
+            }
+            return orgnlMsgNmId != null && sdd_messages.get(messageType).equalsIgnoreCase(orgnlMsgNmId);
+        }
+        return false;
     }
 
 }
