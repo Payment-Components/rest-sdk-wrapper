@@ -12,6 +12,8 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLindEndings;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -288,6 +290,15 @@ public class SepaServiceTest {
 
         //THEN
         assertEquals(errorResponse, exception.getResponseBodyAsString());
+    }
+
+    @Test
+    public void validateSampleMessages() throws Exception {
+        List<String> messages = TestUtils.returnResourcePathFilesContentAsList("/samples/sepa");
+        for (String message : messages) {
+            System.out.println("Testing :\n"+ message);
+            String result = sepaService.validateSepaMessage(message);
+        }
     }
 
 }
