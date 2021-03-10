@@ -18,7 +18,7 @@
         <java.version>1.8</java.version>
         <smv.version>20.7.0</smv.version>
         <mx.version>20.13.0</mx.version>
-        <sepa.version>19.20.0</sepa.version>
+        <sepa.version>19.22.0</sepa.version>
         <swift.translator.version>1.5.7</swift.translator.version>
     </properties>
 
