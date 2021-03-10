@@ -1,14 +1,9 @@
 package com.paymentcomponents.libraries.rest.sdk.wrapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import gr.datamation.sepa.types.epc.camt029.ResolutionOfInvestigationV03;
-import gr.datamation.sepa.types.epc.camt056.FIToFIPaymentCancellationRequestV01;
-import gr.datamation.sepa.types.epc.pacs004.PaymentReturnV02;
-import gr.datamation.sepa.types.epc.pacs008.FIToFICustomerCreditTransferV02;
 import gr.datamation.validation.error.ErrorSeverity;
 import gr.datamation.validation.error.ValidationError;
 import iso.pacs_009_001_08.FinancialInstitutionCreditTransferV08;
-import iso.pain_001_001_09.CustomerCreditTransferInitiationV09;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -137,21 +132,6 @@ public class SwaggerConstants {
 
 
     //Use this class in order to reference to xml for ISO20022 and SEPA libraries
-    @XmlRootElement(name = "Document", namespace = "urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02") public static class SwaggerSepaPacs008Wrapper {
-        @XmlElement public FIToFICustomerCreditTransferV02 fIToFICustomerCreditTransferV02;
-    }
-    @XmlRootElement(name = "Document", namespace = "urn:iso:std:iso:20022:tech:xsd:pacs.004.001.02") public static class SwaggerSepaPacs004Wrapper {
-        @XmlElement public PaymentReturnV02 paymentReturnV02;
-    }
-    @XmlRootElement(name = "Document", namespace = "urn:iso:std:iso:20022:tech:xsd:camt.056.001.01") public static class SwaggerSepaCamt056Wrapper {
-        @XmlElement public FIToFIPaymentCancellationRequestV01 fiToFIPaymentCancellationRequestV01;
-    }
-    @XmlRootElement(name = "Document", namespace = "urn:iso:std:iso:20022:tech:xsd:camt.029.001.03") public static class SwaggerSepaCamt029Wrapper {
-        @XmlElement public ResolutionOfInvestigationV03 resolutionOfInvestigationV03;
-    }
-    @XmlRootElement(name = "Document", namespace = "urn:iso:std:iso:20022:tech:xsd:pain.001.001.09") public static class SwaggerMxPain001Wrapper {
-        @XmlElement public CustomerCreditTransferInitiationV09 customerCreditTransferInitiationV09;
-    }
     @XmlRootElement(name = "Document", namespace = "urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08") public static class SwaggerMxPacs009Wrapper { //TODO Use rtgs schema instead of iso20022
         @XmlElement public FinancialInstitutionCreditTransferV08 financialInstitutionCreditTransferV08;
     }

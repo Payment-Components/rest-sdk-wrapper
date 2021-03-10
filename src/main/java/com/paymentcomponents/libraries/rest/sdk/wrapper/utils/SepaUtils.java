@@ -6,13 +6,10 @@ import com.paymentcomponents.libraries.rest.sdk.wrapper.exception.InvalidMessage
 import com.paymentcomponents.libraries.rest.sdk.wrapper.model.sepa.request.MsgReplyInfoRequest;
 import gr.datamation.sepa.core.messages.CoreMessage;
 import gr.datamation.sepa.core.messages.common.MessageInfo;
-import gr.datamation.sepa.core.messages.epc.pacs.FIToFICustomerCreditTransfer;
-import gr.datamation.sepa.types.epc.pacs008.ActiveCurrencyAndAmount;
 import org.reflections.Reflections;
 import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -86,23 +83,6 @@ public class SepaUtils {
         } else {
             throw new ClassNotFoundException(CLASS_NOT_FOUND_ERROR);
         }
-    }
-
-    public static BigDecimal calculateTtlIntrBkSttlmAmt(FIToFICustomerCreditTransfer fiToFICustomerCreditTransfer) {
-        return fiToFICustomerCreditTransfer.getRootMessage().getCdtTrfTxInf().stream()
-                .map(it -> it.getIntrBkSttlmAmt().getValue())
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-
-    public static void addIntrBkSttlmAmt(CoreMessage coreMessage, String elementPath, BigDecimal value) throws Exception {
-        if (ObjectUtils.isEmpty(value))
-            return;
-
-        ActiveCurrencyAndAmount intrBkSttlmAmt = new ActiveCurrencyAndAmount();
-        intrBkSttlmAmt.setCcy("EUR");
-        intrBkSttlmAmt.setValue(value);
-
-        coreMessage.setElement(elementPath, intrBkSttlmAmt);
     }
 
     public static void addElement(CoreMessage coreMessage, String elementPath, Object element) throws Exception {
