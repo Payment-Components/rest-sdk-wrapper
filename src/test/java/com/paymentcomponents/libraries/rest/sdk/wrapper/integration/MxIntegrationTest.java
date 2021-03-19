@@ -29,13 +29,13 @@ public class MxIntegrationTest {
 
         //WHEN
         mvc.perform(post("/mx/validate")
-                .content(TestConstants.VALID_MX_PAIN_001)
+                .content(TestConstants.VALID_MX_PACS_009)
                 .contentType(MediaType.APPLICATION_XML))
 
         //THEN
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().json(TestConstants.VALID_JSON_MX_PAIN001))
+                .andExpect(content().json(TestConstants.VALID_JSON_MX_PACS009))
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()));
 
     }
@@ -46,7 +46,7 @@ public class MxIntegrationTest {
 
         //WHEN
         mvc.perform(post("/mx/validate")
-                .content(TestConstants.INVALID_MX_PAIN_001)
+                .content(TestConstants.INVALID_MX_PACS_009)
                 .contentType(MediaType.APPLICATION_XML))
 
         //THEN
@@ -57,10 +57,10 @@ public class MxIntegrationTest {
                 .andExpect(jsonPath("$[0].severity", is("ERROR")))
                 .andExpect(jsonPath("$[0].errorCode", IsNull.nullValue()))
                 .andExpect(jsonPath("$[0].fieldPath", IsNull.nullValue()))
-                .andExpect(jsonPath("$[0].description", is("cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pain.001.001.09\":MsgId}' is expected.")))
+                .andExpect(jsonPath("$[0].description", is("cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\":MsgId}' is expected.")))
                 .andExpect(jsonPath("$[0].erroneousValue", IsNull.nullValue()))
                 .andExpect(jsonPath("$[0].line", is(5)))
-                .andExpect(jsonPath("$[0].column", is(34)));
+                .andExpect(jsonPath("$[0].column", is(22)));
 
     }
 

@@ -2,6 +2,7 @@ package com.paymentcomponents.libraries.rest.sdk.wrapper.integration;
 
 import com.paymentcomponents.libraries.rest.sdk.wrapper.Constants;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.TestConstants;
+import com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.StandardCharsets;
 
-import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLindEndings;
+import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLineEndings;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -61,7 +62,7 @@ public class CbprIntegrationTest {
                 .andExpect(jsonPath("$[0].description", is("cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\":MsgId}' is expected.")))
                 .andExpect(jsonPath("$[0].erroneousValue", IsNull.nullValue()))
                 .andExpect(jsonPath("$[0].line", is(4)))
-                .andExpect(jsonPath("$[0].column", is(34)));
+                .andExpect(jsonPath("$[0].column", is(22)));
 
     }
 
@@ -78,7 +79,7 @@ public class CbprIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
-                .andExpect(content().string(replaceLindEndings(TestConstants.CBPR_ENVELOPE)));
+                .andExpect(content().string(TestUtils.replaceLineEndings(TestConstants.CBPR_ENVELOPE)));
 
     }
 
@@ -102,7 +103,7 @@ public class CbprIntegrationTest {
                 .andExpect(jsonPath("$[0].description", is("cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\":MsgId}' is expected.")))
                 .andExpect(jsonPath("$[0].erroneousValue", IsNull.nullValue()))
                 .andExpect(jsonPath("$[0].line", is(4)))
-                .andExpect(jsonPath("$[0].column", is(34)));
+                .andExpect(jsonPath("$[0].column", is(22)));
 
     }
 

@@ -19,7 +19,7 @@
         <smv.version>20.7.0</smv.version>
         <mx.version>20.13.0</mx.version>
         <sepa.version>19.22.0</sepa.version>
-        <swift.translator.version>1.5.7</swift.translator.version>
+        <cbpr.translator.version>1.7.0</cbpr.translator.version>
     </properties>
 
     <repositories>
@@ -74,7 +74,7 @@
         <dependency>
             <groupId>gr.datamation</groupId>
             <artifactId>translator-cbpr</artifactId>
-            <version>${swift.translator.version}</version>
+            <version>${cbpr.translator.version}</version>
             <classifier>demo</classifier>
         </dependency>
 

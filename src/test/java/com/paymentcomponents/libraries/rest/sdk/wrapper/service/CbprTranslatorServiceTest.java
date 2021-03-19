@@ -10,34 +10,33 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLindEndings;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-public class SwiftTranslatorServiceTest {
+public class CbprTranslatorServiceTest {
 
     @TestConfiguration
-    static class SwiftTranslatorServiceTestContextConfiguration {
+    static class CbprTranslatorServiceTestContextConfiguration {
 
         @Bean
-        public SwiftTranslatorService swiftTranslatorService() {
-            return new SwiftTranslatorService();
+        public CbprTranslatorService cbprTranslatorService() {
+            return new CbprTranslatorService();
         }
     }
 
     @Autowired
-    SwiftTranslatorService swiftTranslatorService;
+    CbprTranslatorService cbprTranslatorService;
 
     @Test
     public void givenValidMtMessage_whenTranslateMtToMx_thenReturnMxMessage() throws Exception {
         //GIVEN
-        String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_SWIFT_TRANSLATOR_MT_TO_MX_RESPONSE)
+        String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_RESPONSE)
                 .replaceAll("<CreDt>.*<\\\\/CreDt>", "<CreDt>.*<\\\\/CreDt>")
                 .replaceAll("<CreDtTm>.*<\\\\/CreDtTm>", "<CreDtTm>.*<\\\\/CreDtTm>")
                 .replaceAll("<UETR>.*<\\\\/UETR>", "<UETR>.*<\\\\/UETR>");
 
         //WHEN
-        String result = swiftTranslatorService.translateMtToMx(TestConstants.VALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST);
+        String result = cbprTranslatorService.translateMtToMx(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST);
 
         //THEN
         assertTrue(result.matches(expectedAsRegex));
@@ -58,25 +57,25 @@ public class SwiftTranslatorServiceTest {
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
-            swiftTranslatorService.translateMtToMx(TestConstants.INVALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST);
+            cbprTranslatorService.translateMtToMx(TestConstants.INVALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST);
         });
 
         //THEN
-        assertEquals(replaceLindEndings(exceptionBody), replaceLindEndings(exception.getResponseBodyAsString()));
+        assertEquals(TestUtils.replaceLineEndings(exceptionBody), TestUtils.replaceLineEndings(exception.getResponseBodyAsString()));
     }
 
     @Test
     public void givenValidMxMessage_whenTranslateMxToMt_thenReturnMtMessage() throws Exception {
         //GIVEN
-        String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_SWIFT_TRANSLATOR_MX_TO_MT_RESPONSE)
-                .replaceAll("0527210121", ".*")
-                .replaceAll("2101210527", ".*");
+        String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_RESPONSE)
+                .replaceAll("1726210322", ".*")
+                .replaceAll("2103221726", ".*");
 
         //WHEN
-        String result = swiftTranslatorService.translateMxToMt(TestConstants.VALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST);
+        String result = cbprTranslatorService.translateMxToMt(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST);
 
         //THEN
-        assertTrue(replaceLindEndings(result).matches(replaceLindEndings(expectedAsRegex)));
+        assertTrue(TestUtils.replaceLineEndings(result).matches(TestUtils.replaceLineEndings(expectedAsRegex)));
     }
 
     @Test
@@ -89,17 +88,16 @@ public class SwiftTranslatorServiceTest {
                 "  \"description\" : \"cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\\\":MsgId}' is expected.\",\n" +
                 "  \"erroneousValue\" : null,\n" +
                 "  \"line\" : 4,\n" +
-                "  \"column\" : 34\n" +
+                "  \"column\" : 22\n" +
                 "} ]";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
-            swiftTranslatorService.translateMxToMt(TestConstants.INVALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST);
+            cbprTranslatorService.translateMxToMt(TestConstants.INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST);
         });
 
         //THEN
-        assertEquals(replaceLindEndings(exceptionBody), replaceLindEndings(exception.getResponseBodyAsString()));
+        assertEquals(TestUtils.replaceLineEndings(exceptionBody), TestUtils.replaceLineEndings(exception.getResponseBodyAsString()));
     }
-
 
 }

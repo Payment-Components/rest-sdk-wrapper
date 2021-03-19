@@ -9,7 +9,7 @@ import gr.datamation.swift.translator.exceptions.InvalidMxMessageException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SwiftTranslatorService {
+public class CbprTranslatorService {
 
     public String translateMtToMx(String mtMessage) throws InvalidMessageException, JsonProcessingException {
         try {

@@ -1,6 +1,7 @@
 package com.paymentcomponents.libraries.rest.sdk.wrapper.service;
 
 import com.paymentcomponents.libraries.rest.sdk.wrapper.TestConstants;
+import com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.exception.InvalidMessageException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,7 +10,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLindEndings;
+import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLineEndings;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -47,7 +48,7 @@ public class CbprServiceTest {
                 "  \"description\" : \"cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\\\":MsgId}' is expected.\",\n" +
                 "  \"erroneousValue\" : null,\n" +
                 "  \"line\" : 4,\n" +
-                "  \"column\" : 34\n" +
+                "  \"column\" : 22\n" +
                 "} ]";
 
         //WHEN
@@ -56,7 +57,7 @@ public class CbprServiceTest {
         });
 
         //THEN
-        assertEquals(replaceLindEndings(exceptionBody), replaceLindEndings(exception.getResponseBodyAsString()));
+        assertEquals(TestUtils.replaceLineEndings(exceptionBody), TestUtils.replaceLineEndings(exception.getResponseBodyAsString()));
 
     }
 
@@ -69,7 +70,7 @@ public class CbprServiceTest {
         String result = cbprService.envelopeCbpr(TestConstants.VALID_CBPR_REQUEST);
 
         //THEN
-        assertEquals(replaceLindEndings(expected), replaceLindEndings(result));
+        assertEquals(TestUtils.replaceLineEndings(expected), TestUtils.replaceLineEndings(result));
     }
 
     @Test
@@ -82,7 +83,7 @@ public class CbprServiceTest {
                 "  \"description\" : \"cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\\\":MsgId}' is expected.\",\n" +
                 "  \"erroneousValue\" : null,\n" +
                 "  \"line\" : 4,\n" +
-                "  \"column\" : 34\n" +
+                "  \"column\" : 22\n" +
                 "} ]";
 
         //WHEN
@@ -91,7 +92,7 @@ public class CbprServiceTest {
         });
 
         //THEN
-        assertEquals(replaceLindEndings(exceptionBody), replaceLindEndings(exception.getResponseBodyAsString()));
+        assertEquals(TestUtils.replaceLineEndings(exceptionBody), TestUtils.replaceLineEndings(exception.getResponseBodyAsString()));
 
     }
 

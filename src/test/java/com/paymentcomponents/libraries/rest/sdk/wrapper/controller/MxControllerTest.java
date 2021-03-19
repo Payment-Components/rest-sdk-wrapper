@@ -55,41 +55,39 @@ public class MxControllerTest {
     @Test
     public void givenValidMxMessage_whenMxValidate_thenReturnMxAsJson() throws Exception {
         //GIVEN
-        given(mxService.validateMx(anyString())).willReturn(TestConstants.VALID_JSON_MX_PAIN001);
+        given(mxService.validateMx(anyString())).willReturn(TestConstants.VALID_JSON_MX_PACS009);
 
         //WHEN
         mvc.perform(post("/mx/validate")
-                .content(TestConstants.VALID_MX_PAIN_001)
+                .content(TestConstants.VALID_MX_PACS_009)
                 .contentType(MediaType.APPLICATION_XML))
 
         //THEN
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().json(TestConstants.VALID_JSON_MX_PAIN001))
+                .andExpect(content().json(TestConstants.VALID_JSON_MX_PACS009))
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()));
 
-        then(mxService).should(times(1)).validateMx(TestConstants.VALID_MX_PAIN_001);
+        then(mxService).should(times(1)).validateMx(TestConstants.VALID_MX_PACS_009);
     }
 
     @Test
     public void givenInValidMxMessage_whenMxValidate_thenReturnValidationErrors() throws Exception {
         //GIVEN
-        String errorResponse = "[\n" +
-                "    {\n" +
-                "        \"severity\": \"ERROR\",\n" +
-                "        \"errorCode\": null,\n" +
-                "        \"fieldPath\": null,\n" +
-                "        \"description\": \"cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pain.001.001.09\\\":MsgId}' is expected.\",\n" +
-                "        \"erroneousValue\": null,\n" +
-                "        \"line\": 0,\n" +
-                "        \"column\": 0\n" +
-                "    }\n" +
-                "]";
+        String errorResponse = "[ {\n" +
+                "  \"severity\" : \"ERROR\",\n" +
+                "  \"errorCode\" : null,\n" +
+                "  \"fieldPath\" : null,\n" +
+                "  \"description\" : \"cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\\\":MsgId}' is expected.\",\n" +
+                "  \"erroneousValue\" : null,\n" +
+                "  \"line\" : 5,\n" +
+                "  \"column\" : 22\n" +
+                "} ]";
         given(mxService.validateMx(anyString())).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
         mvc.perform(post("/mx/validate")
-                .content(TestConstants.INVALID_MX_PAIN_001)
+                .content(TestConstants.INVALID_MX_PACS_009)
                 .contentType(MediaType.APPLICATION_XML))
 
         //THEN
@@ -100,12 +98,12 @@ public class MxControllerTest {
                 .andExpect(jsonPath("$[0].severity", is("ERROR")))
                 .andExpect(jsonPath("$[0].errorCode", IsNull.nullValue()))
                 .andExpect(jsonPath("$[0].fieldPath", IsNull.nullValue()))
-                .andExpect(jsonPath("$[0].description", is("cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pain.001.001.09\":MsgId}' is expected.")))
+                .andExpect(jsonPath("$[0].description", is("cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\":MsgId}' is expected.")))
                 .andExpect(jsonPath("$[0].erroneousValue", IsNull.nullValue()))
-                .andExpect(jsonPath("$[0].line", is(0)))
-                .andExpect(jsonPath("$[0].column", is(0)));
+                .andExpect(jsonPath("$[0].line", is(5)))
+                .andExpect(jsonPath("$[0].column", is(22)));
 
-        then(mxService).should(times(1)).validateMx(TestConstants.INVALID_MX_PAIN_001);
+        then(mxService).should(times(1)).validateMx(TestConstants.INVALID_MX_PACS_009);
     }
 
 }

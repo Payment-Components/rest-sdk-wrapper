@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.StandardCharsets;
 
-import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLindEndings;
+import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLineEndings;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SwiftTranslatorIntegrationTest {
+public class CbprTranslatorIntegrationTest {
 
     @Autowired
     private MockMvc mvc;
@@ -30,17 +30,17 @@ public class SwiftTranslatorIntegrationTest {
     @Test
     public void givenValidMtMessage_whenTranslateMtToMx_thenReturnMxMessage() throws Exception {
         //GIVEN
-        String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_SWIFT_TRANSLATOR_MT_TO_MX_RESPONSE)
+        String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_RESPONSE)
                 .replaceAll("<CreDt>.*<\\\\/CreDt>", "<CreDt>.*<\\\\/CreDt>")
                 .replaceAll("<CreDtTm>.*<\\\\/CreDtTm>", "<CreDtTm>.*<\\\\/CreDtTm>")
                 .replaceAll("<UETR>.*<\\\\/UETR>", "<UETR>.*<\\\\/UETR>");
 
         //WHEN
-        mvc.perform(post("/swift/translator/mt/to/mx")
-                .content(TestConstants.VALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST)
+        mvc.perform(post("/swift/translator/cbpr/mt/to/mx")
+                .content(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST)
                 .contentType(MediaType.TEXT_PLAIN))
 
-        //THEN
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
@@ -53,11 +53,11 @@ public class SwiftTranslatorIntegrationTest {
         //GIVEN
 
         //WHEN
-        mvc.perform(post("/swift/translator/mt/to/mx")
-                .content(TestConstants.INVALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST)
+        mvc.perform(post("/swift/translator/cbpr/mt/to/mx")
+                .content(TestConstants.INVALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST)
                 .contentType(MediaType.TEXT_PLAIN))
 
-        //THEN
+                //THEN
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -73,20 +73,20 @@ public class SwiftTranslatorIntegrationTest {
     @Test
     public void givenValidMxMessage_whenTranslateMxToMt_thenReturnMtMessage() throws Exception {
         //GIVEN
-        String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_SWIFT_TRANSLATOR_MX_TO_MT_RESPONSE)
-                .replaceAll("0527210121", ".*")
-                .replaceAll("2101210527", ".*");
+        String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_RESPONSE)
+                .replaceAll("1726210322", ".*")
+                .replaceAll("2103221726", ".*");
 
         //WHEN
-        mvc.perform(post("/swift/translator/mx/to/mt")
-                .content(TestConstants.VALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST)
+        mvc.perform(post("/swift/translator/cbpr/mx/to/mt")
+                .content(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST)
                 .contentType(MediaType.TEXT_PLAIN))
 
-        //THEN
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
-                .andExpect(content().string(Matchers.matchesPattern(replaceLindEndings(expectedAsRegex, "\r\n"))));
+                .andExpect(content().string(Matchers.matchesPattern(replaceLineEndings(expectedAsRegex, "\r\n"))));
 
     }
 
@@ -95,11 +95,11 @@ public class SwiftTranslatorIntegrationTest {
         //GIVEN
 
         //WHEN
-        mvc.perform(post("/swift/translator/mx/to/mt")
-                .content(TestConstants.INVALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST)
+        mvc.perform(post("/swift/translator/cbpr/mx/to/mt")
+                .content(TestConstants.INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST)
                 .contentType(MediaType.TEXT_PLAIN))
 
-        //THEN
+                //THEN
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -109,7 +109,7 @@ public class SwiftTranslatorIntegrationTest {
                 .andExpect(jsonPath("$[0].description", is("cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\":MsgId}' is expected.")))
                 .andExpect(jsonPath("$[0].erroneousValue", IsNull.nullValue()))
                 .andExpect(jsonPath("$[0].line", is(4)))
-                .andExpect(jsonPath("$[0].column", is(34)));
+                .andExpect(jsonPath("$[0].column", is(22)));
     }
 
 }

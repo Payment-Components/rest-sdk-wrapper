@@ -82,7 +82,7 @@ public class RtgsControllerTest {
                 "        \"description\": \"cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\\\":MsgId}' is expected.\",\n" +
                 "        \"erroneousValue\": null,\n" +
                 "        \"line\": 6,\n" +
-                "        \"column\": 0\n" +
+                "        \"column\": 22\n" +
                 "    }\n" +
                 "]";
         given(rtgsService.validateRtgs(anyString())).willThrow(new InvalidMessageException(errorResponse));
@@ -103,7 +103,7 @@ public class RtgsControllerTest {
                 .andExpect(jsonPath("$[0].description", is("cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\":MsgId}' is expected.")))
                 .andExpect(jsonPath("$[0].erroneousValue", IsNull.nullValue()))
                 .andExpect(jsonPath("$[0].line", is(6)))
-                .andExpect(jsonPath("$[0].column", is(0)));
+                .andExpect(jsonPath("$[0].column", is(22)));
 
         then(rtgsService).should(times(1)).validateRtgs(TestConstants.INVALID_RTGS_PACS_009);
     }

@@ -4,7 +4,7 @@ import com.paymentcomponents.libraries.rest.sdk.wrapper.Constants;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.TestConstants;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.exception.InvalidMessageException;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.filter.RequestLogIdFilter;
-import com.paymentcomponents.libraries.rest.sdk.wrapper.service.SwiftTranslatorService;
+import com.paymentcomponents.libraries.rest.sdk.wrapper.service.CbprTranslatorService;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,18 +22,19 @@ import java.nio.charset.StandardCharsets;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.BDDMockito.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(value = SwiftTranslatorController.class)
-public class SwiftTranslatorControllerTest {
+@WebMvcTest(value = CbprTranslatorController.class)
+public class CbprTranslatorControllerTest {
 
     @TestConfiguration
-    static class SwiftTranslatorControllerTestContextConfiguration {
+    static class CbprTranslatorControllerTestContextConfiguration {
 
         @Bean
         public FilterRegistrationBean<RequestLogIdFilter> requestLogIdFilter() {
@@ -48,30 +49,30 @@ public class SwiftTranslatorControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private SwiftTranslatorService swiftTranslatorService;
+    private CbprTranslatorService cbprTranslatorService;
 
     @BeforeEach
     public void setup() {
-        reset(swiftTranslatorService);
+        reset(cbprTranslatorService);
     }
 
     @Test
     public void givenValidMtMessage_whenTranslateMtToMx_thenReturnMxMessage() throws Exception {
         //GIVEN
-        given(swiftTranslatorService.translateMtToMx(anyString())).willReturn(TestConstants.VALID_SWIFT_TRANSLATOR_MT_TO_MX_RESPONSE);
+        given(cbprTranslatorService.translateMtToMx(anyString())).willReturn(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_RESPONSE);
 
         //WHEN
-        mvc.perform(post("/swift/translator/mt/to/mx")
-                .content(TestConstants.VALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST)
+        mvc.perform(post("/swift/translator/cbpr/mt/to/mx")
+                .content(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST)
                 .contentType(MediaType.TEXT_PLAIN))
 
-        //THEN
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
-                .andExpect(content().string(TestConstants.VALID_SWIFT_TRANSLATOR_MT_TO_MX_RESPONSE));
+                .andExpect(content().string(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_RESPONSE));
 
-        then(swiftTranslatorService).should(times(1)).translateMtToMx(TestConstants.VALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST);
+        then(cbprTranslatorService).should(times(1)).translateMtToMx(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST);
     }
 
     @Test
@@ -88,14 +89,14 @@ public class SwiftTranslatorControllerTest {
                 "        \"errorCode\": \"SV16\"\n" +
                 "    }\n" +
                 "]";
-        given(swiftTranslatorService.translateMtToMx(anyString())).willThrow(new InvalidMessageException(errorResponse));
+        given(cbprTranslatorService.translateMtToMx(anyString())).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
-        mvc.perform(post("/swift/translator/mt/to/mx")
-                .content(TestConstants.INVALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST)
+        mvc.perform(post("/swift/translator/cbpr/mt/to/mx")
+                .content(TestConstants.INVALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST)
                 .contentType(MediaType.TEXT_PLAIN))
 
-        //THEN
+                //THEN
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -106,26 +107,26 @@ public class SwiftTranslatorControllerTest {
                 .andExpect(jsonPath("$[0].line", IsNull.nullValue()))
                 .andExpect(jsonPath("$[0].messageIndex", IsNull.nullValue()))
                 .andExpect(jsonPath("$[0].errorCode", is("SV16")));
-        then(swiftTranslatorService).should(times(1)).translateMtToMx(TestConstants.INVALID_SWIFT_TRANSLATOR_MT_TO_MX_REQUEST);
+        then(cbprTranslatorService).should(times(1)).translateMtToMx(TestConstants.INVALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST);
     }
 
     @Test
     public void givenValidMxMessage_whenTranslateMxToMt_thenReturnMtMessage() throws Exception {
         //GIVEN
-        given(swiftTranslatorService.translateMxToMt(anyString())).willReturn(TestConstants.VALID_SWIFT_TRANSLATOR_MX_TO_MT_RESPONSE);
+        given(cbprTranslatorService.translateMxToMt(anyString())).willReturn(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_RESPONSE);
 
         //WHEN
-        mvc.perform(post("/swift/translator/mx/to/mt")
-                .content(TestConstants.VALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST)
+        mvc.perform(post("/swift/translator/cbpr/mx/to/mt")
+                .content(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST)
                 .contentType(MediaType.TEXT_PLAIN))
 
                 //THEN
                 .andExpect(status().isOk())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
-                .andExpect(content().string(TestConstants.VALID_SWIFT_TRANSLATOR_MX_TO_MT_RESPONSE));
+                .andExpect(content().string(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_RESPONSE));
 
-        then(swiftTranslatorService).should(times(1)).translateMxToMt(TestConstants.VALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST);
+        then(cbprTranslatorService).should(times(1)).translateMxToMt(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST);
     }
 
     @Test
@@ -138,15 +139,15 @@ public class SwiftTranslatorControllerTest {
                 "        \"fieldPath\": null,\n" +
                 "        \"description\": \"cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\\\":MsgId}' is expected.\",\n" +
                 "        \"erroneousValue\": null,\n" +
-                "        \"line\": 0,\n" +
-                "        \"column\": 0\n" +
+                "        \"line\": 4,\n" +
+                "        \"column\": 22\n" +
                 "    }\n" +
                 "]";
-        given(swiftTranslatorService.translateMxToMt(anyString())).willThrow(new InvalidMessageException(errorResponse));
+        given(cbprTranslatorService.translateMxToMt(anyString())).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
-        mvc.perform(post("/swift/translator/mx/to/mt")
-                .content(TestConstants.INVALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST)
+        mvc.perform(post("/swift/translator/cbpr/mx/to/mt")
+                .content(TestConstants.INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST)
                 .contentType(MediaType.TEXT_PLAIN))
 
                 //THEN
@@ -158,10 +159,10 @@ public class SwiftTranslatorControllerTest {
                 .andExpect(jsonPath("$[0].fieldPath", IsNull.nullValue()))
                 .andExpect(jsonPath("$[0].description", is("cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\":MsgId}' is expected.")))
                 .andExpect(jsonPath("$[0].erroneousValue", IsNull.nullValue()))
-                .andExpect(jsonPath("$[0].line", is(0)))
-                .andExpect(jsonPath("$[0].column", is(0)));
+                .andExpect(jsonPath("$[0].line", is(4)))
+                .andExpect(jsonPath("$[0].column", is(22)));
 
-        then(swiftTranslatorService).should(times(1)).translateMxToMt(TestConstants.INVALID_SWIFT_TRANSLATOR_MX_TO_MT_REQUEST);
+        then(cbprTranslatorService).should(times(1)).translateMxToMt(TestConstants.INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST);
     }
 
 }

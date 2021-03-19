@@ -1,13 +1,9 @@
 package com.paymentcomponents.libraries.rest.sdk.wrapper.controller;
 
-import com.paymentcomponents.libraries.rest.sdk.wrapper.model.sepa.request.MsgReplyInfoRequest;
-import com.paymentcomponents.libraries.rest.sdk.wrapper.model.sepa.request.SepaCreatePacs008Request;
-import com.paymentcomponents.libraries.rest.sdk.wrapper.service.SepaService;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.Constants;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.SwaggerConstants;
+import com.paymentcomponents.libraries.rest.sdk.wrapper.service.SepaService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,7 +13,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,7 +36,10 @@ public class SepaController {
             description = SwaggerConstants.SEPA_VALIDATE_DESCRIPTION,
             tags = SwaggerConstants.SEPA_TAG,
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    required = true),
+                    required = true,
+                    content = {
+                            @Content(mediaType = "application/xml", examples = @ExampleObject(value = SwaggerConstants.SEPA_VALIDATE_REQUEST_EXAMPLE_VALID), schema = @Schema(implementation = SwaggerConstants.SwaggerSepaPacs002Wrapper.class))
+                    }),
             responses = {
                     @ApiResponse(
                             responseCode = "200",
