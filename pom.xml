@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.paymentcomponents.libraries</groupId>
     <artifactId>rest-sdk-wrapper</artifactId>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
     <name>rest-sdk-wrapper</name>
     <description>Wrapper for Payment Components Financial Messaging Libraries</description>
 
@@ -20,6 +20,7 @@
         <mx.version>20.13.0</mx.version>
         <sepa.version>19.22.0</sepa.version>
         <cbpr.translator.version>1.7.0</cbpr.translator.version>
+        <rtgs.translator.version>1.1.0</rtgs.translator.version>
     </properties>
 
     <repositories>
@@ -77,11 +78,18 @@
             <version>${cbpr.translator.version}</version>
             <classifier>demo</classifier>
         </dependency>
+        <dependency>
+            <groupId>gr.datamation</groupId>
+            <artifactId>translator-rtgs</artifactId>
+            <version>${rtgs.translator.version}</version>
+            <classifier>demo</classifier>
+        </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
-            <version>2.11.4</version> <!--For 2.12.X, advice https://cowtowncoder.medium.com/jackson-2-12-most-wanted-4-5-cbc91c00bcd2-->
+            <version>2.11.4
+            </version> <!--For 2.12.X, advice https://cowtowncoder.medium.com/jackson-2-12-most-wanted-4-5-cbc91c00bcd2-->
         </dependency>
 
         <dependency>

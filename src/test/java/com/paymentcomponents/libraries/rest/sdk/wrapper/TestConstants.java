@@ -805,6 +805,122 @@ public class TestConstants {
             "    </FICdtTrf>\n" +
             "</Document>";
 
+    public static final String VALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST = "{1:F01PBAADEFFAC2X0000000000}{2:O2021109210323PBBBDEFFXXXX00000000002103231109N}{3:{121:e008b028-59c5-41e9-be4c-d45102fc201e}}{4:\n" +
+            ":20:Inp009b028-InsId\n" +
+            ":21:Inp008b028-E2EId\n" +
+            ":13C:/RNCTIME/0915+0200\n" +
+            ":32A:191007EUR61250,00\n" +
+            ":52A:PBBBDEFFXXX\n" +
+            ":58A:PBAADEFFAC2\n" +
+            "-}";
+
+    public static final String VALID_RTGS_TRANSLATOR_MT_TO_MX_RESPONSE = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\">\n" +
+            "    <FICdtTrf>\n" +
+            "        <GrpHdr>\n" +
+            "            <MsgId>Inp009b028-InsId</MsgId>\n" +
+            "            <CreDtTm>2021-03-23T13:42:58.502+02:00</CreDtTm>\n" +
+            "            <NbOfTxs>1</NbOfTxs>\n" +
+            "            <SttlmInf>\n" +
+            "                <SttlmMtd>CLRG</SttlmMtd>\n" +
+            "                <ClrSys>\n" +
+            "                    <Cd>TGT</Cd>\n" +
+            "                </ClrSys>\n" +
+            "            </SttlmInf>\n" +
+            "        </GrpHdr>\n" +
+            "        <CdtTrfTxInf>\n" +
+            "            <PmtId>\n" +
+            "                <InstrId>Inp009b028-InsId</InstrId>\n" +
+            "                <EndToEndId>NOTPROVIDED</EndToEndId>\n" +
+            "                <UETR>e008b028-59c5-41e9-be4c-d45102fc201e</UETR>\n" +
+            "            </PmtId>\n" +
+            "            <IntrBkSttlmAmt Ccy=\"EUR\">61250.00</IntrBkSttlmAmt>\n" +
+            "            <IntrBkSttlmDt>2019-10-07</IntrBkSttlmDt>\n" +
+            "            <SttlmTmIndctn>\n" +
+            "                <CdtDtTm>2019-10-07T09:15:00.000+02:00</CdtDtTm>\n" +
+            "            </SttlmTmIndctn>\n" +
+            "            <InstgAgt>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>PBBBDEFFXXX</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </InstgAgt>\n" +
+            "            <InstdAgt>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>PBAADEFFC2X</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </InstdAgt>\n" +
+            "            <Dbtr>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>PBBBDEFFXXX</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </Dbtr>\n" +
+            "            <Cdtr>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>PBAADEFFAC2</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </Cdtr>\n" +
+            "        </CdtTrfTxInf>\n" +
+            "    </FICdtTrf>\n" +
+            "</Document>\n";
+
+    public static final String VALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\">\n" +
+            "    <FICdtTrf>\n" +
+            "        <GrpHdr>\n" +
+            "            <MsgId>Inp009b028-InsId</MsgId>\n" +
+            "            <CreDtTm>2021-03-23T13:42:58.502+02:00</CreDtTm>\n" +
+            "            <NbOfTxs>1</NbOfTxs>\n" +
+            "            <SttlmInf>\n" +
+            "                <SttlmMtd>CLRG</SttlmMtd>\n" +
+            "                <ClrSys>\n" +
+            "                    <Cd>TGT</Cd>\n" +
+            "                </ClrSys>\n" +
+            "            </SttlmInf>\n" +
+            "        </GrpHdr>\n" +
+            "        <CdtTrfTxInf>\n" +
+            "            <PmtId>\n" +
+            "                <InstrId>Inp009b028-InsId</InstrId>\n" +
+            "                <EndToEndId>NOTPROVIDED</EndToEndId>\n" +
+            "                <UETR>e008b028-59c5-41e9-be4c-d45102fc201e</UETR>\n" +
+            "            </PmtId>\n" +
+            "            <IntrBkSttlmAmt Ccy=\"EUR\">61250.00</IntrBkSttlmAmt>\n" +
+            "            <IntrBkSttlmDt>2019-10-07</IntrBkSttlmDt>\n" +
+            "            <SttlmTmIndctn>\n" +
+            "                <CdtDtTm>2019-10-07T09:15:00.000+02:00</CdtDtTm>\n" +
+            "            </SttlmTmIndctn>\n" +
+            "            <InstgAgt>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>PBBBDEFFXXX</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </InstgAgt>\n" +
+            "            <InstdAgt>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>PBAADEFFC2X</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </InstdAgt>\n" +
+            "            <Dbtr>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>PBBBDEFFXXX</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </Dbtr>\n" +
+            "            <Cdtr>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>PBAADEFFAC2</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </Cdtr>\n" +
+            "        </CdtTrfTxInf>\n" +
+            "    </FICdtTrf>\n" +
+            "</Document>";
+
+    public static final String VALID_RTGS_TRANSLATOR_MX_TO_MT_RESPONSE = "{1:F01PBAADEFFC2XX0000000000}{2:O2021343210323PBBBDEFFXXXX00000000002103231343N}{3:{121:e008b028-59c5-41e9-be4c-d45102fc201e}}{4:\n" +
+            ":20:Inp009b028-InsId\n" +
+            ":21:NOTPROVIDED\n" +
+            ":13C:/RNCTIME/0915+0200\n" +
+            ":32A:191007EUR61250,00\n" +
+            ":52A:PBBBDEFFXXX\n" +
+            ":58A:PBAADEFFAC2\n" +
+            "-}";
+
     public static final String INVALID_MT_101 = VALID_MT_101.replace(":20:00043\n", "");
     public static final String VALID_JSON_SEPA_PACS_008 = Utils.convertXmlToJson(VALID_SEPA_PACS_008, "Document");
     public static final String VALID_JSON_SEPA_EPC_PACS_002 = Utils.convertXmlToJson(VALID_SEPA_EPC_PACS_002, "Document");
@@ -813,6 +929,8 @@ public class TestConstants {
     public static final String VALID_JSON_MX_PACS009 = Utils.convertXmlToJson(VALID_MX_PACS_009, "Document");
     public static final String INVALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST = VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST.replace(":20:00322\n", "");
     public static final String INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST = VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST.replaceFirst("\\s*<MsgId>BBBB/120928-FICT/JPY/430</MsgId>", "");
+    public static final String INVALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST = VALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST.replace(":20:Inp009b028-InsId\n", "");
+    public static final String INVALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST = VALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST.replaceFirst("\\s*<MsgId>Inp009b028-InsId</MsgId>", "");
     public static final String INVALID_CBPR_REQUEST = VALID_CBPR_REQUEST.replaceFirst("\\s*<MsgId>BBBB/120928-FICT/JPY/430</MsgId>", "");
     public static final String INVALID_RTGS_PACS_009 = VALID_RTGS_PACS_009.replaceFirst("\\s*<MsgId>NONREF</MsgId>", "");
     public static final String VALID_JSON_RTGS_PACS_009 = Utils.convertXmlToJson(VALID_RTGS_PACS_009, "Document");
