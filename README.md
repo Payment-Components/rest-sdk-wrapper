@@ -1,7 +1,10 @@
 # Financial Messages REST APIs Wrapper
-Payment Components is known for the Financial Messaging Solutions it provides for over 30 years.  
-The Financial Messaging Libraries are written in Java. They can be integrated smoothly in a Java Application.  
-In order to help developers of other Programming Languages worlds, we prepared this standalone REST API wrapper for MT, SEPA, MX(ISO20022), SWIFT Translator and CBPR+ libraries.
+Payment Components is known for the [Financial Messaging Solutions](https://finaplo.paymentcomponents.com/financial-messages) it provides for over 30 years.  
+
+Our latest product group [FINaplo](https://finaplo.paymentcomponents.com), contains many Financial Messaging Libraries which are written in Java.  
+The libraries can be integrated smoothly in a Java Application but other types of projects were not compatible.
+
+In order to help developers of other Programming Languages worlds, we prepared this standalone REST API wrapper for MT, SEPA, MX(ISO20022), CBPR+, TARGET2(RTGS) and SWIFT Translation libraries.
 
 ## Installation
 It's a simple java web application written in spring boot. You can start it by running the following command `java -jar rest-sdk-wrapper-X.X.X.jar` or
@@ -26,7 +29,8 @@ It has a dependency to
 - Swift MT SDK
 - SEPA SDK
 - ISO20022 SDK
-- Swift Translator SDK
+- SWIFT MT <> CBPR+ TRANSLATION SDK
+- SWIFT MT <> TARGET2 TRANSLATION SDK
 
 By default REST SDK Wrapper is using demo versions of the above SDKs. With the demo versions of the above SDKs you can do the following :
 
