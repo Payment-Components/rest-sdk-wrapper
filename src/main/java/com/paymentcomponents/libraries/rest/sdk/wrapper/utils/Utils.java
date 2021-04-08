@@ -1,6 +1,7 @@
 package com.paymentcomponents.libraries.rest.sdk.wrapper.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -17,11 +18,16 @@ public class Utils {
         String json = "";
         try {
             XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.registerModule(new SimpleModule().addDeserializer(
+                    JsonNode.class,
+                    new DuplicateToArrayJsonNodeDeserializer()
+            ));
             JsonNode node = xmlMapper.readTree(xml.getBytes());
             json = node.toString();
             if (additionalRootElement != null && !additionalRootElement.isEmpty()) {
                 json = "{ \"" + additionalRootElement + "\": " + json + " } ";
             }
+            json = json.replaceAll("\"\":", "\"Value\":");
         } catch (Exception e) {
             e.printStackTrace();
         }
