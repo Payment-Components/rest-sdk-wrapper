@@ -74,7 +74,7 @@ public class RtgsTranslatorIntegrationTest {
                 .content(TestConstants.VALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST)
                 .contentType(MediaType.APPLICATION_XML))
 
-                //THEN
+        //THEN
                 .andExpect(status().isOk())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))

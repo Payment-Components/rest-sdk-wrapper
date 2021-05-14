@@ -3,9 +3,9 @@ package com.paymentcomponents.libraries.rest.sdk.wrapper.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.exception.InvalidMessageException;
-import gr.datamation.swift.translator.Converter;
-import gr.datamation.swift.translator.exceptions.InvalidMtMessageException;
-import gr.datamation.swift.translator.exceptions.InvalidMxMessageException;
+import gr.datamation.swift.translator.cbpr.CbprTranslator;
+import gr.datamation.swift.translator.cbpr.exceptions.InvalidMtMessageException;
+import gr.datamation.swift.translator.cbpr.exceptions.InvalidMxMessageException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +13,7 @@ public class CbprTranslatorService {
 
     public String translateMtToMx(String mtMessage) throws InvalidMessageException, JsonProcessingException {
         try {
-            return Converter.convertMtToMx(mtMessage);
+            return CbprTranslator.translateMtToMx(mtMessage);
         } catch (InvalidMtMessageException ex) {
             throw new InvalidMessageException(
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(ex.getValidationErrorList()));
@@ -28,7 +28,7 @@ public class CbprTranslatorService {
 
     public String translateMxToMt(String mxMessage) throws InvalidMessageException, JsonProcessingException {
         try {
-            return Converter.convertMxToMt(mxMessage);
+            return CbprTranslator.translateMxToMt(mxMessage);
         } catch (InvalidMxMessageException ex) {
             throw new InvalidMessageException(
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(ex.getValidationErrorList()));
