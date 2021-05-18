@@ -2,7 +2,6 @@ package com.paymentcomponents.libraries.rest.sdk.wrapper.integration;
 
 import com.paymentcomponents.libraries.rest.sdk.wrapper.Constants;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.TestConstants;
-import com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.StandardCharsets;
 
-import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLineEndings;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -75,11 +73,11 @@ public class CbprIntegrationTest {
                 .content(TestConstants.VALID_CBPR_REQUEST)
                 .contentType(MediaType.TEXT_PLAIN))
 
-        //THEN
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
-                .andExpect(content().string(TestUtils.replaceLineEndings(TestConstants.CBPR_ENVELOPE)));
+                .andExpect(content().string(TestConstants.CBPR_ENVELOPE));
 
     }
 
