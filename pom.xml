@@ -18,7 +18,7 @@
         <java.version>1.8</java.version>
         <smv.version>21.1.0</smv.version>
         <mx.version>20.15.0</mx.version>
-        <sepa.version>19.22.0</sepa.version>
+        <sepa.version>19.25.0</sepa.version>
         <cbpr.translator.version>2.0.2</cbpr.translator.version>
         <rtgs.translator.version>1.2.2</rtgs.translator.version>
     </properties>
