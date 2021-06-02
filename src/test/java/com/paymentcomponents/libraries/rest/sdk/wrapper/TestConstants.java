@@ -292,11 +292,17 @@ public class TestConstants {
             "    </FICdtTrf>\n" +
             "</Document>";
 
-    public static final String VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST = "{1:F01AAAABEBBAXXX0000000000}{2:I200CCCCUS33AXXXN}{3:{108:MT200 005 OF 013}{433:/AOK/EXCLUDED            }}{4:\n" +
-            ":20:00322\n" +
+    public static final String VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST = "{1:F01AAAABEBBAXXX0000000000}{2:I202CCCCUS33AXXXN}{3:{121:c8b66b47-2bd9-48fe-be90-93c2096f27d2}}{4:\n" +
+            ":20:987\n" +
+            ":21:090525/123COV\n" +
+            ":13C:/SNDTIME/1249+0200\n" +
             ":32A:090527USD10500,00\n" +
+            ":52A:BKAUATWW\n" +
+            ":56A:TESTBICD\n" +
             ":57A:TESTBICE\n" +
-            "-}{5:{MAC:00000000}{CHK:7C36CF9824B0}{TNG:}}{S:{SAC:}{COP:P}}";
+            ":58A:TESTBICF\n" +
+            ":72:/INS/CHASUS33\n" +
+            "-}{5:{MAC:75D138E4}{CHK:DE1B0D71FA96}}";
 
     public static final String VALID_CBPR_TRANSLATOR_MT_TO_MX_RESPONSE = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<AppHdr xmlns=\"urn:iso:std:iso:20022:tech:xsd:head.001.001.02\">\n" +
@@ -314,10 +320,10 @@ public class TestConstants {
             "            </FinInstnId>\n" +
             "        </FIId>\n" +
             "    </To>\n" +
-            "    <BizMsgIdr>00322</BizMsgIdr>\n" +
+            "    <BizMsgIdr>987</BizMsgIdr>\n" +
             "    <MsgDefIdr>pacs.009.001.08</MsgDefIdr>\n" +
             "    <BizSvc>swift.cbprplus.01</BizSvc>\n" +
-            "    <CreDt>2021-01-21T15:42:04.843+02:00</CreDt>\n" +
+            "    <CreDt>2021-06-02T11:05:42.864+03:00</CreDt>\n" +
             "    <Prty>NORM</Prty>\n" +
             "</AppHdr>\n" +
             "\n" +
@@ -325,8 +331,8 @@ public class TestConstants {
             "<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\">\n" +
             "    <FICdtTrf>\n" +
             "        <GrpHdr>\n" +
-            "            <MsgId>00322</MsgId>\n" +
-            "            <CreDtTm>2021-01-21T15:42:04.871+02:00</CreDtTm>\n" +
+            "            <MsgId>987</MsgId>\n" +
+            "            <CreDtTm>2021-06-02T11:05:42.887+03:00</CreDtTm>\n" +
             "            <NbOfTxs>1</NbOfTxs>\n" +
             "            <SttlmInf>\n" +
             "                <SttlmMtd>INDA</SttlmMtd>\n" +
@@ -334,12 +340,20 @@ public class TestConstants {
             "        </GrpHdr>\n" +
             "        <CdtTrfTxInf>\n" +
             "            <PmtId>\n" +
-            "                <InstrId>00322</InstrId>\n" +
+            "                <InstrId>987</InstrId>\n" +
             "                <EndToEndId>NOTPROVIDED</EndToEndId>\n" +
-            "                <UETR>4a12cddb-3cd0-4aa1-91b4-195330904dcf</UETR>\n" +
+            "                <UETR>c8b66b47-2bd9-48fe-be90-93c2096f27d2</UETR>\n" +
             "            </PmtId>\n" +
             "            <IntrBkSttlmAmt Ccy=\"USD\">10500.00</IntrBkSttlmAmt>\n" +
             "            <IntrBkSttlmDt>2009-05-27</IntrBkSttlmDt>\n" +
+            "            <SttlmTmIndctn>\n" +
+            "                <DbtDtTm>2009-05-27T12:49:00.000+02:00</DbtDtTm>\n" +
+            "            </SttlmTmIndctn>\n" +
+            "            <PrvsInstgAgt1>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>CHASUS33</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </PrvsInstgAgt1>\n" +
             "            <InstgAgt>\n" +
             "                <FinInstnId>\n" +
             "                    <BICFI>AAAABEBBXXX</BICFI>\n" +
@@ -350,9 +364,14 @@ public class TestConstants {
             "                    <BICFI>CCCCUS33XXX</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </InstdAgt>\n" +
+            "            <IntrmyAgt1>\n" +
+            "                <FinInstnId>\n" +
+            "                    <BICFI>TESTBICD</BICFI>\n" +
+            "                </FinInstnId>\n" +
+            "            </IntrmyAgt1>\n" +
             "            <Dbtr>\n" +
             "                <FinInstnId>\n" +
-            "                    <BICFI>AAAABEBBXXX</BICFI>\n" +
+            "                    <BICFI>BKAUATWW</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </Dbtr>\n" +
             "            <CdtrAgt>\n" +
@@ -362,135 +381,107 @@ public class TestConstants {
             "            </CdtrAgt>\n" +
             "            <Cdtr>\n" +
             "                <FinInstnId>\n" +
-            "                    <BICFI>CCCCUS33XXX</BICFI>\n" +
+            "                    <BICFI>TESTBICF</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </Cdtr>\n" +
             "        </CdtTrfTxInf>\n" +
             "    </FICdtTrf>\n" +
             "</Document>\n";
 
-    public static final String VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+    public static final String VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<AppHdr xmlns=\"urn:iso:std:iso:20022:tech:xsd:head.001.001.02\">\n" +
             "    <Fr>\n" +
             "        <FIId>\n" +
             "            <FinInstnId>\n" +
-            "                <BICFI>TESTBICY</BICFI>\n" +
+            "                <BICFI>AAAABEBBXXX</BICFI>\n" +
             "            </FinInstnId>\n" +
             "        </FIId>\n" +
             "    </Fr>\n" +
             "    <To>\n" +
             "        <FIId>\n" +
             "            <FinInstnId>\n" +
-            "                <BICFI>TESTBICZ</BICFI>\n" +
+            "                <BICFI>CCCCUS33XXX</BICFI>\n" +
             "            </FinInstnId>\n" +
             "        </FIId>\n" +
             "    </To>\n" +
-            "    <BizMsgIdr>BBBB/120928-FICT/JPY/430</BizMsgIdr>\n" +
+            "    <BizMsgIdr>987</BizMsgIdr>\n" +
             "    <MsgDefIdr>pacs.009.001.08</MsgDefIdr>\n" +
             "    <BizSvc>swift.cbprplus.01</BizSvc>\n" +
-            "    <MktPrctc>\n" +
-            "        <Regy>str1234</Regy>\n" +
-            "        <Id>str1234</Id>\n" +
-            "    </MktPrctc>\n" +
-            "    <CreDt>2012-12-13T12:12:12+13:00</CreDt>\n" +
-            "    <CpyDplct>CODU</CpyDplct>\n" +
-            "    <PssblDplct>true</PssblDplct>\n" +
+            "    <CreDt>2021-06-02T11:05:42.864+03:00</CreDt>\n" +
             "    <Prty>NORM</Prty>\n" +
             "</AppHdr>\n" +
             "\n" +
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\">\n" +
             "    <FICdtTrf>\n" +
             "        <GrpHdr>\n" +
-            "            <MsgId>BBBB/120928-FICT/JPY/430</MsgId>\n" +
-            "            <CreDtTm>2012-09-28T16:00:00+13:00</CreDtTm>\n" +
+            "            <MsgId>987</MsgId>\n" +
+            "            <CreDtTm>2021-06-02T11:05:42.887+03:00</CreDtTm>\n" +
             "            <NbOfTxs>1</NbOfTxs>\n" +
             "            <SttlmInf>\n" +
             "                <SttlmMtd>INDA</SttlmMtd>\n" +
-            "                <SttlmAcct>\n" +
-            "                    <Id>\n" +
-            "                        <Othr>\n" +
-            "                            <Id>ACCOUNTID</Id>\n" +
-            "                        </Othr>\n" +
-            "                    </Id>\n" +
-            "                </SttlmAcct>\n" +
             "            </SttlmInf>\n" +
             "        </GrpHdr>\n" +
             "        <CdtTrfTxInf>\n" +
             "            <PmtId>\n" +
-            "                <InstrId>BBBB/120928-FICT</InstrId>\n" +
-            "                <EndToEndId>ABC/4562/2012-09-08</EndToEndId>\n" +
-            "                <TxId>BBBB/120928-CCT/123/1</TxId>\n" +
-            "                <UETR>00000000-0000-4000-8000-000000000000</UETR>\n" +
+            "                <InstrId>987</InstrId>\n" +
+            "                <EndToEndId>NOTPROVIDED</EndToEndId>\n" +
+            "                <UETR>c8b66b47-2bd9-48fe-be90-93c2096f27d2</UETR>\n" +
             "            </PmtId>\n" +
-            "            <IntrBkSttlmAmt Ccy=\"JPY\">10000000</IntrBkSttlmAmt>\n" +
-            "            <IntrBkSttlmDt>2012-09-29</IntrBkSttlmDt>\n" +
-            "            <SttlmTmReq>\n" +
-            "                <CLSTm>12:12:12+13:00</CLSTm>\n" +
-            "            </SttlmTmReq>\n" +
+            "            <IntrBkSttlmAmt Ccy=\"USD\">10500.00</IntrBkSttlmAmt>\n" +
+            "            <IntrBkSttlmDt>2009-05-27</IntrBkSttlmDt>\n" +
+            "            <SttlmTmIndctn>\n" +
+            "                <DbtDtTm>2009-05-27T12:49:00.000+02:00</DbtDtTm>\n" +
+            "            </SttlmTmIndctn>\n" +
             "            <PrvsInstgAgt1>\n" +
             "                <FinInstnId>\n" +
-            "                    <BICFI>TESTBICD</BICFI>\n" +
+            "                    <BICFI>CHASUS33</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </PrvsInstgAgt1>\n" +
             "            <InstgAgt>\n" +
             "                <FinInstnId>\n" +
-            "                    <BICFI>BBBBUS33</BICFI>\n" +
+            "                    <BICFI>AAAABEBBXXX</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </InstgAgt>\n" +
             "            <InstdAgt>\n" +
             "                <FinInstnId>\n" +
-            "                    <BICFI>CCCCJPJT</BICFI>\n" +
+            "                    <BICFI>CCCCUS33XXX</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </InstdAgt>\n" +
             "            <IntrmyAgt1>\n" +
             "                <FinInstnId>\n" +
-            "                    <BICFI>INTERBIC</BICFI>\n" +
+            "                    <BICFI>TESTBICD</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </IntrmyAgt1>\n" +
-            "            <IntrmyAgt1Acct>\n" +
-            "                <Id>\n" +
-            "                    <Othr>\n" +
-            "                        <Id>INTERAGTACCT</Id>\n" +
-            "                    </Othr>\n" +
-            "                </Id>\n" +
-            "            </IntrmyAgt1Acct>\n" +
             "            <Dbtr>\n" +
             "                <FinInstnId>\n" +
-            "                    <BICFI>BBBBUS33</BICFI>\n" +
+            "                    <BICFI>BKAUATWW</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </Dbtr>\n" +
             "            <CdtrAgt>\n" +
             "                <FinInstnId>\n" +
-            "                    <BICFI>AAAAJPJT</BICFI>\n" +
+            "                    <BICFI>TESTBICE</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </CdtrAgt>\n" +
-            "            <CdtrAgtAcct>\n" +
-            "                <Id>\n" +
-            "                    <Othr>\n" +
-            "                        <Id>CDTRAGTACCT</Id>\n" +
-            "                    </Othr>\n" +
-            "                </Id>\n" +
-            "            </CdtrAgtAcct>\n" +
             "            <Cdtr>\n" +
             "                <FinInstnId>\n" +
-            "                    <BICFI>BBBBUS33</BICFI>\n" +
+            "                    <BICFI>TESTBICF</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </Cdtr>\n" +
             "        </CdtTrfTxInf>\n" +
             "    </FICdtTrf>\n" +
-            "</Document>";
+            "</Document>\n";
 
-    public static final String VALID_CBPR_TRANSLATOR_MX_TO_MT_RESPONSE = "{1:F01TESTBICZXXXX0000000000}{2:O2001726210322TESTBICYXXXX00000000002103221726N}{3:{121:00000000-0000-4000-8000-000000000000}}{4:\n" +
-            ":20:BBBB/120928-FICT\n" +
-            ":32A:120929JPY10000000,\n" +
-            ":53B:/ACCOUNTID\n" +
-            ":56A:/INTERAGTACCT\n" +
-            "INTERBIC\n" +
-            ":57A:/CDTRAGTACCT\n" +
-            "AAAAJPJT\n" +
-            ":72:/CLSTIME/1212+1300\n" +
-            "/INS/TESTBICD\n" +
+    public static final String VALID_CBPR_TRANSLATOR_MX_TO_MT_RESPONSE = "{1:F01CCCCUS33XXXX0000000000}{2:O2021108210602AAAABEBBXXXX00000000002106021108N}{3:{121:c8b66b47-2bd9-48fe-be90-93c2096f27d2}}{4:\n" +
+            ":20:987\n" +
+            ":21:NOTPROVIDED\n" +
+            ":13C:/SNDTIME/1249+0200\n" +
+            ":32A:090527USD10500,00\n" +
+            ":52A:BKAUATWW\n" +
+            ":56A:TESTBICD\n" +
+            ":57A:TESTBICE\n" +
+            ":58A:TESTBICF\n" +
+            ":72:/INS/CHASUS33\n" +
             "-}";
 
     public static final String VALID_CBPR_REQUEST = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
@@ -1024,18 +1015,18 @@ public class TestConstants {
             ":58A:PBAADEFFAC2\n" +
             "-}";
 
-    public static final String INVALID_MT_101 = VALID_MT_101.replace(":20:00043\n", "");
+    public static final String INVALID_MT_101 = VALID_MT_101.replaceFirst(":20:.*\n", "");
     public static final String VALID_JSON_SEPA_PACS_008 = Utils.convertXmlToJson(VALID_SEPA_PACS_008, "Document");
     public static final String VALID_JSON_SEPA_EPC_PACS_002 = Utils.convertXmlToJson(VALID_SEPA_EPC_PACS_002, "Document");
-    public static final String INVALID_SEPA_EPC_PACS_002 = VALID_SEPA_EPC_PACS_002.replaceFirst("\\s*<MsgId>SCTREJ200020190314300000000001</MsgId>", "");
-    public static final String INVALID_MX_PACS_009 = VALID_MX_PACS_009.replaceFirst("\\s*<MsgId>BBBB/120928-FICT/JPY/430</MsgId>", "");
+    public static final String INVALID_SEPA_EPC_PACS_002 = VALID_SEPA_EPC_PACS_002.replaceFirst("\\s*<MsgId>.*</MsgId>", "");
+    public static final String INVALID_MX_PACS_009 = VALID_MX_PACS_009.replaceFirst("\\s*<MsgId>.*</MsgId>", "");
     public static final String VALID_JSON_MX_PACS009 = Utils.convertXmlToJson(VALID_MX_PACS_009, "Document");
-    public static final String INVALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST = VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST.replace(":20:00322\n", "");
-    public static final String INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST = VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST.replaceFirst("\\s*<MsgId>BBBB/120928-FICT/JPY/430</MsgId>", "");
-    public static final String INVALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST = VALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST.replace(":20:Inp009b028-InsId\n", "");
-    public static final String INVALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST = VALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST.replaceFirst("\\s*<MsgId>Inp009b028-InsId</MsgId>", "");
+    public static final String INVALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST = VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST.replaceFirst(":20:.*\n", "");
+    public static final String INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST = VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST.replaceFirst("\\s*<MsgId>.*</MsgId>", "");
+    public static final String INVALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST = VALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST.replaceFirst(":20:.*\n", "");
+    public static final String INVALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST = VALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST.replaceFirst("\\s*<MsgId>.*</MsgId>", "");
     public static final String INVALID_CBPR_REQUEST = VALID_CBPR_REQUEST.replaceFirst("\\s*<MsgId>.*</MsgId>", "");
-    public static final String INVALID_RTGS_PACS_009 = VALID_RTGS_PACS_009.replaceFirst("\\s*<MsgId>NONREF</MsgId>", "");
+    public static final String INVALID_RTGS_PACS_009 = VALID_RTGS_PACS_009.replaceFirst("\\s*<MsgId>.*</MsgId>", "");
     public static final String VALID_JSON_RTGS_PACS_009 = Utils.convertXmlToJson(VALID_RTGS_PACS_009, "Document");
 
 }

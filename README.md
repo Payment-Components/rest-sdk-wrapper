@@ -37,12 +37,14 @@ By default REST SDK Wrapper is using demo versions of the above SDKs. With the d
 - Parse and validate an `MT101` using the `/mt/validate` or the `/mt/parse` endpoints
 - Parse and validate a SEPA `PACS.002.001.03` using the `/sepa/validate` endpoint
 - Parse and validate an ISO20022 `PACS.009.001.04` using the `/mx/validate` endpoint
-- Validate a CBPR+ `PACS.009.001.08` using the `/cbpr/validate` endpoint
+- Parse and validate a CBPR+ `PACS.009.001.08` using the `/cbpr/validate` endpoint
 - Parse and validate an RTGS `PACS.009.001.08` using the `/rtgs/validate` endpoint
-- Translate an ISO20022 `PACS.009.001.08` to `MT200` for `CBPR+` using the `/swift/translator/cbpr/mx/to/mt` endpoint
-- Translate an `MT200` to ISO20022 `PACS.009.001.08` for `CBPR+` using the `/swift/translator/cbpr/mt/to/mx` endpoint
-- Translate an ISO20022 `PACS.009.001.08` to `MT200` for `RTGS` using the `/swift/translator/rtgs/mx/to/mt` endpoint
-- Translate an `MT200` to ISO20022 `PACS.009.001.08` for `RTGS` using the `/swift/translator/rtgs/mt/to/mx` endpoint
+- Translate an ISO20022 `PACS.009.001.08.CORE` to `MT202` for `CBPR+` using the `/swift/translator/cbpr/mx/to/mt`
+  endpoint
+- Translate an `MT202` to ISO20022 `PACS.009.001.08.CORE` for `CBPR+` using the `/swift/translator/cbpr/mt/to/mx`
+  endpoint
+- Translate an ISO20022 `PACS.009.001.08` to `MT202` for `RTGS` using the `/swift/translator/rtgs/mx/to/mt` endpoint
+- Translate an `MT202` to ISO20022 `PACS.009.001.08` for `RTGS` using the `/swift/translator/rtgs/mt/to/mx` endpoint
 
 ## Features available in the paid versions of the SDKs
 

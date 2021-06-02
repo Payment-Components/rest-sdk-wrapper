@@ -68,8 +68,8 @@ public class CbprTranslatorServiceTest {
     public void givenValidMxMessage_whenTranslateMxToMt_thenReturnMtMessage() throws Exception {
         //GIVEN
         String expectedAsRegex = TestUtils.escapeSpecialRegexChars(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_RESPONSE)
-                .replaceAll("1726210322", ".*")
-                .replaceAll("2103221726", ".*");
+                .replaceAll("1108210602", ".*")
+                .replaceAll("2106021108", ".*");
 
         //WHEN
         String result = cbprTranslatorService.translateMxToMt(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST);
