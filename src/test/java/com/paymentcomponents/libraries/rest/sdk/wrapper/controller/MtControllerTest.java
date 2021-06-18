@@ -7,6 +7,9 @@ import com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.exception.InvalidMessageException;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.filter.RequestLogIdFilter;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.model.CustomSwiftMessage;
+import com.paymentcomponents.libraries.rest.sdk.wrapper.model.mt.request.MtCreate103Request;
+import com.paymentcomponents.libraries.rest.sdk.wrapper.model.mt.request.MtCreateGeneralRequest;
+import com.paymentcomponents.libraries.rest.sdk.wrapper.model.mt.request.MtTagGeneralRequest;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.service.MtService;
 import gr.datamation.mt.common.InvalidMessageFormatException;
 import org.hamcrest.Matchers;
@@ -23,6 +26,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -162,13 +166,198 @@ public class MtControllerTest {
                 .content(TestConstants.VALID_MT_101)
                 .contentType(MediaType.TEXT_PLAIN))
 
-        //THEN
+                //THEN
                 .andExpect(status().isBadRequest())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
                 .andExpect(content().string(errorResponse));
 
         then(mtService).should(times(1)).validateMt(TestConstants.VALID_MT_101);
+    }
+
+    @Test
+    public void givenValidMt103Json_whenCreateMt103_thenReturnMt103AsText() throws Exception {
+        //GIVEN
+        given(mtService.createMt103(isA(MtCreate103Request.class))).willReturn(TestConstants.VALID_MT_103);
+        String requestJson = objectMapper.writeValueAsString(TestConstants.getMtCreate103RequestSample());
+
+        //WHEN
+        mvc.perform(post("/mt/create/103")
+                .content(requestJson)
+                .contentType(MediaType.APPLICATION_JSON))
+
+                //THEN
+                .andExpect(status().isOk())
+                .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
+                .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
+                .andExpect(content().string(TestConstants.VALID_MT_103));
+
+        then(mtService).should(times(1)).createMt103(isA(MtCreate103Request.class));
+    }
+
+    @Test
+    public void givenInvalidMt103Json_whenCreateMt103_thenReturnValidationErrors() throws Exception {
+        //GIVEN
+        String errorResponse = "[\n" +
+                "    {\n" +
+                "        \"tagName\": \"71A\",\n" +
+                "        \"description\": \"T08 - in field 71A one of the following codes may be used : BEN, OUR, SHA. \",\n" +
+                "        \"sequence\": null,\n" +
+                "        \"occurs\": \"1\",\n" +
+                "        \"line\": null,\n" +
+                "        \"messageIndex\": null,\n" +
+                "        \"errorCode\": \"T08\"\n" +
+                "    }\n" +
+                "]";
+        given(mtService.createMt103(isA(MtCreate103Request.class))).willThrow(new InvalidMessageException(errorResponse));
+        MtCreate103Request mtCreate103Request = TestConstants.getMtCreate103RequestSample();
+        mtCreate103Request.setDetailsOfCharges("AAA"); //invalid value
+        String requestJson = objectMapper.writeValueAsString(mtCreate103Request);
+
+        //WHEN
+        mvc.perform(post("/mt/create/103")
+                .content(requestJson)
+                .contentType(MediaType.APPLICATION_JSON))
+
+                //THEN
+                .andExpect(status().isBadRequest())
+                .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].tagName", is("71A")))
+                .andExpect(jsonPath("$[0].description", is("T08 - in field 71A one of the following codes may be used : BEN, OUR, SHA. ")))
+                .andExpect(jsonPath("$[0].sequence", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].occurs", is("1")))
+                .andExpect(jsonPath("$[0].line", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].messageIndex", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].errorCode", is("T08")));
+
+        then(mtService).should(times(1)).createMt103(isA(MtCreate103Request.class));
+    }
+
+    @Test
+    public void givenValidMtGeneralJson_whenCreateMtGeneral_thenReturnMtGeneralAsText() throws Exception {
+        //GIVEN
+        given(mtService.createMtGeneral(isA(MtCreateGeneralRequest.class))).willReturn(TestConstants.VALID_MT_103);
+        String requestJson = objectMapper.writeValueAsString(TestConstants.getMtCreateGeneralRequestSample());
+
+        //WHEN
+        mvc.perform(post("/mt/create/general")
+                .content(requestJson)
+                .contentType(MediaType.APPLICATION_JSON))
+
+                //THEN
+                .andExpect(status().isOk())
+                .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
+                .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
+                .andExpect(content().string(TestConstants.VALID_MT_103));
+
+        then(mtService).should(times(1)).createMtGeneral(isA(MtCreateGeneralRequest.class));
+    }
+
+    @Test
+    public void givenInvalidMtGeneralJson_whenCreateMtGeneral_thenReturnValidationErrors() throws Exception {
+        //GIVEN
+        String errorResponse = "[\n" +
+                "    {\n" +
+                "        \"tagName\": \"71A\",\n" +
+                "        \"description\": \"T08 - in field 71A one of the following codes may be used : BEN, OUR, SHA. \",\n" +
+                "        \"sequence\": null,\n" +
+                "        \"occurs\": \"1\",\n" +
+                "        \"line\": null,\n" +
+                "        \"messageIndex\": null,\n" +
+                "        \"errorCode\": \"T08\"\n" +
+                "    }\n" +
+                "]";
+        given(mtService.createMtGeneral(isA(MtCreateGeneralRequest.class))).willThrow(new InvalidMessageException(errorResponse));
+        MtCreateGeneralRequest mtCreateGeneralRequest = TestConstants.getMtCreateGeneralRequestSample();
+        mtCreateGeneralRequest.getTags().removeIf(tag -> tag.getName().equals("71A"));
+        mtCreateGeneralRequest.getTags().add(new MtTagGeneralRequest("71A", Arrays.asList("AAA"))); //invalid value
+        String requestJson = objectMapper.writeValueAsString(mtCreateGeneralRequest);
+
+        //WHEN
+        mvc.perform(post("/mt/create/general")
+                .content(requestJson)
+                .contentType(MediaType.APPLICATION_JSON))
+
+                //THEN
+                .andExpect(status().isBadRequest())
+                .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].tagName", is("71A")))
+                .andExpect(jsonPath("$[0].description", is("T08 - in field 71A one of the following codes may be used : BEN, OUR, SHA. ")))
+                .andExpect(jsonPath("$[0].sequence", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].occurs", is("1")))
+                .andExpect(jsonPath("$[0].line", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].messageIndex", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].errorCode", is("T08")));
+
+        then(mtService).should(times(1)).createMtGeneral(isA(MtCreateGeneralRequest.class));
+    }
+
+    @Test
+    public void givenValidMt103Message_whenUniversalConfirmation_thenReturnUniversalConfirmation() throws Exception {
+        //GIVEN
+        given(mtService.generateUniversalConfirmation(eq(TestConstants.VALID_MT_103), eq("1234"), eq("ACCC"), isNull(), isNull(), isNull(), isNull())).willReturn(TestConstants.VALID_MT_199);
+
+        //WHEN
+        mvc.perform(post("/mt/generate/universal/confirmation")
+                .queryParam("confirmationId", "1234")
+                .queryParam("statusCode", "ACCC")
+                .content(TestConstants.VALID_MT_103)
+                .contentType(MediaType.TEXT_PLAIN))
+
+                //THEN
+                .andExpect(status().isOk())
+                .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
+                .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
+                .andExpect(content().string(TestConstants.VALID_MT_199));
+
+        then(mtService).should(times(1)).generateUniversalConfirmation(eq(TestConstants.VALID_MT_103), eq("1234"), eq("ACCC"), isNull(), isNull(), isNull(), isNull());
+    }
+
+    @Test
+    public void givenInvalidUniversalConfirmationParams_whenUniversalConfirmation_thenReturnInvalidMessageException() throws Exception {
+        //GIVEN
+        String errorResponse = "[\n" +
+                "    {\n" +
+                "        \"tagName\": null,\n" +
+                "        \"description\": \"D94 - In field 79, line 2, presence of subfield 2 (Reason Code) depends on subfield 1 (Status) as follows:\\n- When Status Code is ACCC, Reason Code is not allowed.\\n- When Status Code is ACSP, Reason Code must be one of the following : [G001, G002, G003, G004]\\n- When Status Code is RJCT, if Reason Code is present must be one of the following : [AC01, AC04, AC06, AM06, BE01, CUST, DUPL, FF07, FOCR, MS03, NOAS, RC01, RC08, RR03, RR05]\",\n" +
+                "        \"sequence\": null,\n" +
+                "        \"occurs\": \"1\",\n" +
+                "        \"line\": null,\n" +
+                "        \"messageIndex\": null,\n" +
+                "        \"errorCode\": \"D94\"\n" +
+                "    }\n" +
+                "]";
+
+        given(mtService.generateUniversalConfirmation(eq(TestConstants.VALID_MT_103), eq("1234"), eq("ACCC"), eq("AC01"), isNull(), isNull(), isNull()))
+                .willThrow(new InvalidMessageException(errorResponse));
+
+
+        //WHEN
+        mvc.perform(post("/mt/generate/universal/confirmation")
+                .queryParam("confirmationId", "1234")
+                .queryParam("statusCode", "ACCC")
+                .queryParam("reasonCode", "AC01")
+                .content(TestConstants.VALID_MT_103)
+                .contentType(MediaType.TEXT_PLAIN))
+
+                //THEN
+                .andExpect(status().isBadRequest())
+                .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].tagName", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].description", is("D94 - In field 79, line 2, presence of subfield 2 (Reason Code) depends on subfield 1 (Status) as follows:\n- When Status Code is ACCC, Reason Code is not allowed.\n- When Status Code is ACSP, Reason Code must be one of the following : [G001, G002, G003, G004]\n- When Status Code is RJCT, if Reason Code is present must be one of the following : [AC01, AC04, AC06, AM06, BE01, CUST, DUPL, FF07, FOCR, MS03, NOAS, RC01, RC08, RR03, RR05]")))
+                .andExpect(jsonPath("$[0].sequence", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].occurs", is("1")))
+                .andExpect(jsonPath("$[0].line", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].messageIndex", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].errorCode", is("D94")));
+
+        then(mtService).should(times(1)).generateUniversalConfirmation(eq(TestConstants.VALID_MT_103), eq("1234"), eq("ACCC"), eq("AC01"), isNull(), isNull(), isNull());
     }
 
 }
