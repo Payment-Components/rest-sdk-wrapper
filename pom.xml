@@ -24,8 +24,8 @@
 
     <repositories>
         <repository>
-            <id>public</id>
-            <url>https://nexus.paymentcomponents.com/repository/public</url>
+            <id>internal</id>
+            <url>https://nexus.paymentcomponents.com/repository/internal</url>
         </repository>
     </repositories>
 
@@ -51,31 +51,31 @@
             <groupId>gr.datamation</groupId>
             <artifactId>smv</artifactId>
             <version>${smv.version}</version>
-            <classifier>demo</classifier>
+            <classifier>full</classifier>
         </dependency>
         <dependency>
             <groupId>gr.datamation.mx</groupId>
             <artifactId>mx</artifactId>
             <version>${mx.version}</version>
-            <classifier>demo</classifier>
+            <classifier>full</classifier>
         </dependency>
         <dependency>
             <groupId>gr.datamation</groupId>
             <artifactId>sepa-core-jaxb</artifactId>
             <version>${sepa.version}</version>
-            <classifier>demo</classifier>
+            <classifier>epc</classifier>
         </dependency>
         <dependency>
             <groupId>gr.datamation</groupId>
             <artifactId>translator-cbpr</artifactId>
             <version>${translator.version}</version>
-            <classifier>demo</classifier>
+            <classifier>full</classifier>
         </dependency>
         <dependency>
             <groupId>gr.datamation</groupId>
             <artifactId>translator-rtgs</artifactId>
             <version>${translator.version}</version>
-            <classifier>demo</classifier>
+            <classifier>full</classifier>
         </dependency>
 
         <dependency>
