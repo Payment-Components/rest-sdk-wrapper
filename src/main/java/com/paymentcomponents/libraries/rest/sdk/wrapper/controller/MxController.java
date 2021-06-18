@@ -1,8 +1,8 @@
 package com.paymentcomponents.libraries.rest.sdk.wrapper.controller;
 
-import com.paymentcomponents.libraries.rest.sdk.wrapper.service.MxService;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.Constants;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.SwaggerConstants;
+import com.paymentcomponents.libraries.rest.sdk.wrapper.service.MxService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -13,7 +13,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,7 +38,7 @@ public class MxController {
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     required = true,
                     content = {
-                            @Content(mediaType = "application/xml", examples = @ExampleObject(value = SwaggerConstants.MX_VALIDATE_REQUEST_EXAMPLE_VALID), schema = @Schema(implementation = SwaggerConstants.SwaggerMxPacs009Wrapper.class))
+                            @Content(mediaType = "application/xml", examples = @ExampleObject(value = SwaggerConstants.MX_VALIDATE_REQUEST_EXAMPLE_VALID), schema = @Schema(implementation = SwaggerConstants.SwaggerMxPain001Wrapper.class))
                     }),
             responses = {
                     @ApiResponse(
