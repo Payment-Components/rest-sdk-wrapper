@@ -8,11 +8,14 @@ import gr.datamation.mx.CoreMessage;
 import gr.datamation.mx.MXUtils;
 import gr.datamation.mx.Message;
 import gr.datamation.mx.XSDSchema;
+import gr.datamation.mx.message.pacs.FIToFICustomerCreditTransfer08;
 import gr.datamation.util.Utilities;
 import gr.datamation.validation.error.ValidationErrorList;
 import org.springframework.util.ObjectUtils;
+import xsd.pacs_008_001_08.ActiveCurrencyAndAmount;
 
 import java.io.ByteArrayInputStream;
+import java.math.BigDecimal;
 import java.util.Collection;
 
 public class SepaUtils {
@@ -43,6 +46,28 @@ public class SepaUtils {
         MxUtils.throwMxValidationError(validationErrorList);
 
         return sepaMessage;
+    }
+
+    public static void validateSepaMessage(CoreMessage<?, ?, ?> coreMessage) throws Exception {
+        ValidationErrorList validationErrorList = coreMessage.validate();
+        MxUtils.throwMxValidationError(validationErrorList);
+    }
+
+    public static BigDecimal calculateTtlIntrBkSttlmAmt(FIToFICustomerCreditTransfer08 fiToFICustomerCreditTransfer) {
+        return fiToFICustomerCreditTransfer.getMessage().getCdtTrfTxInf().stream()
+                .map(it -> it.getIntrBkSttlmAmt().getValue())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public static void addIntrBkSttlmAmt(CoreMessage coreMessage, String elementPath, BigDecimal value) throws Exception {
+        if (ObjectUtils.isEmpty(value))
+            return;
+
+        ActiveCurrencyAndAmount intrBkSttlmAmt = new ActiveCurrencyAndAmount();
+        intrBkSttlmAmt.setCcy("EUR");
+        intrBkSttlmAmt.setValue(value);
+
+        coreMessage.setElement(elementPath, intrBkSttlmAmt);
     }
 
     public static void addElement(CoreMessage coreMessage, String elementPath, Object element) throws Exception {
