@@ -3,9 +3,9 @@ package com.paymentcomponents.libraries.rest.sdk.wrapper.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.exception.InvalidMessageException;
+import gr.datamation.swift.translator.common.exceptions.InvalidMtMessageException;
+import gr.datamation.swift.translator.common.exceptions.InvalidMxMessageException;
 import gr.datamation.swift.translator.rtgs.RtgsTranslator;
-import gr.datamation.swift.translator.rtgs.exceptions.InvalidMtMessageException;
-import gr.datamation.swift.translator.rtgs.exceptions.InvalidMxMessageException;
 import org.springframework.stereotype.Service;
 
 @Service
