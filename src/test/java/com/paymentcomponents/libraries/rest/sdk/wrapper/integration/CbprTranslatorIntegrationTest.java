@@ -5,11 +5,13 @@ import com.paymentcomponents.libraries.rest.sdk.wrapper.TestConstants;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsNull;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.StandardCharsets;
@@ -36,7 +38,7 @@ public class CbprTranslatorIntegrationTest {
                 .replaceAll("<UETR>.*<\\\\/UETR>", "<UETR>.*<\\\\/UETR>");
 
         //WHEN
-        mvc.perform(post("/swift/translator/cbpr/mt/to/mx")
+        MockHttpServletResponse response =mvc.perform(post("/swift/translator/cbpr/mt/to/mx")
                 .content(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST)
                 .contentType(MediaType.TEXT_PLAIN))
 
@@ -44,8 +46,9 @@ public class CbprTranslatorIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
-                .andExpect(content().string(Matchers.matchesPattern(expectedAsRegex)));
+                .andReturn().getResponse();
 
+        Assertions.assertTrue(replaceLineEndings(response.getContentAsString()).matches(replaceLineEndings(expectedAsRegex)));
     }
 
     @Test

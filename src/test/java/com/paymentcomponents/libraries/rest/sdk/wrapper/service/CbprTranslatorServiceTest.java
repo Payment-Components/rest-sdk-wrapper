@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLineEndings;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -39,7 +40,7 @@ public class CbprTranslatorServiceTest {
         String result = cbprTranslatorService.translateMtToMx(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST);
 
         //THEN
-        assertTrue(result.matches(expectedAsRegex));
+        assertTrue(replaceLineEndings(result).matches(replaceLineEndings(expectedAsRegex)));
     }
 
     @Test
@@ -61,7 +62,7 @@ public class CbprTranslatorServiceTest {
         });
 
         //THEN
-        assertEquals(TestUtils.replaceLineEndings(exceptionBody), TestUtils.replaceLineEndings(exception.getResponseBodyAsString()));
+        assertEquals(replaceLineEndings(exceptionBody), replaceLineEndings(exception.getResponseBodyAsString()));
     }
 
     @Test
@@ -75,7 +76,7 @@ public class CbprTranslatorServiceTest {
         String result = cbprTranslatorService.translateMxToMt(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST);
 
         //THEN
-        assertTrue(TestUtils.replaceLineEndings(result).matches(TestUtils.replaceLineEndings(expectedAsRegex)));
+        assertTrue(replaceLineEndings(result).matches(replaceLineEndings(expectedAsRegex)));
     }
 
     @Test
@@ -97,7 +98,7 @@ public class CbprTranslatorServiceTest {
         });
 
         //THEN
-        assertEquals(TestUtils.replaceLineEndings(exceptionBody), TestUtils.replaceLineEndings(exception.getResponseBodyAsString()));
+        assertEquals(replaceLineEndings(exceptionBody), replaceLineEndings(exception.getResponseBodyAsString()));
     }
 
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.StandardCharsets;
@@ -17,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLineEndings;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -34,7 +36,7 @@ public class RtgsTranslatorIntegrationTest {
                 .replaceAll("<CreDtTm>.*<\\\\/CreDtTm>", "<CreDtTm>.*<\\\\/CreDtTm>");
 
         //WHEN
-        mvc.perform(post("/swift/translator/rtgs/mt/to/mx")
+        MockHttpServletResponse response = mvc.perform(post("/swift/translator/rtgs/mt/to/mx")
                 .content(TestConstants.VALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST)
                 .contentType(MediaType.TEXT_PLAIN))
 
@@ -42,8 +44,9 @@ public class RtgsTranslatorIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.APPLICATION_XML, StandardCharsets.UTF_8)))
-                .andExpect(content().string(Matchers.matchesPattern(expectedAsRegex)));
+                .andReturn().getResponse();
 
+        assertTrue(replaceLineEndings(response.getContentAsString()).matches(replaceLineEndings(expectedAsRegex)));
     }
 
     @Test

@@ -38,7 +38,7 @@ public class RtgsTranslatorServiceTest {
         String result = rtgsTranslatorService.translateMtToMx(TestConstants.VALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST);
 
         //THEN
-        assertTrue(result.matches(expectedAsRegex));
+        assertTrue(replaceLineEndings(result).matches(replaceLineEndings(expectedAsRegex)));
     }
 
     @Test

@@ -9,12 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.StandardCharsets;
 
+import static com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils.replaceLineEndings;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -69,7 +72,7 @@ public class CbprIntegrationTest {
         //GIVEN
 
         //WHEN
-        mvc.perform(post("/cbpr/envelope")
+        MockHttpServletResponse response = mvc.perform(post("/cbpr/envelope")
                 .content(TestConstants.VALID_CBPR_REQUEST)
                 .contentType(MediaType.TEXT_PLAIN))
 
@@ -77,8 +80,9 @@ public class CbprIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
-                .andExpect(content().string(TestConstants.CBPR_ENVELOPE));
+                .andReturn().getResponse();
 
+        assertEquals(replaceLineEndings(response.getContentAsString()), replaceLineEndings(TestConstants.CBPR_ENVELOPE));
     }
 
     @Test
