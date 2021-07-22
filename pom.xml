@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.paymentcomponents.libraries</groupId>
     <artifactId>rest-sdk-wrapper</artifactId>
-    <version>1.6.2</version>
+    <version>1.7.0</version>
     <name>rest-sdk-wrapper</name>
     <description>Wrapper for Payment Components Financial Messaging Libraries</description>
     <packaging>war</packaging>
