@@ -10,16 +10,16 @@
     </parent>
     <groupId>com.paymentcomponents.libraries</groupId>
     <artifactId>rest-sdk-wrapper</artifactId>
-    <version>1.6.1</version>
+    <version>1.6.2</version>
     <name>rest-sdk-wrapper</name>
     <description>Wrapper for Payment Components Financial Messaging Libraries</description>
 
     <properties>
         <java.version>1.8</java.version>
         <smv.version>21.10.0</smv.version>
-        <mx.version>21.0.0</mx.version>
+        <mx.version>21.2.0</mx.version>
         <sepa.version>19.25.0</sepa.version>
-        <swift.translator.version>3.0.1</swift.translator.version>
+        <swift.translator.version>3.1.0</swift.translator.version>
     </properties>
 
     <repositories>
@@ -57,13 +57,13 @@
             <groupId>gr.datamation.mx</groupId>
             <artifactId>mx</artifactId>
             <version>${mx.version}</version>
-            <classifier>demo-cbpr</classifier>
-        </dependency>
-        <dependency>
-            <groupId>gr.datamation.mx</groupId>
-            <artifactId>mx</artifactId>
-            <version>${mx.version}</version>
-            <classifier>demo-rtgs</classifier>
+            <classifier>demo</classifier>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.codehaus.groovy</groupId>
+                    <artifactId>groovy-all</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>gr.datamation</groupId>
@@ -76,12 +76,24 @@
             <artifactId>translator-cbpr</artifactId>
             <version>${swift.translator.version}</version>
             <classifier>demo</classifier>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.codehaus.groovy</groupId>
+                    <artifactId>groovy-all</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>gr.datamation</groupId>
             <artifactId>translator-rtgs</artifactId>
             <version>${swift.translator.version}</version>
             <classifier>demo</classifier>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.codehaus.groovy</groupId>
+                    <artifactId>groovy-all</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
