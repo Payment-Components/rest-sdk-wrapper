@@ -341,7 +341,7 @@ public class TestConstants {
             "        <CdtTrfTxInf>\n" +
             "            <PmtId>\n" +
             "                <InstrId>987</InstrId>\n" +
-            "                <EndToEndId>NOTPROVIDED</EndToEndId>\n" +
+            "                <EndToEndId>090525/123COV</EndToEndId>\n" +
             "                <UETR>c8b66b47-2bd9-48fe-be90-93c2096f27d2</UETR>\n" +
             "            </PmtId>\n" +
             "            <IntrBkSttlmAmt Ccy=\"USD\">10500.00</IntrBkSttlmAmt>\n" +
@@ -901,7 +901,7 @@ public class TestConstants {
 
     public static final String VALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST = "{1:F01PBAADEFFAC2X0000000000}{2:O2021109210323PBBBDEFFXXXX00000000002103231109N}{3:{121:e008b028-59c5-41e9-be4c-d45102fc201e}}{4:\n" +
             ":20:Inp009b028-InsId\n" +
-            ":21:Inp008b028-E2EId\n" +
+            ":21:Inp009b028-E2EId\n" +
             ":13C:/RNCTIME/0915+0200\n" +
             ":32A:191007EUR61250,00\n" +
             ":52A:PBBBDEFFXXX\n" +
@@ -925,7 +925,7 @@ public class TestConstants {
             "        <CdtTrfTxInf>\n" +
             "            <PmtId>\n" +
             "                <InstrId>Inp009b028-InsId</InstrId>\n" +
-            "                <EndToEndId>NOTPROVIDED</EndToEndId>\n" +
+            "                <EndToEndId>Inp009b028-E2EId</EndToEndId>\n" +
             "                <UETR>e008b028-59c5-41e9-be4c-d45102fc201e</UETR>\n" +
             "            </PmtId>\n" +
             "            <IntrBkSttlmAmt Ccy=\"EUR\">61250.00</IntrBkSttlmAmt>\n" +
@@ -1006,7 +1006,7 @@ public class TestConstants {
             "    </FICdtTrf>\n" +
             "</Document>";
 
-    public static final String VALID_RTGS_TRANSLATOR_MX_TO_MT_RESPONSE = "{1:F01PBAADEFFC2XX0000000000}{2:O2021343210323PBBBDEFFXXXX00000000002103231343S}{3:{121:e008b028-59c5-41e9-be4c-d45102fc201e}}{4:\n" +
+    public static final String VALID_RTGS_TRANSLATOR_MX_TO_MT_RESPONSE = "{1:F01PBAADEFFXC2X0000000000}{2:O2021343210323PBBBDEFFXXXX00000000002103231343S}{3:{121:e008b028-59c5-41e9-be4c-d45102fc201e}}{4:\n" +
             ":20:Inp009b028-InsId\n" +
             ":21:NOTPROVIDED\n" +
             ":13C:/RNCTIME/0915+0200\n" +
