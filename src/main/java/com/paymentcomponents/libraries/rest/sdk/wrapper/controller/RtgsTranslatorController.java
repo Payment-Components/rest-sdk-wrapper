@@ -46,7 +46,7 @@ public class RtgsTranslatorController {
                             responseCode = "200",
                             description = VALID_MESSAGE_DESCRIPTION,
                             headers = @Header(name = REQUEST_LOG_ID, description = REQUEST_LOG_ID_DESCRIPTION),
-                            content = @Content(mediaType = "application/xml", examples = @ExampleObject(value = RTGS_TRANSLATOR_MT_TO_MX_RESPONSE_EXAMPLE_200), schema = @Schema(implementation = SwaggerConstants.SwaggerMxPacs009Wrapper.class))),
+                            content = @Content(mediaType = "application/xml", examples = @ExampleObject(value = RTGS_TRANSLATOR_MT_TO_MX_RESPONSE_EXAMPLE_200), schema = @Schema(implementation = SwaggerConstants.SwaggerRtgsPacs009Wrapper.class))),
                     @ApiResponse(
                             responseCode = "400",
                             description = INVALID_MESSAGE_DESCRIPTION,
@@ -71,7 +71,7 @@ public class RtgsTranslatorController {
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     required = true,
                     content = {
-                            @Content(mediaType = "application/xml", examples = @ExampleObject(value = RTGS_TRANSLATOR_MX_TO_MT_REQUEST_EXAMPLE_VALID), schema = @Schema(implementation = SwaggerConstants.SwaggerMxPacs009Wrapper.class))
+                            @Content(mediaType = "application/xml", examples = @ExampleObject(value = RTGS_TRANSLATOR_MX_TO_MT_REQUEST_EXAMPLE_VALID), schema = @Schema(implementation = SwaggerConstants.SwaggerRtgsPacs009Wrapper.class))
                     }),
             responses = {
                     @ApiResponse(

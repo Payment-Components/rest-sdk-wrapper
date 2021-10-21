@@ -181,11 +181,11 @@ public class TestConstants {
             "</Document>";
 
     public static final String VALID_MX_PACS_009 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            "<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\">\n" +
+            "<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.10\">\n" +
             "    <FICdtTrf>\n" +
             "        <GrpHdr>\n" +
-            "            <MsgId>BBBB/120928-FICT/JPY/430</MsgId>\n" +
-            "            <CreDtTm>2012-09-28T16:00:00</CreDtTm>\n" +
+            "            <MsgId>BBBB/150928-FICT/JPY/430</MsgId>\n" +
+            "            <CreDtTm>2015-09-28T16:00:00</CreDtTm>\n" +
             "            <NbOfTxs>1</NbOfTxs>\n" +
             "            <SttlmInf>\n" +
             "                <SttlmMtd>INDA</SttlmMtd>\n" +
@@ -203,13 +203,12 @@ public class TestConstants {
             "        </GrpHdr>\n" +
             "        <CdtTrfTxInf>\n" +
             "            <PmtId>\n" +
-            "                <InstrId>BBBB/120928-FICT/JPY/430/1</InstrId>\n" +
-            "                <EndToEndId>ABC/4562/2012-09-08</EndToEndId>\n" +
-            "                <TxId>BBBB/120928-CCT/123/1</TxId>\n" +
-            "                <UETR>00000000-0000-4000-8000-000000000000</UETR>\n" +
+            "                <InstrId>BBBB/150928-FICT/JPY/430/1</InstrId>\n" +
+            "                <EndToEndId>ABC/4562/2015-09-08</EndToEndId>\n" +
+            "                <TxId>BBBB/150928-CCT/123/1</TxId>\n" +
             "            </PmtId>\n" +
             "            <IntrBkSttlmAmt Ccy=\"JPY\">10000000</IntrBkSttlmAmt>\n" +
-            "            <IntrBkSttlmDt>2012-09-29</IntrBkSttlmDt>\n" +
+            "            <IntrBkSttlmDt>2015-09-29</IntrBkSttlmDt>\n" +
             "            <Dbtr>\n" +
             "                <FinInstnId>\n" +
             "                    <BICFI>BBBBUS33</BICFI>\n" +
@@ -283,7 +282,7 @@ public class TestConstants {
             "                                </CdOrPrtry>\n" +
             "                            </Tp>\n" +
             "                            <Nb>4562</Nb>\n" +
-            "                            <RltdDt>2012-09-08</RltdDt>\n" +
+            "                            <RltdDt>2015-09-08</RltdDt>\n" +
             "                        </RfrdDocInf>\n" +
             "                    </Strd>\n" +
             "                </RmtInf>\n" +

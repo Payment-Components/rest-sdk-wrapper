@@ -38,7 +38,7 @@ public class RtgsController {
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     required = true,
                     content = {
-                            @Content(mediaType = "application/xml", examples = @ExampleObject(value = SwaggerConstants.RTGS_VALIDATE_REQUEST_EXAMPLE_VALID), schema = @Schema(implementation = SwaggerConstants.SwaggerMxPacs009Wrapper.class))
+                            @Content(mediaType = "application/xml", examples = @ExampleObject(value = SwaggerConstants.RTGS_VALIDATE_REQUEST_EXAMPLE_VALID), schema = @Schema(implementation = SwaggerConstants.SwaggerRtgsPacs009Wrapper.class))
                     }),
             responses = {
                     @ApiResponse(
