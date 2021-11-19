@@ -12,7 +12,7 @@ public class CbprService {
     }
 
     public String envelopeCbpr(String cbprMessageText) throws Exception {
-        CbprMessage cbprMessage = CbprUtils.parseAndValidateCbprMessage(cbprMessageText);
+        CbprMessage<?, ?> cbprMessage = CbprUtils.parseAndValidateCbprMessage(cbprMessageText);
         return cbprMessage.encloseCbprMessage("RequestPayload");
     }
 

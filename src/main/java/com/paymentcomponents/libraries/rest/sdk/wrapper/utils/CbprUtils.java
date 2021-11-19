@@ -7,8 +7,8 @@ import java.io.ByteArrayInputStream;
 
 public class CbprUtils {
 
-    public static CbprMessage parseAndValidateCbprMessage(String cbprXml) throws Exception {
-        CbprMessage cbprMessage = new CbprMessage();
+    public static CbprMessage<?, ?> parseAndValidateCbprMessage(String cbprXml) throws Exception {
+        CbprMessage<?, ?> cbprMessage = new CbprMessage<>();
 
         ValidationErrorList validationErrorList = cbprMessage.validateXml(new ByteArrayInputStream(cbprXml.getBytes()));
         MxUtils.throwMxValidationError(validationErrorList);
