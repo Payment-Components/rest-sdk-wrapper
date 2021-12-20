@@ -5,6 +5,7 @@ public class MsgReplyInfoRequest {
     private String reasonCode;
     private String reasonPrtry;
     private String indicator;
+    private String additionInformation;
 
     public String getReasonCode() {
         return reasonCode;
@@ -30,4 +31,11 @@ public class MsgReplyInfoRequest {
         this.indicator = indicator;
     }
 
+    public String getAdditionInformation() {
+        return additionInformation;
+    }
+
+    public void setAdditionInformation(String additionInformation) {
+        this.additionInformation = additionInformation;
+    }
 }
