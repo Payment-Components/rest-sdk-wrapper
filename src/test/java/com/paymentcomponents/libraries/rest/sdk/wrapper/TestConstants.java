@@ -462,11 +462,25 @@ public class TestConstants {
             "                    <BICFI>TESTBICE</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </CdtrAgt>\n" +
+            "            <CdtrAgtAcct>\n" +
+            "                <Id>\n" +
+            "                    <Othr>\n" +
+            "                        <Id>CDTRAGTACCT</Id>\n" +
+            "                    </Othr>\n" +
+            "                </Id>\n" +
+            "            </CdtrAgtAcct>\n" +
             "            <Cdtr>\n" +
             "                <FinInstnId>\n" +
             "                    <BICFI>TESTBICF</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </Cdtr>\n" +
+            "            <CdtrAcct>\n" +
+            "                <Id>\n" +
+            "                    <Othr>\n" +
+            "                        <Id>CDTRACCT</Id>\n" +
+            "                    </Othr>\n" +
+            "                </Id>\n" +
+            "            </CdtrAcct>\n" +
             "        </CdtTrfTxInf>\n" +
             "    </FICdtTrf>\n" +
             "</Document>\n";
@@ -478,8 +492,10 @@ public class TestConstants {
             ":32A:090527USD10500,00\n" +
             ":52A:BKAUATWW\n" +
             ":56A:TESTBICD\n" +
-            ":57A:TESTBICE\n" +
-            ":58A:TESTBICF\n" +
+            ":57A:/CDTRAGTACCT\n" +
+            "TESTBICE\n" +
+            ":58A:/CDTRACCT\n" +
+            "TESTBICF\n" +
             ":72:/INS/CHASUS33\n" +
             "-}";
 
