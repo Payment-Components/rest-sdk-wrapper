@@ -1,6 +1,8 @@
-FROM tomcat:9-jre8-alpine
-RUN ["rm", "-fr", "/usr/local/tomcat/webapps/ROOT"]
+FROM eclipse-temurin:8-jre-focal
 
-ADD ./target/*.war  /usr/local/tomcat/webapps/ROOT.war
+COPY ./target/*.jar /work/app.jar
+WORKDIR /work
 
 EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","app.jar"]

@@ -10,17 +10,16 @@
     </parent>
     <groupId>com.paymentcomponents.libraries</groupId>
     <artifactId>rest-sdk-wrapper</artifactId>
-    <version>1.7.5</version>
+    <version>1.8.0</version>
     <name>rest-sdk-wrapper</name>
     <description>Wrapper for Payment Components Financial Messaging Libraries</description>
-    <packaging>war</packaging>
 
     <properties>
         <java.version>1.8</java.version>
-        <smv.version>21.27.0</smv.version>
-        <mx.version>21.7.0</mx.version>
+        <smv.version>21.27.1</smv.version>
+        <mx.version>21.8.0</mx.version>
         <sepa.version>21.6.0</sepa.version>
-        <swift.translator.version>3.5.1</swift.translator.version>
+        <swift.translator.version>3.6.0</swift.translator.version>
     </properties>
 
     <repositories>
@@ -34,11 +33,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -89,12 +83,6 @@
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>2.11.4
             </version> <!--For 2.12.X, advice https://cowtowncoder.medium.com/jackson-2-12-most-wanted-4-5-cbc91c00bcd2-->
-        </dependency>
-
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.12</version>
         </dependency>
 
         <dependency>

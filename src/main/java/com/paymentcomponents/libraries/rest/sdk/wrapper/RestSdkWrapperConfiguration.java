@@ -17,7 +17,7 @@ public class RestSdkWrapperConfiguration {
                 .info(new Info()
                         .title("Payment Components")
                         .description("Financial Messaging APIs")
-                        .version("1.1.0")); //should be the same as maven
+                        .version("1.8.0")); //should be the same as maven
     }
 
     @Bean

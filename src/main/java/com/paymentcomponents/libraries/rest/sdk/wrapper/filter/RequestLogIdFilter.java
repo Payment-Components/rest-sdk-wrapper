@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.UUID;
 
-//@Component
 public class RequestLogIdFilter implements Filter {
 
     private final static Logger LOG = LoggerFactory.getLogger(RequestLogIdFilter.class);

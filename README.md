@@ -12,15 +12,7 @@ you can run it inside a docker container using the following instructions:
 
 1. Create a folder named `rest-sdk-wrapper`
 2. Copy the jar inside this folder
-3. Create a file named `Dockerfile` or use [this one](Dockerfile) and paste in it the following content
-```Dockerfile
-FROM tomcat:9-jre8-alpine
-RUN ["rm", "-fr", "/usr/local/tomcat/webapps/ROOT"]
-
-ADD ./target/*.war  /usr/local/tomcat/webapps/ROOT.war
-
-EXPOSE 8080
-```
+3. Create a file named `Dockerfile` or use [this one](Dockerfile)
 4. Run the following command to build the docker container `docker build -t paymentcomponents/rest-sdk-wrapper .`
 5. Run the following command to run the docker
    container `docker run -p 8089:8080 -n rest-sdk-wrapper paymentcomponents/rest-sdk-wrapper`
