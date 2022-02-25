@@ -343,7 +343,7 @@ public class TestConstants {
             "                <EndToEndId>090525/123COV</EndToEndId>\n" +
             "                <UETR>c8b66b47-2bd9-48fe-be90-93c2096f27d2</UETR>\n" +
             "            </PmtId>\n" +
-            "            <IntrBkSttlmAmt Ccy=\"USD\">10500.00</IntrBkSttlmAmt>\n" +
+            "            <IntrBkSttlmAmt Ccy=\"USD\">10500</IntrBkSttlmAmt>\n" +
             "            <IntrBkSttlmDt>2009-05-27</IntrBkSttlmDt>\n" +
             "            <SttlmTmIndctn>\n" +
             "                <DbtDtTm>2009-05-27T12:49:00.000+02:00</DbtDtTm>\n" +
@@ -489,7 +489,7 @@ public class TestConstants {
             ":20:987\n" +
             ":21:NOTPROVIDED\n" +
             ":13C:/SNDTIME/1249+0200\n" +
-            ":32A:090527USD10500,00\n" +
+            ":32A:090527USD10500,\n" +
             ":52A:BKAUATWW\n" +
             ":56A:TESTBICD\n" +
             ":57A:/CDTRAGTACCT\n" +

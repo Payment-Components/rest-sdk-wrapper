@@ -4,8 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.exception.InvalidMessageException;
 import gr.datamation.swift.translator.cbpr.CbprTranslator;
+import gr.datamation.swift.translator.cbpr.utils.CbprMessageValidationUtils;
 import gr.datamation.swift.translator.common.exceptions.InvalidMtMessageException;
 import gr.datamation.swift.translator.common.exceptions.InvalidMxMessageException;
+import gr.datamation.swift.translator.common.utils.MtMessageValidationUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +15,9 @@ public class CbprTranslatorService {
 
     public String translateMtToMx(String mtMessage) throws InvalidMessageException, JsonProcessingException {
         try {
-            return CbprTranslator.translateMtToMx(mtMessage);
+            String translatedMessage = CbprTranslator.translateMtToMx(mtMessage); //throws InvalidMtMessageException
+            CbprMessageValidationUtils.autoParseAndValidateCbprMessage(translatedMessage); //throws InvalidMxMessageException
+            return translatedMessage;
         } catch (InvalidMtMessageException ex) {
             throw new InvalidMessageException(
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(ex.getValidationErrorList()));
@@ -28,7 +32,9 @@ public class CbprTranslatorService {
 
     public String translateMxToMt(String mxMessage) throws InvalidMessageException, JsonProcessingException {
         try {
-            return CbprTranslator.translateMxToMt(mxMessage);
+            String translatedMessage = CbprTranslator.translateMxToMt(mxMessage); //throws InvalidMxMessageException
+            MtMessageValidationUtils.parseAndValidateMtMessage(translatedMessage); //throws InvalidMtMessageException
+            return translatedMessage;
         } catch (InvalidMxMessageException ex) {
             throw new InvalidMessageException(
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(ex.getValidationErrorList()));

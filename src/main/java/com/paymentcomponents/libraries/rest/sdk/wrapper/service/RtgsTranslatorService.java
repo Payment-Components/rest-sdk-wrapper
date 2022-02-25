@@ -6,6 +6,7 @@ import com.paymentcomponents.libraries.rest.sdk.wrapper.exception.InvalidMessage
 import gr.datamation.swift.translator.common.exceptions.InvalidMtMessageException;
 import gr.datamation.swift.translator.common.exceptions.InvalidMxMessageException;
 import gr.datamation.swift.translator.rtgs.RtgsTranslator;
+import gr.datamation.swift.translator.rtgs.utils.RtgsMessageValidationUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +14,9 @@ public class RtgsTranslatorService {
 
     public String translateMtToMx(String mtMessage) throws InvalidMessageException, JsonProcessingException {
         try {
-            return RtgsTranslator.translateMtToMx(mtMessage);
+            String translatedMessage = RtgsTranslator.translateMtToMx(mtMessage); //throws InvalidMtMessageException
+            RtgsMessageValidationUtils.autoParseAndValidateRtgsMessage(translatedMessage); //throws InvalidMxMessageException
+            return translatedMessage;
         } catch (InvalidMtMessageException ex) {
             throw new InvalidMessageException(
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(ex.getValidationErrorList()));
@@ -28,7 +31,7 @@ public class RtgsTranslatorService {
 
     public String translateMxToMt(String mxMessage) throws InvalidMessageException, JsonProcessingException {
         try {
-            return RtgsTranslator.translateMxToMt(mxMessage);
+            return RtgsTranslator.translateMxToMt(mxMessage); //output should not validated for now
         } catch (InvalidMxMessageException ex) {
             throw new InvalidMessageException(
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(ex.getValidationErrorList()));
