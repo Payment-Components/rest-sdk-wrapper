@@ -1,10 +1,12 @@
 # Financial Messages REST APIs Wrapper
 Payment Components is known for the [Financial Messaging Solutions](https://finaplo.paymentcomponents.com/financial-messages) it provides for over 30 years.  
 
-Our latest product group [FINaplo](https://finaplo.paymentcomponents.com), contains many Financial Messaging Libraries which are written in Java.  
+Our latest product group [FINaplo](https://finaplo.paymentcomponents.com), contains many Financial Messaging Libraries
+which are written in Java.  
 The libraries can be integrated smoothly in a Java Application but other types of projects were not compatible.
 
-In order to help developers of other Programming Languages worlds, we prepared this standalone REST API wrapper for MT, SEPA, MX(ISO20022), CBPR+, TARGET2(RTGS) and SWIFT Translation libraries.
+In order to help developers of other Programming Languages worlds, we prepared this standalone REST API wrapper for MT,
+SEPA, MX(ISO20022), CBPR+, TARGET2(RTGS) and MT-MX Translation libraries.
 
 ## Installation
 It's a simple java web application written in spring boot. You can start it by running the following command `java -jar rest-sdk-wrapper-X.X.X.jar` or
@@ -19,11 +21,12 @@ you can run it inside a docker container using the following instructions:
 
 ## Dependencies
 It has a dependency to
-- Swift MT SDK
+
+- MT SDK
 - SEPA SDK
 - ISO20022 SDK
-- SWIFT MT <> CBPR+ TRANSLATION SDK
-- SWIFT MT <> TARGET2 TRANSLATION SDK
+- MT <> CBPR+ TRANSLATION SDK
+- MT <> TARGET2 TRANSLATION SDK
 
 By default REST SDK Wrapper is using demo versions of the above SDKs. With the demo versions of the above SDKs you can do the following :
 
@@ -32,12 +35,12 @@ By default REST SDK Wrapper is using demo versions of the above SDKs. With the d
 - Parse and validate an ISO20022 `PACS.009.001.04` using the `/mx/validate` endpoint
 - Parse and validate a CBPR+ `PACS.009.001.08` using the `/cbpr/validate` endpoint
 - Parse and validate an RTGS `PACS.009.001.08` using the `/rtgs/validate` endpoint
-- Translate an ISO20022 `PACS.009.001.08.CORE` to `MT202` for `CBPR+` using the `/swift/translator/cbpr/mx/to/mt`
+- Translate an ISO20022 `PACS.009.001.08.CORE` to `MT202` for `CBPR+` using the `/translator/cbpr/mx/to/mt`
   endpoint
-- Translate an `MT202` to ISO20022 `PACS.009.001.08.CORE` for `CBPR+` using the `/swift/translator/cbpr/mt/to/mx`
+- Translate an `MT202` to ISO20022 `PACS.009.001.08.CORE` for `CBPR+` using the `/translator/cbpr/mt/to/mx`
   endpoint
-- Translate an ISO20022 `PACS.009.001.08` to `MT202` for `RTGS` using the `/swift/translator/rtgs/mx/to/mt` endpoint
-- Translate an `MT202` to ISO20022 `PACS.009.001.08` for `RTGS` using the `/swift/translator/rtgs/mt/to/mx` endpoint
+- Translate an ISO20022 `PACS.009.001.08` to `MT202` for `RTGS` using the `/translator/rtgs/mx/to/mt` endpoint
+- Translate an `MT202` to ISO20022 `PACS.009.001.08` for `RTGS` using the `/translator/rtgs/mt/to/mx` endpoint
 
 ## Features available in the paid versions of the SDKs
 
@@ -57,7 +60,7 @@ By default REST SDK Wrapper is using demo versions of the above SDKs. With the d
 ### The following ISO20022(MX) operations are available
 - Validate an MX message and return it as JSON
 
-### The following SWIFT Translator operations are available
+### The following Translator operations are available
 - Translate an MT Message to the equivalent MX
 - Translate an MX Message to the equivalent MT
 

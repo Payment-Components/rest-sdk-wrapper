@@ -62,9 +62,9 @@ public class RtgsTranslatorControllerTest {
         given(rtgsTranslatorService.translateMtToMx(anyString())).willReturn(TestConstants.VALID_RTGS_TRANSLATOR_MT_TO_MX_RESPONSE);
 
         //WHEN
-        mvc.perform(post("/swift/translator/rtgs/mt/to/mx")
-                .content(TestConstants.VALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST)
-                .contentType(MediaType.TEXT_PLAIN))
+        mvc.perform(post("/translator/rtgs/mt/to/mx")
+                        .content(TestConstants.VALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST)
+                        .contentType(MediaType.TEXT_PLAIN))
 
                 //THEN
                 .andExpect(status().isOk())
@@ -82,9 +82,9 @@ public class RtgsTranslatorControllerTest {
         given(rtgsTranslatorService.translateMtToMx(anyString())).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
-        mvc.perform(post("/swift/translator/rtgs/mt/to/mx")
-                .content(TestConstants.INVALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST)
-                .contentType(MediaType.TEXT_PLAIN))
+        mvc.perform(post("/translator/rtgs/mt/to/mx")
+                        .content(TestConstants.INVALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST)
+                        .contentType(MediaType.TEXT_PLAIN))
 
                 //THEN
                 .andExpect(status().isBadRequest())
@@ -99,9 +99,9 @@ public class RtgsTranslatorControllerTest {
         given(rtgsTranslatorService.translateMxToMt(anyString())).willReturn(TestConstants.VALID_RTGS_TRANSLATOR_MX_TO_MT_RESPONSE);
 
         //WHEN
-        mvc.perform(post("/swift/translator/rtgs/mx/to/mt")
-                .content(TestConstants.VALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST)
-                .contentType(MediaType.APPLICATION_XML))
+        mvc.perform(post("/translator/rtgs/mx/to/mt")
+                        .content(TestConstants.VALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST)
+                        .contentType(MediaType.APPLICATION_XML))
 
                 //THEN
                 .andExpect(status().isOk())
@@ -129,9 +129,9 @@ public class RtgsTranslatorControllerTest {
         given(rtgsTranslatorService.translateMxToMt(anyString())).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
-        mvc.perform(post("/swift/translator/rtgs/mx/to/mt")
-                .content(TestConstants.INVALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST)
-                .contentType(MediaType.APPLICATION_XML))
+        mvc.perform(post("/translator/rtgs/mx/to/mt")
+                        .content(TestConstants.INVALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST)
+                        .contentType(MediaType.APPLICATION_XML))
 
                 //THEN
                 .andExpect(status().isBadRequest())

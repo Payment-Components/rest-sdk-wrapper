@@ -36,25 +36,25 @@ public class MtController {
         this.mtService = mtService;
     }
 
-    @Operation(summary = SWIFT_MT_PARSE_SUMMARY,
-            description = SWIFT_MT_PARSE_DESCRIPTION,
-            tags = SWIFT_MT_TAG,
+    @Operation(summary = MT_PARSE_SUMMARY,
+            description = MT_PARSE_DESCRIPTION,
+            tags = MT_TAG,
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     required = true,
                     content = {
-                            @Content(mediaType = "text/plain", examples = @ExampleObject(value = SWIFT_MT_PARSE_REQUEST_EXAMPLE_VALID))
+                            @Content(mediaType = "text/plain", examples = @ExampleObject(value = MT_PARSE_REQUEST_EXAMPLE_VALID))
                     }),
             responses = {
                     @ApiResponse(
                             responseCode = "200",
                             description = VALID_MESSAGE_DESCRIPTION,
                             headers = @Header(name = REQUEST_LOG_ID, description = REQUEST_LOG_ID_DESCRIPTION),
-                            content = @Content(mediaType = "application/json", examples = @ExampleObject(value = SWIFT_MT_PARSE_RESPONSE_EXAMPLE_200), schema = @Schema(implementation = CustomSwiftMessage.class))),
+                            content = @Content(mediaType = "application/json", examples = @ExampleObject(value = MT_PARSE_RESPONSE_EXAMPLE_200), schema = @Schema(implementation = CustomSwiftMessage.class))),
                     @ApiResponse(
                             responseCode = "400",
                             description = INVALID_MESSAGE_DESCRIPTION,
                             headers = @Header(name = REQUEST_LOG_ID, description = REQUEST_LOG_ID_DESCRIPTION),
-                            content = @Content(mediaType = "text/plain", examples = @ExampleObject(value = SWIFT_MT_PARSE_RESPONSE_EXAMPLE_400))),
+                            content = @Content(mediaType = "text/plain", examples = @ExampleObject(value = MT_PARSE_RESPONSE_EXAMPLE_400))),
                     @ApiResponse(
                             responseCode = "500",
                             description = UNHANDLED_ERROR_DESCRIPTION,
@@ -68,13 +68,13 @@ public class MtController {
         return mtService.parseMt(mtMessage);
     }
 
-    @Operation(summary = SWIFT_MT_VALIDATE_SUMMARY,
-            description = SWIFT_MT_VALIDATE_DESCRIPTION,
-            tags = SWIFT_MT_TAG,
+    @Operation(summary = MT_VALIDATE_SUMMARY,
+            description = MT_VALIDATE_DESCRIPTION,
+            tags = MT_TAG,
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     required = true,
                     content = {
-                            @Content(mediaType = "text/plain", examples = @ExampleObject(value = SWIFT_MT_VALIDATE_REQUEST_EXAMPLE_VALID))
+                            @Content(mediaType = "text/plain", examples = @ExampleObject(value = MT_VALIDATE_REQUEST_EXAMPLE_VALID))
                     }),
             responses = {
                     @ApiResponse(
@@ -86,7 +86,7 @@ public class MtController {
                             responseCode = "400",
                             description = INVALID_MESSAGE_DESCRIPTION,
                             headers = @Header(name = REQUEST_LOG_ID, description = REQUEST_LOG_ID_DESCRIPTION),
-                            content = @Content(mediaType = "application/json", examples = @ExampleObject(value = SWIFT_MT_VALIDATE_RESPONSE_EXAMPLE_400), array = @ArraySchema(schema = @Schema(implementation = SwaggerConstants.SwaggerMtValidationErrorWrapper.class)))),
+                            content = @Content(mediaType = "application/json", examples = @ExampleObject(value = MT_VALIDATE_RESPONSE_EXAMPLE_400), array = @ArraySchema(schema = @Schema(implementation = SwaggerConstants.SwaggerMtValidationErrorWrapper.class)))),
                     @ApiResponse(
                             responseCode = "500",
                             description = UNHANDLED_ERROR_DESCRIPTION,

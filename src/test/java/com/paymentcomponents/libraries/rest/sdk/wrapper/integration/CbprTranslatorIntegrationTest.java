@@ -38,9 +38,9 @@ public class CbprTranslatorIntegrationTest {
                 .replaceAll("<UETR>.*<\\\\/UETR>", "<UETR>.*<\\\\/UETR>");
 
         //WHEN
-        MockHttpServletResponse response =mvc.perform(post("/swift/translator/cbpr/mt/to/mx")
-                .content(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST)
-                .contentType(MediaType.TEXT_PLAIN))
+        MockHttpServletResponse response = mvc.perform(post("/translator/cbpr/mt/to/mx")
+                        .content(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST)
+                        .contentType(MediaType.TEXT_PLAIN))
 
                 //THEN
                 .andExpect(status().isOk())
@@ -56,9 +56,9 @@ public class CbprTranslatorIntegrationTest {
         //GIVEN
 
         //WHEN
-        mvc.perform(post("/swift/translator/cbpr/mt/to/mx")
-                .content(TestConstants.INVALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST)
-                .contentType(MediaType.TEXT_PLAIN))
+        mvc.perform(post("/translator/cbpr/mt/to/mx")
+                        .content(TestConstants.INVALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST)
+                        .contentType(MediaType.TEXT_PLAIN))
 
                 //THEN
                 .andExpect(status().isBadRequest())
@@ -81,9 +81,9 @@ public class CbprTranslatorIntegrationTest {
                 .replaceAll("2106021108", ".*");
 
         //WHEN
-        mvc.perform(post("/swift/translator/cbpr/mx/to/mt")
-                .content(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST)
-                .contentType(MediaType.TEXT_PLAIN))
+        mvc.perform(post("/translator/cbpr/mx/to/mt")
+                        .content(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST)
+                        .contentType(MediaType.TEXT_PLAIN))
 
                 //THEN
                 .andExpect(status().isOk())
@@ -98,9 +98,9 @@ public class CbprTranslatorIntegrationTest {
         //GIVEN
 
         //WHEN
-        mvc.perform(post("/swift/translator/cbpr/mx/to/mt")
-                .content(TestConstants.INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST)
-                .contentType(MediaType.TEXT_PLAIN))
+        mvc.perform(post("/translator/cbpr/mx/to/mt")
+                        .content(TestConstants.INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST)
+                        .contentType(MediaType.TEXT_PLAIN))
 
                 //THEN
                 .andExpect(status().isBadRequest())

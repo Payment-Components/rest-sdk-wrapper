@@ -1,7 +1,7 @@
 package com.paymentcomponents.libraries.rest.sdk.wrapper.model;
 
-import gr.datamation.swift.common.SwiftMessage;
-import gr.datamation.swift.common.Tag;
+import gr.datamation.mt.common.SwiftMessage;
+import gr.datamation.mt.common.Tag;
 
 import java.util.Vector;
 

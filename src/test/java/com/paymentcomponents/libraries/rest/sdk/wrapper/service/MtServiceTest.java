@@ -4,7 +4,7 @@ import com.paymentcomponents.libraries.rest.sdk.wrapper.TestConstants;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.exception.InvalidMessageException;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.model.CustomSwiftMessage;
-import gr.datamation.swift.common.InvalidMessageFormatException;
+import gr.datamation.mt.common.InvalidMessageFormatException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

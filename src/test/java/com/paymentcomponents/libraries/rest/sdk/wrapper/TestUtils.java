@@ -1,8 +1,8 @@
 package com.paymentcomponents.libraries.rest.sdk.wrapper;
 
-import gr.datamation.swift.common.InvalidMessageFormatException;
-import gr.datamation.swift.common.SwiftMessage;
-import gr.datamation.swift.processor.SwiftMsgProcessor;
+import gr.datamation.mt.common.InvalidMessageFormatException;
+import gr.datamation.mt.common.SwiftMessage;
+import gr.datamation.mt.processor.SwiftMsgProcessor;
 
 import java.io.*;
 import java.net.URISyntaxException;

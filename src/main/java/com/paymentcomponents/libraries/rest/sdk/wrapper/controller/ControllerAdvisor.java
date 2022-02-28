@@ -1,7 +1,7 @@
 package com.paymentcomponents.libraries.rest.sdk.wrapper.controller;
 
 import com.paymentcomponents.libraries.rest.sdk.wrapper.exception.InvalidMessageException;
-import gr.datamation.swift.common.InvalidMessageFormatException;
+import gr.datamation.mt.common.InvalidMessageFormatException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;

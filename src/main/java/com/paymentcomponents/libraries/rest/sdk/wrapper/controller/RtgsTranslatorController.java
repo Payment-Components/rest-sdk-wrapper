@@ -22,7 +22,7 @@ import static com.paymentcomponents.libraries.rest.sdk.wrapper.Constants.REQUEST
 import static com.paymentcomponents.libraries.rest.sdk.wrapper.SwaggerConstants.*;
 
 @RestController
-@RequestMapping("/swift/translator/rtgs")
+@RequestMapping("/translator/rtgs")
 public class RtgsTranslatorController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass().getName());

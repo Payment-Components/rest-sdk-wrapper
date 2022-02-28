@@ -36,9 +36,9 @@ public class RtgsTranslatorIntegrationTest {
                 .replaceAll("<CreDtTm>.*<\\\\/CreDtTm>", "<CreDtTm>.*<\\\\/CreDtTm>");
 
         //WHEN
-        MockHttpServletResponse response = mvc.perform(post("/swift/translator/rtgs/mt/to/mx")
-                .content(TestConstants.VALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST)
-                .contentType(MediaType.TEXT_PLAIN))
+        MockHttpServletResponse response = mvc.perform(post("/translator/rtgs/mt/to/mx")
+                        .content(TestConstants.VALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST)
+                        .contentType(MediaType.TEXT_PLAIN))
 
                 //THEN
                 .andExpect(status().isOk())
@@ -55,9 +55,9 @@ public class RtgsTranslatorIntegrationTest {
         String errorResponse = "\"Message could not be translated\"";
 
         //WHEN
-        mvc.perform(post("/swift/translator/rtgs/mt/to/mx")
-                .content(TestConstants.INVALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST)
-                .contentType(MediaType.TEXT_PLAIN))
+        mvc.perform(post("/translator/rtgs/mt/to/mx")
+                        .content(TestConstants.INVALID_RTGS_TRANSLATOR_MT_TO_MX_REQUEST)
+                        .contentType(MediaType.TEXT_PLAIN))
 
                 //THEN
                 .andExpect(status().isBadRequest())
@@ -73,9 +73,9 @@ public class RtgsTranslatorIntegrationTest {
                 .replaceAll("2103231343", ".*");
 
         //WHEN
-        mvc.perform(post("/swift/translator/rtgs/mx/to/mt")
-                .content(TestConstants.VALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST)
-                .contentType(MediaType.APPLICATION_XML))
+        mvc.perform(post("/translator/rtgs/mx/to/mt")
+                        .content(TestConstants.VALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST)
+                        .contentType(MediaType.APPLICATION_XML))
 
         //THEN
                 .andExpect(status().isOk())
@@ -89,9 +89,9 @@ public class RtgsTranslatorIntegrationTest {
         //GIVEN
 
         //WHEN
-        mvc.perform(post("/swift/translator/rtgs/mx/to/mt")
-                .content(TestConstants.INVALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST)
-                .contentType(MediaType.APPLICATION_XML))
+        mvc.perform(post("/translator/rtgs/mx/to/mt")
+                        .content(TestConstants.INVALID_RTGS_TRANSLATOR_MX_TO_MT_REQUEST)
+                        .contentType(MediaType.APPLICATION_XML))
 
                 //THEN
                 .andExpect(status().isBadRequest())

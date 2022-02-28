@@ -8,11 +8,11 @@ import com.paymentcomponents.libraries.rest.sdk.wrapper.model.mt.request.MtCreat
 import com.paymentcomponents.libraries.rest.sdk.wrapper.model.mt.request.MtCreateGeneralRequest;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.model.mt.request.MtTagGeneralRequest;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.utils.MtUtils;
-import gr.datamation.swift.common.InvalidMessageFormatException;
-import gr.datamation.swift.common.SwiftMessage;
-import gr.datamation.swift.common.ValidationErrorException;
-import gr.datamation.swift.processor.SwiftMsgProcessor;
-import gr.datamation.swift.validator.validation.ValidationErrorList;
+import gr.datamation.mt.common.InvalidMessageFormatException;
+import gr.datamation.mt.common.SwiftMessage;
+import gr.datamation.mt.common.ValidationErrorException;
+import gr.datamation.mt.processor.SwiftMsgProcessor;
+import gr.datamation.mt.validator.validation.ValidationErrorList;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

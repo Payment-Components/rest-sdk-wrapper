@@ -20,7 +20,7 @@ import static com.paymentcomponents.libraries.rest.sdk.wrapper.Constants.REQUEST
 import static com.paymentcomponents.libraries.rest.sdk.wrapper.SwaggerConstants.*;
 
 @RestController
-@RequestMapping("/swift/translator/cbpr")
+@RequestMapping("/translator/cbpr")
 public class CbprTranslatorController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass().getName());

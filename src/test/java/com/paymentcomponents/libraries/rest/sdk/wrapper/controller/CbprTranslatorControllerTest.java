@@ -62,9 +62,9 @@ public class CbprTranslatorControllerTest {
         given(cbprTranslatorService.translateMtToMx(anyString())).willReturn(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_RESPONSE);
 
         //WHEN
-        mvc.perform(post("/swift/translator/cbpr/mt/to/mx")
-                .content(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST)
-                .contentType(MediaType.TEXT_PLAIN))
+        mvc.perform(post("/translator/cbpr/mt/to/mx")
+                        .content(TestConstants.VALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST)
+                        .contentType(MediaType.TEXT_PLAIN))
 
                 //THEN
                 .andExpect(status().isOk())
@@ -92,9 +92,9 @@ public class CbprTranslatorControllerTest {
         given(cbprTranslatorService.translateMtToMx(anyString())).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
-        mvc.perform(post("/swift/translator/cbpr/mt/to/mx")
-                .content(TestConstants.INVALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST)
-                .contentType(MediaType.TEXT_PLAIN))
+        mvc.perform(post("/translator/cbpr/mt/to/mx")
+                        .content(TestConstants.INVALID_CBPR_TRANSLATOR_MT_TO_MX_REQUEST)
+                        .contentType(MediaType.TEXT_PLAIN))
 
                 //THEN
                 .andExpect(status().isBadRequest())
@@ -116,9 +116,9 @@ public class CbprTranslatorControllerTest {
         given(cbprTranslatorService.translateMxToMt(anyString())).willReturn(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_RESPONSE);
 
         //WHEN
-        mvc.perform(post("/swift/translator/cbpr/mx/to/mt")
-                .content(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST)
-                .contentType(MediaType.TEXT_PLAIN))
+        mvc.perform(post("/translator/cbpr/mx/to/mt")
+                        .content(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST)
+                        .contentType(MediaType.TEXT_PLAIN))
 
                 //THEN
                 .andExpect(status().isOk())
@@ -146,9 +146,9 @@ public class CbprTranslatorControllerTest {
         given(cbprTranslatorService.translateMxToMt(anyString())).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
-        mvc.perform(post("/swift/translator/cbpr/mx/to/mt")
-                .content(TestConstants.INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST)
-                .contentType(MediaType.TEXT_PLAIN))
+        mvc.perform(post("/translator/cbpr/mx/to/mt")
+                        .content(TestConstants.INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST)
+                        .contentType(MediaType.TEXT_PLAIN))
 
                 //THEN
                 .andExpect(status().isBadRequest())

@@ -1,14 +1,14 @@
 package com.paymentcomponents.libraries.rest.sdk.wrapper.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.paymentcomponents.libraries.rest.sdk.wrapper.Constants;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.TestConstants;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.TestUtils;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.exception.InvalidMessageException;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.filter.RequestLogIdFilter;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.model.CustomSwiftMessage;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.service.MtService;
-import com.paymentcomponents.libraries.rest.sdk.wrapper.Constants;
-import gr.datamation.swift.common.InvalidMessageFormatException;
+import gr.datamation.mt.common.InvalidMessageFormatException;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +26,7 @@ import java.nio.charset.StandardCharsets;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.*;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
