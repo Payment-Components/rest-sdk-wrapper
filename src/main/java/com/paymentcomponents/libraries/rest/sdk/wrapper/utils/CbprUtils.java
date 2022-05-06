@@ -10,10 +10,9 @@ public class CbprUtils {
     public static CbprMessage<?, ?> parseAndValidateCbprMessage(String cbprXml) throws Exception {
         CbprMessage<?, ?> cbprMessage = new CbprMessage<>();
 
-        ValidationErrorList validationErrorList = cbprMessage.validateXml(new ByteArrayInputStream(cbprXml.getBytes()));
+        ValidationErrorList validationErrorList = cbprMessage.autoParseAndValidateXml(new ByteArrayInputStream(cbprXml.getBytes()));
         MxUtils.throwMxValidationError(validationErrorList);
 
-        cbprMessage.autoParseXml(cbprXml);
         validationErrorList = cbprMessage.autoValidate();
         MxUtils.throwMxValidationError(validationErrorList);
 

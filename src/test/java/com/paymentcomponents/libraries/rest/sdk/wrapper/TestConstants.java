@@ -321,7 +321,7 @@ public class TestConstants {
             "    </To>\n" +
             "    <BizMsgIdr>987</BizMsgIdr>\n" +
             "    <MsgDefIdr>pacs.009.001.08</MsgDefIdr>\n" +
-            "    <BizSvc>swift.cbprplus.01</BizSvc>\n" +
+            "    <BizSvc>swift.cbprplus.02</BizSvc>\n" +
             "    <CreDt>2021-06-02T11:05:42.864+03:00</CreDt>\n" +
             "    <Prty>NORM</Prty>\n" +
             "</AppHdr>\n" +
@@ -405,7 +405,7 @@ public class TestConstants {
             "    </To>\n" +
             "    <BizMsgIdr>987</BizMsgIdr>\n" +
             "    <MsgDefIdr>pacs.009.001.08</MsgDefIdr>\n" +
-            "    <BizSvc>swift.cbprplus.01</BizSvc>\n" +
+            "    <BizSvc>swift.cbprplus.02</BizSvc>\n" +
             "    <CreDt>2021-06-02T11:05:42.864+03:00</CreDt>\n" +
             "    <Prty>NORM</Prty>\n" +
             "</AppHdr>\n" +
@@ -517,7 +517,7 @@ public class TestConstants {
             "    </To>\n" +
             "    <BizMsgIdr>BBBB/120928-FICT/JPY/430</BizMsgIdr>\n" +
             "    <MsgDefIdr>pacs.009.001.08</MsgDefIdr>\n" +
-            "    <BizSvc>swift.cbprplus.01</BizSvc>\n" +
+            "    <BizSvc>swift.cbprplus.02</BizSvc>\n" +
             "    <MktPrctc>\n" +
             "        <Regy>string</Regy>\n" +
             "        <Id>string</Id>\n" +
@@ -543,7 +543,7 @@ public class TestConstants {
             "        </To>\n" +
             "        <BizMsgIdr>BBBB/120928-FICT/JPY/430</BizMsgIdr>\n" +
             "        <MsgDefIdr>pacs.009.001.08</MsgDefIdr>\n" +
-            "        <BizSvc>swift.cbprplus.01</BizSvc>\n" +
+            "        <BizSvc>swift.cbprplus.02</BizSvc>\n" +
             "        <CreDt>2014-06-09T18:15:04+03:00</CreDt>\n" +
             "        <CpyDplct>COPY</CpyDplct>\n" +
             "        <Prty>NORM</Prty>\n" +
@@ -681,7 +681,7 @@ public class TestConstants {
             "        </To>\n" +
             "        <BizMsgIdr>BBBB/120928-FICT/JPY/430</BizMsgIdr>\n" +
             "        <MsgDefIdr>pacs.009.001.08</MsgDefIdr>\n" +
-            "        <BizSvc>swift.cbprplus.01</BizSvc>\n" +
+            "        <BizSvc>swift.cbprplus.02</BizSvc>\n" +
             "        <MktPrctc>\n" +
             "            <Regy>string</Regy>\n" +
             "            <Id>string</Id>\n" +
@@ -707,7 +707,7 @@ public class TestConstants {
             "            </To>\n" +
             "            <BizMsgIdr>BBBB/120928-FICT/JPY/430</BizMsgIdr>\n" +
             "            <MsgDefIdr>pacs.009.001.08</MsgDefIdr>\n" +
-            "            <BizSvc>swift.cbprplus.01</BizSvc>\n" +
+            "            <BizSvc>swift.cbprplus.02</BizSvc>\n" +
             "            <CreDt>2014-06-09T18:15:04+03:00</CreDt>\n" +
             "            <CpyDplct>COPY</CpyDplct>\n" +
             "            <Prty>NORM</Prty>\n" +
@@ -1021,7 +1021,7 @@ public class TestConstants {
             "    </FICdtTrf>\n" +
             "</Document>";
 
-    public static final String VALID_RTGS_TRANSLATOR_MX_TO_MT_RESPONSE = "{1:F01PBAADEFFXC2X0000000000}{2:O2021343210323PBBBDEFFXXXX00000000002103231343S}{3:{121:e008b028-59c5-41e9-be4c-d45102fc201e}}{4:\n" +
+    public static final String VALID_RTGS_TRANSLATOR_MX_TO_MT_RESPONSE = "{1:F01PBAADEFFXC2X0000000000}{2:O2021343210323PBBBDEFFXXXX00000000002103231343S}{3:{103:TGT}{121:e008b028-59c5-41e9-be4c-d45102fc201e}}{4:\n" +
             ":20:Inp009b028-InsId\n" +
             ":21:NOTPROVIDED\n" +
             ":13C:/RNCTIME/0915+0200\n" +
