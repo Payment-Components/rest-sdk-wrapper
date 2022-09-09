@@ -10,16 +10,16 @@
     </parent>
     <groupId>com.paymentcomponents.libraries</groupId>
     <artifactId>rest-sdk-wrapper</artifactId>
-    <version>1.9.2</version>
+    <version>1.9.3</version>
     <name>rest-sdk-wrapper</name>
     <description>Wrapper for Payment Components Financial Messaging Libraries</description>
 
     <properties>
         <java.version>1.8</java.version>
-        <smv.version>21.28.0</smv.version>
-        <mx.version>21.17.2</mx.version>
-        <sepa.version>21.12.0</sepa.version>
-        <translator.version>3.33.0</translator.version>
+        <smv.version>21.36.0</smv.version>
+        <mx.version>21.21.0</mx.version>
+        <sepa.version>21.15.0</sepa.version>
+        <translator.version>3.38.0</translator.version>
     </properties>
 
     <repositories>
