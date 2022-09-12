@@ -943,7 +943,7 @@ public class TestConstants {
             "                <EndToEndId>Inp009b028-E2EId</EndToEndId>\n" +
             "                <UETR>e008b028-59c5-41e9-be4c-d45102fc201e</UETR>\n" +
             "            </PmtId>\n" +
-            "            <IntrBkSttlmAmt Ccy=\"EUR\">61250.00</IntrBkSttlmAmt>\n" +
+            "            <IntrBkSttlmAmt Ccy=\"EUR\">61250</IntrBkSttlmAmt>\n" +
             "            <IntrBkSttlmDt>2019-10-07</IntrBkSttlmDt>\n" +
             "            <SttlmTmIndctn>\n" +
             "                <CdtDtTm>2019-10-07T09:15:00.000+02:00</CdtDtTm>\n" +
