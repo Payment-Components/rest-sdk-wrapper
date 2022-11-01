@@ -5,8 +5,8 @@ import gr.datamation.validation.error.ValidationErrorList;
 
 import java.io.ByteArrayInputStream;
 
-import static gr.datamation.mx.RtgsUtils.autoParseXML;
-import static gr.datamation.mx.RtgsUtils.autoValidateXML;
+import static gr.datamation.iso20022.target2.RtgsUtils.autoParseXML;
+import static gr.datamation.iso20022.target2.RtgsUtils.autoValidateXML;
 
 public class RtgsUtils {
 

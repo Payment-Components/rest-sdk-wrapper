@@ -1,7 +1,7 @@
 package com.paymentcomponents.libraries.rest.sdk.wrapper.service;
 
 import com.paymentcomponents.libraries.rest.sdk.wrapper.utils.CbprUtils;
-import gr.datamation.mx.CbprMessage;
+import gr.datamation.iso20022.cbpr.CbprMessage;
 import org.springframework.stereotype.Service;
 
 @Service

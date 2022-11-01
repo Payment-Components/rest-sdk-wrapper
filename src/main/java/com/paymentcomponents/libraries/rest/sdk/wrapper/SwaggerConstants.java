@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import gr.datamation.sepa.types.epc.pacs002.FIToFIPaymentStatusReportV03;
 import gr.datamation.validation.error.ErrorSeverity;
 import gr.datamation.validation.error.ValidationError;
-import iso.pacs_009_001_08.FinancialInstitutionCreditTransferV08;
-import iso.pacs_009_001_10.FinancialInstitutionCreditTransferV10;
+import xsd.pacs_009_001_08.FinancialInstitutionCreditTransferV08;
+import xsd.pacs_009_001_10.FinancialInstitutionCreditTransferV10;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

@@ -1,6 +1,6 @@
 package com.paymentcomponents.libraries.rest.sdk.wrapper.utils;
 
-import gr.datamation.mx.CbprMessage;
+import gr.datamation.iso20022.cbpr.CbprMessage;
 import gr.datamation.validation.error.ValidationErrorList;
 
 import java.io.ByteArrayInputStream;
