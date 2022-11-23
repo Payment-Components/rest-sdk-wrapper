@@ -7,6 +7,8 @@ import gr.datamation.converter.cbpr.CbprTranslator;
 import gr.datamation.converter.cbpr.utils.CbprMessageValidationUtils;
 import gr.datamation.converter.common.exceptions.InvalidMtMessageException;
 import gr.datamation.converter.common.exceptions.InvalidMxMessageException;
+import gr.datamation.converter.common.exceptions.StopTranslationException;
+import gr.datamation.converter.common.exceptions.TranslationUnhandledException;
 import gr.datamation.converter.common.utils.MtMessageValidationUtils;
 import org.springframework.stereotype.Service;
 
@@ -24,15 +26,18 @@ public class CbprTranslatorService {
         } catch (InvalidMxMessageException ex) {
             throw new InvalidMessageException(
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(ex.getValidationErrorList()));
-        } catch (Exception ex) {
+        } catch (StopTranslationException e) {
             throw new InvalidMessageException(
-                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString("Message could not be translated"));
+                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(e.getTranslationErrorList()));
+        } catch (TranslationUnhandledException e) {
+            throw new InvalidMessageException(
+                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(e.getMessage()));
         }
     }
 
-    public String translateMxToMt(String mxMessage) throws InvalidMessageException, JsonProcessingException {
+    public String translateMxToMt(String mxMessage, String direction) throws InvalidMessageException, JsonProcessingException {
         try {
-            String translatedMessage = CbprTranslator.translateMxToMt(mxMessage); //throws InvalidMxMessageException
+            String translatedMessage = CbprTranslator.translateMxToMt(mxMessage, direction); //throws InvalidMxMessageException
             MtMessageValidationUtils.parseAndValidateMtMessage(translatedMessage); //throws InvalidMtMessageException
             return translatedMessage;
         } catch (InvalidMxMessageException ex) {
@@ -41,9 +46,12 @@ public class CbprTranslatorService {
         } catch (InvalidMtMessageException ex) {
             throw new InvalidMessageException(
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(ex.getValidationErrorList()));
-        } catch (Exception ex) {
+        } catch (StopTranslationException e) {
             throw new InvalidMessageException(
-                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString("Message could not be translated"));
+                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(e.getTranslationErrorList()));
+        } catch (TranslationUnhandledException e) {
+            throw new InvalidMessageException(
+                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(e.getMessage()));
         }
     }
 

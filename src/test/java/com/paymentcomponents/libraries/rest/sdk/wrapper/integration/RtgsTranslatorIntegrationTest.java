@@ -52,7 +52,15 @@ public class RtgsTranslatorIntegrationTest {
     @Test
     public void givenInvalidMtMessage_whenTranslateMtToMx_thenReturnValidationErrors() throws Exception {
         //GIVEN
-        String errorResponse = "\"Message could not be translated\"";
+        String errorResponse = "[ {\n" +
+                "  \"tagName\" : \"20\",\n" +
+                "  \"description\" : \"SV16 - Mandatory Tag is missing \",\n" +
+                "  \"sequence\" : null,\n" +
+                "  \"occurs\" : \"1\",\n" +
+                "  \"line\" : null,\n" +
+                "  \"messageIndex\" : null,\n" +
+                "  \"errorCode\" : \"SV16\"\n" +
+                "} ]";
 
         //WHEN
         mvc.perform(post("/translator/rtgs/mt/to/mx")
@@ -62,7 +70,7 @@ public class RtgsTranslatorIntegrationTest {
                 //THEN
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(errorResponse));
+                .andExpect(content().string(replaceLineEndings(errorResponse)));
     }
 
     @Test

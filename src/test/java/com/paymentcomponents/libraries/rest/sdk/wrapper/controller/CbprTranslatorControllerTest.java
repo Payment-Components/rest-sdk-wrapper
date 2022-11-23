@@ -23,6 +23,7 @@ import java.nio.charset.StandardCharsets;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.reset;
@@ -113,7 +114,7 @@ public class CbprTranslatorControllerTest {
     @Test
     public void givenValidMxMessage_whenTranslateMxToMt_thenReturnMtMessage() throws Exception {
         //GIVEN
-        given(cbprTranslatorService.translateMxToMt(anyString())).willReturn(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_RESPONSE);
+        given(cbprTranslatorService.translateMxToMt(anyString(), eq("O"))).willReturn(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_RESPONSE);
 
         //WHEN
         mvc.perform(post("/translator/cbpr/mx/to/mt")
@@ -126,7 +127,7 @@ public class CbprTranslatorControllerTest {
                 .andExpect(content().contentType(new MediaType(MediaType.TEXT_PLAIN, StandardCharsets.UTF_8)))
                 .andExpect(content().string(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_RESPONSE));
 
-        then(cbprTranslatorService).should(times(1)).translateMxToMt(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST);
+        then(cbprTranslatorService).should(times(1)).translateMxToMt(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST, "O");
     }
 
     @Test
@@ -143,7 +144,7 @@ public class CbprTranslatorControllerTest {
                 "        \"column\": 22\n" +
                 "    }\n" +
                 "]";
-        given(cbprTranslatorService.translateMxToMt(anyString())).willThrow(new InvalidMessageException(errorResponse));
+        given(cbprTranslatorService.translateMxToMt(anyString(), eq("O"))).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
         mvc.perform(post("/translator/cbpr/mx/to/mt")
@@ -162,7 +163,7 @@ public class CbprTranslatorControllerTest {
                 .andExpect(jsonPath("$[0].line", is(4)))
                 .andExpect(jsonPath("$[0].column", is(22)));
 
-        then(cbprTranslatorService).should(times(1)).translateMxToMt(TestConstants.INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST);
+        then(cbprTranslatorService).should(times(1)).translateMxToMt(TestConstants.INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST, "O");
     }
 
 }

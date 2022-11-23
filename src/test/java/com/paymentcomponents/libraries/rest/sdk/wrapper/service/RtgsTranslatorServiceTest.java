@@ -44,7 +44,15 @@ public class RtgsTranslatorServiceTest {
     @Test
     public void givenInvalidMtMessage_whenTranslateMtToMx_thenThrowInvalidMessageException() {
         //GIVEN
-        String exceptionBody = "\"Message could not be translated\"";
+        String exceptionBody = "[ {\n" +
+                "  \"tagName\" : \"20\",\n" +
+                "  \"description\" : \"SV16 - Mandatory Tag is missing \",\n" +
+                "  \"sequence\" : null,\n" +
+                "  \"occurs\" : \"1\",\n" +
+                "  \"line\" : null,\n" +
+                "  \"messageIndex\" : null,\n" +
+                "  \"errorCode\" : \"SV16\"\n" +
+                "} ]";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {

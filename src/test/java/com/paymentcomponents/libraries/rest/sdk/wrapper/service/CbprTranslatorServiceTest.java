@@ -73,7 +73,7 @@ public class CbprTranslatorServiceTest {
                 .replaceAll("2106021108", ".*");
 
         //WHEN
-        String result = cbprTranslatorService.translateMxToMt(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST);
+        String result = cbprTranslatorService.translateMxToMt(TestConstants.VALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST, "O");
 
         //THEN
         assertTrue(replaceLineEndings(result).matches(replaceLineEndings(expectedAsRegex)));
@@ -94,7 +94,7 @@ public class CbprTranslatorServiceTest {
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {
-            cbprTranslatorService.translateMxToMt(TestConstants.INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST);
+            cbprTranslatorService.translateMxToMt(TestConstants.INVALID_CBPR_TRANSLATOR_MX_TO_MT_REQUEST, "O");
         });
 
         //THEN
