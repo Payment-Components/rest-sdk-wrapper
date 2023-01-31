@@ -1,3 +1,7 @@
+<a id="logo" href="https://www.paymentcomponents.com" title="Payment Components" target="_blank">
+    <img loading="lazy" src="https://i.postimg.cc/yN5TNy29/LOGO-HORIZONTAL2.png" alt="Payment Components">
+</a>
+
 # Financial Messages REST APIs Wrapper
 Payment Components is known for the [Financial Messaging Solutions](https://finaplo.paymentcomponents.com/financial-messages) it provides for over 30 years.  
 
