@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: AWS Serverless Spring Boot API - com.paymentcomponents.rest.sdk.wrapper::Serverless-rest-sdk-wrapper
+Globals:
+  Api:
+    EndpointConfiguration: REGIONAL
+
+Resources:
+  ServerlessRestSdkWrapperFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.paymentcomponents.libraries.rest.sdk.wrapper.StreamLambdaHandler::handleRequest
+      Runtime: java8
+      CodeUri: .
+      MemorySize: 512
+      Policies: AWSLambdaBasicExecutionRole
+      Timeout: 30
+      Events:
+        ProxyResource:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: any
+
+Outputs:
+  ServerlessRestSdkWrapperApi:
+    Description: URL for application
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod'
+    Export:
+      Name: ServerlessRestSdkWrapperApi
