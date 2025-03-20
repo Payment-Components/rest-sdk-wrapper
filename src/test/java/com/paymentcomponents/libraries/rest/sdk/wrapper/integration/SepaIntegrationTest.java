@@ -3,6 +3,7 @@ package com.paymentcomponents.libraries.rest.sdk.wrapper.integration;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.TestConstants;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.Constants;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -53,8 +54,13 @@ public class SepaIntegrationTest {
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0]", is("Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.002.001.03\":MsgId}' is expected.")));
-
+                .andExpect(jsonPath("$[0].severity", is("ERROR")))
+                .andExpect(jsonPath("$[0].errorCode", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].fieldPath", is("/Document/FIToFIPmtStsRpt/GrpHdr/CreDtTm")))
+                .andExpect(jsonPath("$[0].description", is("cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.002.001.10\":MsgId}' is expected.")))
+                .andExpect(jsonPath("$[0].erroneousValue", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].line", is(4)))
+                .andExpect(jsonPath("$[0].column", is(22)));
     }
 
 }

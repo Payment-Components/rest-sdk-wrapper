@@ -25,97 +25,125 @@ public class TestConstants {
             "-}{5:{MAC:00000000}{CHK:19DA346889CC}{TNG:}}{S:{SAC:}{COP:P}}";
 
     public static final String VALID_SEPA_PACS_008 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.02\">\n" +
+            "<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.008.001.08\">\n" +
             "    <FIToFICstmrCdtTrf>\n" +
             "        <GrpHdr>\n" +
-            "            <MsgId>20210113155624246</MsgId>\n" +
-            "            <CreDtTm>2021-01-13T15:56:24</CreDtTm>\n" +
+            "            <MsgId>SSSSSS200020190305ORD000011119</MsgId>\n" +
+            "            <CreDtTm>2019-03-06T14:56:10</CreDtTm>\n" +
             "            <NbOfTxs>1</NbOfTxs>\n" +
-            "            <TtlIntrBkSttlmAmt Ccy=\"EUR\">89.67</TtlIntrBkSttlmAmt>\n" +
-            "            <IntrBkSttlmDt>2020-09-22</IntrBkSttlmDt>\n" +
+            "            <TtlIntrBkSttlmAmt Ccy=\"EUR\">228.71</TtlIntrBkSttlmAmt>\n" +
+            "            <IntrBkSttlmDt>2019-03-06</IntrBkSttlmDt>\n" +
             "            <SttlmInf>\n" +
             "                <SttlmMtd>CLRG</SttlmMtd>\n" +
             "                <ClrSys>\n" +
-            "                    <Prtry>ST2</Prtry>\n" +
+            "                    <Cd>REP</Cd>\n" +
             "                </ClrSys>\n" +
             "            </SttlmInf>\n" +
             "            <InstgAgt>\n" +
             "                <FinInstnId>\n" +
-            "                    <BIC>TESTBICF</BIC>\n" +
+            "                    <BICFI>TESTBICX</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </InstgAgt>\n" +
             "            <InstdAgt>\n" +
             "                <FinInstnId>\n" +
-            "                    <BIC>TESTBICD</BIC>\n" +
+            "                    <BICFI>TESTBICB</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </InstdAgt>\n" +
             "        </GrpHdr>\n" +
             "        <CdtTrfTxInf>\n" +
             "            <PmtId>\n" +
-            "                <InstrId>tx-id-1234</InstrId>\n" +
-            "                <EndToEndId>123456789</EndToEndId>\n" +
-            "                <TxId>tx-id-1234</TxId>\n" +
+            "                <InstrId>BSCHESMMCT1201903054095263553</InstrId>\n" +
+            "                <EndToEndId>NOT PROVIDED</EndToEndId>\n" +
+            "                <TxId>00730100632BHGCRWC</TxId>\n" +
             "            </PmtId>\n" +
             "            <PmtTpInf>\n" +
             "                <SvcLvl>\n" +
             "                    <Cd>SEPA</Cd>\n" +
             "                </SvcLvl>\n" +
             "            </PmtTpInf>\n" +
-            "            <IntrBkSttlmAmt Ccy=\"EUR\">89.67</IntrBkSttlmAmt>\n" +
-            "            <AccptncDtTm>2020-09-22T00:00:00</AccptncDtTm>\n" +
+            "            <IntrBkSttlmAmt Ccy=\"EUR\">228.71</IntrBkSttlmAmt>\n" +
             "            <ChrgBr>SLEV</ChrgBr>\n" +
             "            <Dbtr>\n" +
-            "                <Nm>Jim Smith</Nm>\n" +
+            "                <Nm>JOHN DOE</Nm>\n" +
             "                <PstlAdr>\n" +
-            "                    <Ctry>GR</Ctry>\n" +
-            "                    <AdrLine>Address1</AdrLine>\n" +
-            "                    <AdrLine>Address2</AdrLine>\n" +
+            "                    <Ctry>ES</Ctry>\n" +
+            "                    <AdrLine>ADDRESS 1</AdrLine>\n" +
+            "                    <AdrLine>ADDRESS 2</AdrLine>\n" +
             "                </PstlAdr>\n" +
+            "                <Id>\n" +
+            "                    <PrvtId>\n" +
+            "                        <DtAndPlcOfBirth>\n" +
+            "                            <BirthDt>1982-02-12</BirthDt>\n" +
+            "                            <PrvcOfBirth>TEST</PrvcOfBirth>\n" +
+            "                            <CityOfBirth>Athens</CityOfBirth>\n" +
+            "                            <CtryOfBirth>GR</CtryOfBirth>\n" +
+            "                        </DtAndPlcOfBirth>\n" +
+            "                        <Othr>\n" +
+            "                            <Id>44912150G</Id>\n" +
+            "                            <SchmeNm>\n" +
+            "                                <Prtry>N</Prtry>\n" +
+            "                            </SchmeNm>\n" +
+            "                        </Othr>\n" +
+            "                    </PrvtId>\n" +
+            "                </Id>\n" +
             "            </Dbtr>\n" +
             "            <DbtrAcct>\n" +
             "                <Id>\n" +
-            "                    <IBAN>GR1601101250000000012300777</IBAN>\n" +
+            "                    <IBAN>ES5300730100503232323232</IBAN>\n" +
             "                </Id>\n" +
             "            </DbtrAcct>\n" +
             "            <DbtrAgt>\n" +
             "                <FinInstnId>\n" +
-            "                    <BIC>TESTBICB</BIC>\n" +
+            "                    <BICFI>TESTBICA</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </DbtrAgt>\n" +
             "            <CdtrAgt>\n" +
             "                <FinInstnId>\n" +
-            "                    <BIC>TESTBICA</BIC>\n" +
+            "                    <BICFI>TESTBICB</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </CdtrAgt>\n" +
             "            <Cdtr>\n" +
-            "                <Nm>John Doe</Nm>\n" +
+            "                <Nm>Jane Doe</Nm>\n" +
             "                <PstlAdr>\n" +
             "                    <Ctry>GR</Ctry>\n" +
-            "                    <AdrLine>Address1</AdrLine>\n" +
-            "                    <AdrLine>Address2</AdrLine>\n" +
+            "                    <AdrLine>AdressLine 1</AdrLine>\n" +
+            "                    <AdrLine>AdressLine 2</AdrLine>\n" +
             "                </PstlAdr>\n" +
+            "                <Id>\n" +
+            "                    <PrvtId>\n" +
+            "                        <DtAndPlcOfBirth>\n" +
+            "                            <BirthDt>1982-02-12</BirthDt>\n" +
+            "                            <PrvcOfBirth>TEST</PrvcOfBirth>\n" +
+            "                            <CityOfBirth>Athens</CityOfBirth>\n" +
+            "                            <CtryOfBirth>GR</CtryOfBirth>\n" +
+            "                        </DtAndPlcOfBirth>\n" +
+            "                        <Othr>\n" +
+            "                            <Id>SOMEID 1</Id>\n" +
+            "                            <SchmeNm>\n" +
+            "                                <Prtry>PRTRY</Prtry>\n" +
+            "                            </SchmeNm>\n" +
+            "                            <Issr>ISSUER</Issr>\n" +
+            "                        </Othr>\n" +
+            "                    </PrvtId>\n" +
+            "                </Id>\n" +
             "            </Cdtr>\n" +
             "            <CdtrAcct>\n" +
             "                <Id>\n" +
-            "                    <IBAN>GR1601101250000000012300695</IBAN>\n" +
+            "                    <IBAN>ES1911110001063300445566</IBAN>\n" +
             "                </Id>\n" +
             "            </CdtrAcct>\n" +
-            "            <RmtInf>\n" +
-            "                <Ustrd>Remit. Info</Ustrd>\n" +
-            "            </RmtInf>\n" +
             "        </CdtTrfTxInf>\n" +
             "    </FIToFICstmrCdtTrf>\n" +
-            "</Document>";
+            "</Document>\n";
 
-    public static final String VALID_SEPA_EPC_PACS_002 = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.002.001.03\">\n" +
+    public static final String VALID_SEPA_EPC_PACS_002 = "<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pacs.002.001.10\">\n" +
             "    <FIToFIPmtStsRpt>\n" +
             "        <GrpHdr>\n" +
             "            <MsgId>SCTREJ200020190314300000000001</MsgId>\n" +
             "            <CreDtTm>2019-03-14T00:00:00</CreDtTm>\n" +
             "            <InstdAgt>\n" +
             "                <FinInstnId>\n" +
-            "                    <BIC>TESTBICA</BIC>\n" +
+            "                    <BICFI>TESTBICA</BICFI>\n" +
             "                </FinInstnId>\n" +
             "            </InstdAgt>\n" +
             "        </GrpHdr>\n" +
@@ -123,12 +151,6 @@ public class TestConstants {
             "            <OrgnlMsgId>SSSSSS111120190313090033395001</OrgnlMsgId>\n" +
             "            <OrgnlMsgNmId>pacs.008.001.02</OrgnlMsgNmId>\n" +
             "            <GrpSts>PART</GrpSts>\n" +
-            "            <StsRsnInf>\n" +
-            "                <Orgtr/>\n" +
-            "                <Rsn>\n" +
-            "                    <Cd>IT01</Cd>\n" +
-            "                </Rsn>\n" +
-            "            </StsRsnInf>\n" +
             "        </OrgnlGrpInfAndSts>\n" +
             "        <TxInfAndSts>\n" +
             "            <StsId>000R907330000001</StsId>\n" +
@@ -139,7 +161,7 @@ public class TestConstants {
             "                <Orgtr>\n" +
             "                    <Id>\n" +
             "                        <OrgId>\n" +
-            "                            <BICOrBEI>TESTBICB</BICOrBEI>\n" +
+            "                            <AnyBIC>TESTBICB</AnyBIC>\n" +
             "                        </OrgId>\n" +
             "                    </Id>\n" +
             "                </Orgtr>\n" +
@@ -150,7 +172,16 @@ public class TestConstants {
             "            <OrgnlTxRef>\n" +
             "                <IntrBkSttlmAmt Ccy=\"EUR\">9.95</IntrBkSttlmAmt>\n" +
             "                <Dbtr>\n" +
-            "                    <Nm>John Doe</Nm>\n" +
+            "                    <Pty>\n" +
+            "                        <Nm>Schneider</Nm>\n" +
+            "                        <PstlAdr>\n" +
+            "                            <StrtNm>Kuertman Strasse</StrtNm>\n" +
+            "                            <BldgNb>45</BldgNb>\n" +
+            "                            <PstCd>50475</PstCd>\n" +
+            "                            <TwnNm>Koln</TwnNm>\n" +
+            "                            <Ctry>DE</Ctry>\n" +
+            "                        </PstlAdr>\n" +
+            "                    </Pty>\n" +
             "                </Dbtr>\n" +
             "                <DbtrAcct>\n" +
             "                    <Id>\n" +
@@ -159,16 +190,25 @@ public class TestConstants {
             "                </DbtrAcct>\n" +
             "                <DbtrAgt>\n" +
             "                    <FinInstnId>\n" +
-            "                        <BIC>TESTBICA</BIC>\n" +
+            "                        <BICFI>TESTBICA</BICFI>\n" +
             "                    </FinInstnId>\n" +
             "                </DbtrAgt>\n" +
             "                <CdtrAgt>\n" +
             "                    <FinInstnId>\n" +
-            "                        <BIC>TESTBICB</BIC>\n" +
+            "                        <BICFI>TESTBICB</BICFI>\n" +
             "                    </FinInstnId>\n" +
             "                </CdtrAgt>\n" +
             "                <Cdtr>\n" +
-            "                    <Nm>Beneficioso beneficiario</Nm>\n" +
+            "                    <Pty>\n" +
+            "                        <Nm>Schneider</Nm>\n" +
+            "                        <PstlAdr>\n" +
+            "                            <StrtNm>Kuertman Strasse</StrtNm>\n" +
+            "                            <BldgNb>45</BldgNb>\n" +
+            "                            <PstCd>50475</PstCd>\n" +
+            "                            <TwnNm>Koln</TwnNm>\n" +
+            "                            <Ctry>DE</Ctry>\n" +
+            "                        </PstlAdr>\n" +
+            "                    </Pty>\n" +
             "                </Cdtr>\n" +
             "                <CdtrAcct>\n" +
             "                    <Id>\n" +

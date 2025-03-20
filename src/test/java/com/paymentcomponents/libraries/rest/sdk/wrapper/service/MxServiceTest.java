@@ -46,7 +46,7 @@ public class MxServiceTest {
         String exceptionBody = "[ {\n" +
                 "  \"severity\" : \"ERROR\",\n" +
                 "  \"errorCode\" : null,\n" +
-                "  \"fieldPath\" : null,\n" +
+                "  \"fieldPath\" : \"/Document/FICdtTrf/GrpHdr/CreDtTm\",\n" +
                 "  \"description\" : \"cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.10\\\":MsgId}' is expected.\",\n" +
                 "  \"erroneousValue\" : null,\n" +
                 "  \"line\" : 5,\n" +

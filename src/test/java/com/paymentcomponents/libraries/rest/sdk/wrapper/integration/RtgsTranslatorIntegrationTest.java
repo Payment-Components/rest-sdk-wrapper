@@ -107,7 +107,7 @@ public class RtgsTranslatorIntegrationTest {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].severity", is("ERROR")))
                 .andExpect(jsonPath("$[0].errorCode", IsNull.nullValue()))
-                .andExpect(jsonPath("$[0].fieldPath", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].fieldPath", is("/Document/FICdtTrf/GrpHdr/CreDtTm")))
                 .andExpect(jsonPath("$[0].description", is("cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.009.001.08\":MsgId}' is expected.")))
                 .andExpect(jsonPath("$[0].erroneousValue", IsNull.nullValue()))
                 .andExpect(jsonPath("$[0].line", is(5)))

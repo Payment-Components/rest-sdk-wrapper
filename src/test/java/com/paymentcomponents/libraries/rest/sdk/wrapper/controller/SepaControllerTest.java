@@ -6,6 +6,7 @@ import com.paymentcomponents.libraries.rest.sdk.wrapper.filter.RequestLogIdFilte
 import com.paymentcomponents.libraries.rest.sdk.wrapper.service.SepaService;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.Constants;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +76,15 @@ public class SepaControllerTest {
     @Test
     public void givenInValidSepaMessage_whenSepaValidate_thenReturnValidationErrors() throws Exception {
         //GIVEN
-        String errorResponse = "[ \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.002.001.03\\\":MsgId}' is expected.\" ]";
+        String errorResponse = "[ {\n" +
+                "  \"severity\" : \"ERROR\",\n" +
+                "  \"errorCode\" : null,\n" +
+                "  \"fieldPath\" : \"/Document/FIToFIPmtStsRpt/GrpHdr/CreDtTm\",\n" +
+                "  \"description\" : \"cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.002.001.10\\\":MsgId}' is expected.\",\n" +
+                "  \"erroneousValue\" : null,\n" +
+                "  \"line\" : 4,\n" +
+                "  \"column\" : 22\n" +
+                "} ]";
         given(sepaService.validateSepaMessage(anyString())).willThrow(new InvalidMessageException(errorResponse));
 
         //WHEN
@@ -88,8 +97,13 @@ public class SepaControllerTest {
                 .andExpect(header().string(Constants.REQUEST_LOG_ID, Matchers.anything()))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0]", is("Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.002.001.03\":MsgId}' is expected.")));
-
+                .andExpect(jsonPath("$[0].severity", is("ERROR")))
+                .andExpect(jsonPath("$[0].errorCode", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].fieldPath", is("/Document/FIToFIPmtStsRpt/GrpHdr/CreDtTm")))
+                .andExpect(jsonPath("$[0].description", is("cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\"urn:iso:std:iso:20022:tech:xsd:pacs.002.001.10\":MsgId}' is expected.")))
+                .andExpect(jsonPath("$[0].erroneousValue", IsNull.nullValue()))
+                .andExpect(jsonPath("$[0].line", is(4)))
+                .andExpect(jsonPath("$[0].column", is(22)));
         then(sepaService).should(times(1)).validateSepaMessage(TestConstants.INVALID_SEPA_EPC_PACS_002);
     }
 

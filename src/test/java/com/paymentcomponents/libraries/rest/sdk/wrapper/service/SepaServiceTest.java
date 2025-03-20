@@ -42,7 +42,15 @@ public class SepaServiceTest {
     @Test
     public void givenInvalidSepaMessage_whenSepaValidate_thenThrowInvalidMessageException() {
         //GIVEN
-        String exceptionBody = "[ \"Line: 5 -- cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.002.001.03\\\":MsgId}' is expected.\" ]";
+        String exceptionBody = "[ {\n" +
+                "  \"severity\" : \"ERROR\",\n" +
+                "  \"errorCode\" : null,\n" +
+                "  \"fieldPath\" : \"/Document/FIToFIPmtStsRpt/GrpHdr/CreDtTm\",\n" +
+                "  \"description\" : \"cvc-complex-type.2.4.a: Invalid content was found starting with element 'CreDtTm'. One of '{\\\"urn:iso:std:iso:20022:tech:xsd:pacs.002.001.10\\\":MsgId}' is expected.\",\n" +
+                "  \"erroneousValue\" : null,\n" +
+                "  \"line\" : 4,\n" +
+                "  \"column\" : 22\n" +
+                "} ]";
 
         //WHEN
         InvalidMessageException exception = assertThrows(InvalidMessageException.class, () -> {

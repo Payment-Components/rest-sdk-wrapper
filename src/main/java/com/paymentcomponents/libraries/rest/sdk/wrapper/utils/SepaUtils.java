@@ -4,85 +4,45 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.exception.InvalidMessageException;
 import com.paymentcomponents.libraries.rest.sdk.wrapper.model.sepa.request.MsgReplyInfoRequest;
-import gr.datamation.sepa.core.messages.CoreMessage;
-import gr.datamation.sepa.core.messages.common.MessageInfo;
-import org.reflections.Reflections;
+import gr.datamation.mx.CoreMessage;
+import gr.datamation.mx.MXUtils;
+import gr.datamation.mx.Message;
+import gr.datamation.mx.XSDSchema;
+import gr.datamation.util.Utilities;
+import gr.datamation.validation.error.ValidationErrorList;
 import org.springframework.util.ObjectUtils;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
-import static com.paymentcomponents.libraries.rest.sdk.wrapper.Constants.ISO20022_REGEX;
+import java.io.ByteArrayInputStream;
+import java.util.Collection;
 
 public class SepaUtils {
 
     public static final String MESSASE_TYPE_ERROR = "Cannot retrieve message type";
-    public static final String CLASS_NOT_FOUND_ERROR = "Class not found";
-    private static final HashMap<String, String> SEPA_MESSAGE_TYPES = new HashMap<String, String>();
 
-    static {
-        Reflections reflections = new Reflections("gr.datamation.sepa.core.messages");
+    private static final String SEPA_EPC_CT_PACKAGE_NAME = "gr.datamation.iso20022.sepa.epc.ct";
+    private static final String SEPA_EPC_CT_MESSAGE_SUFFIX = ".sepa.epc.ct";
 
-        Set<Class<? extends CoreMessage>> allClasses =
-                reflections.getSubTypesOf(CoreMessage.class);
-        for (Class clazz : allClasses) {
-            if (clazz.getName().contains(".epc.") && clazz.getAnnotation(MessageInfo.class) != null) {
-                MessageInfo messageInfo = (MessageInfo) clazz.getAnnotation(MessageInfo.class);
-                String messageTypeId = messageInfo.xsd().replaceAll("^.*(" + ISO20022_REGEX + ")\\.xsd.*", "$1");
-                messageTypeId += clazz.getName().contains(".sdd.") ? "_sdd" : "";
-                SEPA_MESSAGE_TYPES.put(messageTypeId, clazz.getName());
-            }
-        }
-    }
+    private static final Collection<Class<?>> sepaEpcCTClasses = Utilities.getAnnotatedClasses(SEPA_EPC_CT_PACKAGE_NAME, XSDSchema.class);
 
-    public static CoreMessage parseAndValidateSepaMessage(String messageText) throws JsonProcessingException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException, ClassNotFoundException {
-        CoreMessage sepaMessage = SepaUtils.retrieveSepaMessageTypeText(messageText);
-        sepaMessage.parseAndValidateString(messageText);
+    public static Message parseAndValidateSepaMessage(String sepaXml) throws Exception {
+        String messageNamespace = MXUtils.extractNamespaceFromXML(sepaXml);
 
-        if (sepaMessage.hasValidationErrors()) {
-            throw new InvalidMessageException(
-                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(sepaMessage.getErrors()));
-        }
+        if (messageNamespace.split("\\.").length != 4)
+            throw new InvalidMessageException(MESSASE_TYPE_ERROR);
+
+        Class<?> messageClass = MXUtils.determineClassByNamespace(messageNamespace, sepaEpcCTClasses, SEPA_EPC_CT_MESSAGE_SUFFIX);
+
+        Message<?, ?, ?> sepaMessage = (CoreMessage<?, ?, ?>) messageClass.getDeclaredConstructor().newInstance();
+
+        ValidationErrorList validationErrorList = sepaMessage.validateXML(new ByteArrayInputStream(sepaXml.getBytes()));
+        MxUtils.throwMxValidationError(validationErrorList);
+
+        sepaMessage.parseXML(sepaXml);
+
+        validationErrorList.addAll(sepaMessage.validate());
+        MxUtils.throwMxValidationError(validationErrorList);
 
         return sepaMessage;
-    }
-
-    public static CoreMessage parseAndValidateSepaMessage(CoreMessage sepaMessage) throws JsonProcessingException {
-        sepaMessage.validate();
-
-        if (sepaMessage.hasValidationErrors()) {
-            throw new InvalidMessageException(
-                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(sepaMessage.getErrors()));
-        }
-
-        return sepaMessage;
-    }
-
-    public static CoreMessage retrieveSepaMessageTypeText(String messageText) throws JsonProcessingException, ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        String messageType = messageText.replaceAll("(?s).*<Document.*(" + ISO20022_REGEX + ")\".*>.*</Document>.*", "$1");
-        if (messageType.split("\\.").length != 4) {
-            throw new InvalidMessageException(
-                    new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(Collections.singletonList(MESSASE_TYPE_ERROR)));
-        }
-
-        String orgnlMsgNmId = messageText.contains("<OrgnlMsgNmId>") ? messageText.replaceAll("(?s).*<OrgnlMsgNmId>(.*)</OrgnlMsgNmId>.*", "$1") : null;
-        String variation = isSDD(messageType, orgnlMsgNmId) ? "_sdd" : "";
-
-        String classFullName = getClassForMessageType(messageType + variation);
-        return (CoreMessage) Class.forName(classFullName).getDeclaredConstructor().newInstance();
-    }
-
-    public static String getClassForMessageType(String messageType) throws ClassNotFoundException {
-        if (SEPA_MESSAGE_TYPES.containsKey(messageType)) {
-            return SEPA_MESSAGE_TYPES.get(messageType);
-        } else if (SEPA_MESSAGE_TYPES.containsKey(messageType + "_sdd")) {
-            return SEPA_MESSAGE_TYPES.get(messageType + "_sdd");
-        } else {
-            throw new ClassNotFoundException(CLASS_NOT_FOUND_ERROR);
-        }
     }
 
     public static void addElement(CoreMessage coreMessage, String elementPath, Object element) throws Exception {
@@ -104,23 +64,6 @@ public class SepaUtils {
             throw new InvalidMessageException(
                     new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString("Either CD or PRTRY is required"));
 
-    }
-
-    private static boolean isSDD(String messageType, String orgnlMsgNmId) {
-        final Map<String, String> sdd_messages = new HashMap<String, String>() {{
-            put("pacs.002.001.03", "pacs.003.001.02");
-            put("pacs.003.001.02", "*");
-            put("pacs.004.001.02", "pacs.003.001.02");
-            put("pacs.007.001.02", "pacs.003.001.02");
-            put("pain.008.001.02", "*");
-        }};
-        if (sdd_messages.containsKey(messageType)) {
-            if (sdd_messages.get(messageType).equalsIgnoreCase("*")) {
-                return true;
-            }
-            return orgnlMsgNmId != null && sdd_messages.get(messageType).equalsIgnoreCase(orgnlMsgNmId);
-        }
-        return false;
     }
 
 }
