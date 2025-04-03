@@ -1,4 +1,4 @@
-FROM eclipse-temurin:8-jre-focal
+FROM eclipse-temurin:21-jre-jammy
 
 COPY ./target/*.jar /work/app.jar
 WORKDIR /work

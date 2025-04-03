@@ -9,10 +9,10 @@ import java.util.List;
 @Schema(description = "Contains the data for the MT Tag")
 public class MtTagGeneralRequest {
     @Schema(description = "The name of the field",
-            example = "20", required = true)
+            example = "20", requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;
     @ArraySchema(schema = @Schema(description = "The lines for the field",
-            example = "line1", required = true))
+            example = "line1", requiredMode = Schema.RequiredMode.REQUIRED))
     private List<String> data;
 
     public MtTagGeneralRequest() {

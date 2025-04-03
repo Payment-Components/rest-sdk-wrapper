@@ -7,7 +7,7 @@ public class Institution {
             example = "123456789")
     private String id;
     @Schema(description = "Identifier Code",
-            example = "TESTBICA", required = true)
+            example = "TESTBICA", requiredMode = Schema.RequiredMode.REQUIRED)
     private String bic;
 
     public String getId() {

@@ -12,11 +12,11 @@ public class SepaCreatePacs008Request {
       public static final String DEFAULT_STTLM_MTD = "CLRG";
       public static final String DEFAULT_CLR_SYS = "ST2";
 
-      @Schema(description = "/CdtTrfTxInf/CdtrAgt/FinInstnId/BIC", example = "TESTBICA", required = true)
+      @Schema(description = "/CdtTrfTxInf/CdtrAgt/FinInstnId/BIC", example = "TESTBICA", requiredMode = Schema.RequiredMode.REQUIRED)
       private String creditorBic;
       @Schema(description = "/CdtTrfTxInf/Cdtr/PstlAdr/Ctry", example = "GR")
       private String creditorCountryCode;
-      @Schema(description = "/CdtTrfTxInf/CdtrAcct/Id/IBAN", example = "GR1601101250000000012300695", required = true)
+      @Schema(description = "/CdtTrfTxInf/CdtrAcct/Id/IBAN", example = "GR1601101250000000012300695", requiredMode = Schema.RequiredMode.REQUIRED)
       private String creditorIban;
       @Schema(description = "/CdtTrfTxInf/Cdtr/Nm", example = "John Doe")
       private String creditorName;
@@ -24,11 +24,11 @@ public class SepaCreatePacs008Request {
       private String creditorAddrLn1;
       @Schema(description = "/CdtTrfTxInf/Cdtr/PstlAdr/AdrLine", example = "Address2")
       private String creditorAddrLn2;
-      @Schema(description = "/CdtTrfTxInf/DbtrAgt/FinInstnId/BIC", example = "TESTBICB", required = true)
+      @Schema(description = "/CdtTrfTxInf/DbtrAgt/FinInstnId/BIC", example = "TESTBICB", requiredMode = Schema.RequiredMode.REQUIRED)
       private String debtorBic;
       @Schema(description = "/CdtTrfTxInf/Dbtr/PstlAdr/Ctry", example = "GR")
       private String debtorCountryCode;
-      @Schema(description = "/CdtTrfTxInf/DbtrAcct/Id/IBAN", example = "GR1601101250000000012300777", required = true)
+      @Schema(description = "/CdtTrfTxInf/DbtrAcct/Id/IBAN", example = "GR1601101250000000012300777", requiredMode = Schema.RequiredMode.REQUIRED)
       private String debtorIban;
       @Schema(description = "/CdtTrfTxInf/Dbtr/Nm", example = "Jim Smith")
       private String debtorName;
@@ -36,19 +36,19 @@ public class SepaCreatePacs008Request {
       private String debtorAddrLn1;
       @Schema(description = "/CdtTrfTxInf/Dbtr/PstlAdr/AdrLine", example = "Address2")
       private String debtorAddrLn2;
-      @Schema(description = "/CdtTrfTxInf/PmtId/EndToEndId", example = "123456789", required = true)
+      @Schema(description = "/CdtTrfTxInf/PmtId/EndToEndId", example = "123456789", requiredMode = Schema.RequiredMode.REQUIRED)
       private String endToEndId;
       @Schema(description = "/CdtTrfTxInf/RmtInf/Ustrd", example = "Remit. Info")
       private String remInfo;
-      @Schema(description = "/CdtTrfTxInf/IntrBkSttlmAmt", example = "89.67", required = true)
+      @Schema(description = "/CdtTrfTxInf/IntrBkSttlmAmt", example = "89.67", requiredMode = Schema.RequiredMode.REQUIRED)
       private BigDecimal sttlmAmt;
-      @Schema(description = "/CdtTrfTxInf/AccptncDtTm", example = "2020-09-22", format = "yyyy-MM-dd", required = true)
+      @Schema(description = "/CdtTrfTxInf/AccptncDtTm", example = "2020-09-22", format = "yyyy-MM-dd", requiredMode = Schema.RequiredMode.REQUIRED)
       private String sttlmDt;
-      @Schema(description = "/CdtTrfTxInf/PmtId/TxId", example = "tx-id-1234", required = true)
+      @Schema(description = "/CdtTrfTxInf/PmtId/TxId", example = "tx-id-1234", requiredMode = Schema.RequiredMode.REQUIRED)
       private String txId;
-      @Schema(description = "/GrpHdr/InstgAgt/FinInstnId/BIC", example = "TESTBICF", required = true)
+      @Schema(description = "/GrpHdr/InstgAgt/FinInstnId/BIC", example = "TESTBICF", requiredMode = Schema.RequiredMode.REQUIRED)
       private String instgAgt;
-      @Schema(description = "/GrpHdr/InstdAgt/FinInstnId/BIC", example = "TESTBICD", required = true)
+      @Schema(description = "/GrpHdr/InstdAgt/FinInstnId/BIC", example = "TESTBICD", requiredMode = Schema.RequiredMode.REQUIRED)
       private String instdAgt;
 
       public String getCreditorBic() {

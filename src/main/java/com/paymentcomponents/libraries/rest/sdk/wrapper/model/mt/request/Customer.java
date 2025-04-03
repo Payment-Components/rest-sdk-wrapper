@@ -7,7 +7,7 @@ public class Customer {
             example = "123456789")
     private String account;
     @Schema(description = "Part of Name and Address of Customer",
-            example = "John Doe", required = true)
+            example = "John Doe", requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;
     @Schema(description = "Part of Name and Address of Customer",
             example = "Chatziantoniou 14")

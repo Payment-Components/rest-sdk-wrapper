@@ -3,12 +3,12 @@ package com.paymentcomponents.libraries.rest.sdk.wrapper;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import gr.datamation.validation.error.ErrorSeverity;
 import gr.datamation.validation.error.ValidationError;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import xsd.pacs_002_001_10.FIToFIPaymentStatusReportV10;
 import xsd.pacs_009_001_08.FinancialInstitutionCreditTransferV08;
 import xsd.pacs_009_001_10.FinancialInstitutionCreditTransferV10;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 public class SwaggerConstants {
 

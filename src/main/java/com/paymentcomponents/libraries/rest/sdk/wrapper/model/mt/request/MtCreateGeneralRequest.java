@@ -8,18 +8,18 @@ import java.util.List;
 public class MtCreateGeneralRequest {
 
     @Schema(description = "Category of the MT message",
-            example = "MT103", required = true)
+            example = "MT103", requiredMode = Schema.RequiredMode.REQUIRED)
     private String category;
     @Schema(description = "Used in Header Block 1",
-            example = "MT103", required = true)
+            example = "MT103", requiredMode = Schema.RequiredMode.REQUIRED)
     private String sender;
     @Schema(description = "Used in Header Block 2",
-            example = "MT103", required = true)
+            example = "MT103", requiredMode = Schema.RequiredMode.REQUIRED)
     private String receiver;
     @Schema(description = "Optional UETR of the message",
             example = "2412527e-aefa-455d-8307-851118e145fe")
     private String uetr;
-    @Schema(required = true)
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
     private List<MtTagGeneralRequest> tags;
 
     public String getCategory() {

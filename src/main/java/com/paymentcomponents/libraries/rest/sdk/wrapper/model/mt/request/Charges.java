@@ -6,10 +6,10 @@ import java.math.BigDecimal;
 
 public class Charges {
     @Schema(description = "Currency",
-            example = "EUR", required = true)
+            example = "EUR", requiredMode = Schema.RequiredMode.REQUIRED)
     private String currency;
     @Schema(description = "Amount",
-            example = "0.40", required = true)
+            example = "0.40", requiredMode = Schema.RequiredMode.REQUIRED)
     private BigDecimal amount;
 
     public String getCurrency() {

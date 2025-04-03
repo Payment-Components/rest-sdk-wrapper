@@ -7,26 +7,26 @@ import java.math.BigDecimal;
 public class MtCreate103Request {
 
     @Schema(description = "Field 20",
-            example = "123456789", required = true)
+            example = "123456789", requiredMode = Schema.RequiredMode.REQUIRED)
     private String sendersReference;
     @Schema(description = "Field 121(UETR)",
-            example = "2412527e-aefa-455d-8307-851118e145fe", required = true)
+            example = "2412527e-aefa-455d-8307-851118e145fe", requiredMode = Schema.RequiredMode.REQUIRED)
     private String uetr;
     @Schema(description = "Field 23B",
-            required = true, allowableValues = {"CRED", "CRTS", "SPAY", "SPRI", "SSTD"})
+            requiredMode = Schema.RequiredMode.REQUIRED, allowableValues = {"CRED", "CRTS", "SPAY", "SPRI", "SSTD"})
     private String bankOperationCode;
     @Schema(description = "Date of Field 32A. If absent, current date will be used.",
             example = "2020-09-24", format = "yyyy-MM-dd")
     private String valueDate;
     @Schema(description = "Currency of Field 32A",
-            example = "EUR", required = true)
+            example = "EUR", requiredMode = Schema.RequiredMode.REQUIRED)
     private String currency;
     @Schema(description = "Amount of Field 32A",
-            example = "1.08", required = true)
+            example = "1.08", requiredMode = Schema.RequiredMode.REQUIRED)
     private BigDecimal interbankSettlementAmount;
-    @Schema(required = true)
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
     private Customer orderingCustomer; //Field 50K
-    @Schema(required = true)
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
     private Customer beneficiaryCustomer; //Field 59
     private Institution orderingInstitution; //Field 52A
     private Institution intermediaryInstitution; //Field 56A
@@ -35,14 +35,14 @@ public class MtCreate103Request {
     private RemittanceInformation remittanceInformation; //Field 70
     private SenderToReceiverInformation senderToReceiverInformation; //Field 72
     @Schema(description = "Field 71A", allowableValues = {"BEN", "OUR", "SHA"},
-            required = true)
+            requiredMode = Schema.RequiredMode.REQUIRED)
     private String detailsOfCharges;
     private Charges senderCharges; //Field 71F
     @Schema(description = "To be used in Block 1",
-            required = true)
+            requiredMode = Schema.RequiredMode.REQUIRED)
     private String sender;
     @Schema(description = "To be used in Block 2",
-            required = true)
+            requiredMode = Schema.RequiredMode.REQUIRED)
     private String receiver;
 
     public String getSendersReference() {

@@ -11,11 +11,11 @@ import java.io.ByteArrayInputStream;
 
 public class MxUtils {
 
-    public static CoreMessage parseAndValidateMxMessage(String mxMessage) throws Exception {
+    public static CoreMessage<?, ?, ?> parseAndValidateMxMessage(String mxMessage) throws Exception {
         ValidationErrorList validationErrorList = MXUtils.autoValidateXML(new ByteArrayInputStream(mxMessage.getBytes()));
         throwMxValidationError(validationErrorList);
 
-        CoreMessage coreMessage = (CoreMessage) MXUtils.autoParseXML(mxMessage);
+        CoreMessage<?, ?, ?> coreMessage = (CoreMessage<?, ?, ?>) MXUtils.autoParseXML(mxMessage);
         validationErrorList = coreMessage.validate();
         throwMxValidationError(validationErrorList);
 

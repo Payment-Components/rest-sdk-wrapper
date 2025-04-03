@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
@@ -39,12 +38,17 @@ public class RtgsControllerTest {
 
             return registrationBean;
         }
+        
+        @Bean
+        public RtgsService rtgsService() {
+            return mock(RtgsService.class);
+        }
     }
 
     @Autowired
     private MockMvc mvc;
 
-    @MockBean
+    @Autowired
     private RtgsService rtgsService;
 
     @BeforeEach
